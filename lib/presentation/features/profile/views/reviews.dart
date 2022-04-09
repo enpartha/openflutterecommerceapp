@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import '../presentation/widgets/widgets.dart';
 
 class MyReviewsView extends StatefulWidget {
-  final Function changeView;
+  final Function? changeView;
 
-  const MyReviewsView({Key key, this.changeView}) : super(key: key);
+  const MyReviewsView({Key? key, this.changeView}) : super(key: key);
   
   @override
   _MyReviewsViewState createState() => _MyReviewsViewState();

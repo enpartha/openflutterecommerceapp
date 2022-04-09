@@ -3,22 +3,22 @@
 // Date: 2020-02-11
 
 import 'package:bloc/bloc.dart';
-import 'package:openflutterecommerce/data/model/cart_item.dart';
-import 'package:openflutterecommerce/data/model/sort_rules.dart';
-import 'package:openflutterecommerce/domain/usecases/cart/add_product_to_cart_use_case.dart';
-import 'package:openflutterecommerce/domain/usecases/favorites/add_to_favorites_use_case.dart';
-import 'package:openflutterecommerce/domain/usecases/favorites/get_favorite_products_use_case.dart';
-import 'package:openflutterecommerce/domain/usecases/favorites/remove_from_favorites_use_case.dart';
-import 'package:openflutterecommerce/locator.dart';
+import '../data/model/cart_item.dart';
+import '../data/model/sort_rules.dart';
+import '../domain/usecases/cart/add_product_to_cart_use_case.dart';
+import '../domain/usecases/favorites/add_to_favorites_use_case.dart';
+import '../domain/usecases/favorites/get_favorite_products_use_case.dart';
+import '../domain/usecases/favorites/remove_from_favorites_use_case.dart';
+import '../locator.dart';
 
 import 'favorites_event.dart';
 import 'favorites_state.dart';
 
 class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
-  AddToFavoritesUseCase addToFavoriteUseCase;
-  RemoveFromFavoritesUseCase removeFromFavoriteUseCase;
-  GetFavoriteProductsUseCase getFavoriteProductsUseCase;
-  AddProductToCartUseCase addProductToCartUseCase;
+  AddToFavoritesUseCase? addToFavoriteUseCase;
+  RemoveFromFavoritesUseCase? removeFromFavoriteUseCase;
+  GetFavoriteProductsUseCase? getFavoriteProductsUseCase;
+  AddProductToCartUseCase? addProductToCartUseCase;
 
   FavouriteBloc() 
   : addToFavoriteUseCase = sl(),
@@ -30,7 +30,7 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
   Stream<FavouriteState> mapEventToState(FavouriteEvent event) async* {
     if (event is ScreenLoadedEvent) {
       GetFavoriteProductResult favoriteProducts = 
-        await getFavoriteProductsUseCase.execute(
+        await getFavoriteProductsUseCase!.execute(
           GetFavoriteProductParams()
         );
       yield FavouriteState(
@@ -41,7 +41,7 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
       yield state.copyWith(isList: !state.isList);
     } else if (event is ProductChangeSortRulesEvent) {
       yield state.getLoading();
-      final filteredData = await getFavoriteProductsUseCase.execute(
+      final filteredData = await getFavoriteProductsUseCase!.execute(
         GetFavoriteProductParams(
           filterRules: state.filterRules,
           sortRules: event.sortBy
@@ -53,7 +53,7 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
       );
     } else if (event is ProductChangeFilterRulesEvent) {
       yield state.getLoading();
-      final filteredData = await getFavoriteProductsUseCase.execute(
+      final filteredData = await getFavoriteProductsUseCase!.execute(
         GetFavoriteProductParams(
           filterRules: event.filterRules,
           sortRules: state.sortBy
@@ -64,19 +64,19 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
         data: filteredData.products
       );
     } else if (event is AddToCartEvent) {
-      await addProductToCartUseCase.execute(CartItem(
+      await addProductToCartUseCase!.execute(CartItem(
         product: event.favouriteProduct.product, 
         productQuantity: ProductQuantity(1), 
         selectedAttributes: event.favouriteProduct.favoriteForm
       ));
     } else if ( event is RemoveFromFavoriteEvent ) {
       yield state.getLoading();
-      await removeFromFavoriteUseCase.execute(
+      await removeFromFavoriteUseCase!.execute(
         RemoveFromFavoritesParams(
           event.product
         )
       );
-      final filteredData = await getFavoriteProductsUseCase.execute(
+      final filteredData = await getFavoriteProductsUseCase!.execute(
         GetFavoriteProductParams(
           filterRules: state.filterRules,
           sortRules: state.sortBy

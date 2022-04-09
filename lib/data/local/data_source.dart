@@ -1,9 +1,9 @@
-import 'package:openflutterecommerce/data/local/db_provider.dart';
-import 'package:openflutterecommerce/domain/entities/entity.dart';
+import '../data/local/db_provider.dart';
+import '../domain/entities/entity.dart';
 import 'package:sqflite/sqflite.dart';
 
 abstract class DataSource {
-  Database db;
+  Database? db;
 
   String get tableName;
 
@@ -11,19 +11,19 @@ abstract class DataSource {
 
   // connect to database
   Future<void> open() async {
-    if ( SQLiteDbProvider.db==null || !SQLiteDbProvider.db.isOpen ) {
+    if ( SQLiteDbProvider.db==null || !SQLiteDbProvider.db!.isOpen ) {
       await SQLiteDbProvider.open();
     }
     db = await SQLiteDbProvider.db;
   }
 
   // get a record in the table
-  Future<Entity> get(int id) async {
+  Future<Entity?> get(int id) async {
     return null;
   }
 
   // get all records in the table
-  Future<List<Entity>> all() async {
+  Future<List<Entity>?> all() async {
     return null;
   }
 
@@ -31,7 +31,7 @@ abstract class DataSource {
   Future<void> insert(Entity model) async {
     checkDatabaseConnection();
 
-    await db.insert(
+    await db!.insert(
       tableName,
       model.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
@@ -42,7 +42,7 @@ abstract class DataSource {
   Future<void> update(Entity model) async {
     checkDatabaseConnection();
 
-    await db.update(
+    await db!.update(
       tableName,
       model.toMap(),
       where: '$primaryKey = ?',
@@ -54,7 +54,7 @@ abstract class DataSource {
   Future<void> delete(int id) async {
     checkDatabaseConnection();
 
-    await db.delete(
+    await db!.delete(
       tableName,
       where: '$primaryKey = ?',
       whereArgs: [id],
@@ -65,13 +65,13 @@ abstract class DataSource {
   Future<void> deleteAll() async {
     checkDatabaseConnection();
 
-    await db.rawDelete('DELETE FROM $tableName');
+    await db!.rawDelete('DELETE FROM $tableName');
   }
 
   // close database connection
   Future<void> close() async {
     checkDatabaseConnection();
-    await db.close();
+    await db!.close();
   }
 
   void checkDatabaseConnection() {

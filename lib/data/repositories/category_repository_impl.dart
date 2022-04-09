@@ -1,17 +1,17 @@
 
-import 'package:openflutterecommerce/data/repositories/abstract/category_repository.dart';
-import 'package:openflutterecommerce/data/model/category.dart';
-import 'package:openflutterecommerce/data/error/exceptions.dart';
-import 'package:openflutterecommerce/data/local/local_category_repository.dart';
-import 'package:openflutterecommerce/data/network/network_status.dart';
-import 'package:openflutterecommerce/data/woocommerce/repositories/category_remote_repository.dart';
-import 'package:openflutterecommerce/locator.dart';
+import '../data/repositories/abstract/category_repository.dart';
+import '../data/model/category.dart';
+import '../data/error/exceptions.dart';
+import '../data/local/local_category_repository.dart';
+import '../data/network/network_status.dart';
+import '../data/woocommerce/repositories/category_remote_repository.dart';
+import '../locator.dart';
 
 //Uses remote or local data depending on NetworkStatus
 class CategoryRepositoryImpl extends CategoryRepository {
 
   @override
-  Future<List<ProductCategory>> getCategories({int parentCategoryId = 0}) async {
+  Future<List<ProductCategory>?> getCategories({int? parentCategoryId = 0}) async {
     try
     {
       NetworkStatus networkStatus = sl();
@@ -29,9 +29,9 @@ class CategoryRepositoryImpl extends CategoryRepository {
   }
 
   @override
-  Future<ProductCategory> getCategoryDetails(int categoryId) async {
+  Future<ProductCategory?> getCategoryDetails(int categoryId) async {
     // TODO: implement getCategoryDetails
-    List<ProductCategory> categories = await getCategories();
+    List<ProductCategory> categories = await (getCategories() as FutureOr<List<ProductCategory>>);
     return categories.isNotEmpty ? categories[0] : null;
   }
 }

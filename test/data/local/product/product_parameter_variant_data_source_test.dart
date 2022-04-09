@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:openflutterecommerce/data/local/product/product_parameter_variant_data_source.dart';
-import 'package:openflutterecommerce/domain/entities/product/product_parameter_variant_entity.dart';
+import '../data/local/product/product_parameter_variant_data_source.dart';
+import '../domain/entities/product/product_parameter_variant_entity.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   group('Test ProductParameterVariant Data Source', () {
-    ProductParameterVariantDataSource dataSource;
+    late ProductParameterVariantDataSource dataSource;
 
     setUp(() async {
       dataSource = ProductParameterVariantDataSource();

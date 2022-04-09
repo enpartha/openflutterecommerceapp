@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:openflutterecommerce/data/local/order/order_product_data_source.dart';
-import 'package:openflutterecommerce/domain/entities/order/order_product_entity.dart';
+import '../data/local/order/order_product_data_source.dart';
+import '../domain/entities/order/order_product_entity.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   group('Test OrderProduct Data Source', () {
-    OrderProductDataSource dataSource;
+    late OrderProductDataSource dataSource;
 
     setUp(() async {
       dataSource = OrderProductDataSource();

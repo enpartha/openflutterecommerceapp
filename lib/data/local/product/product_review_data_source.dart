@@ -1,12 +1,12 @@
-import 'package:openflutterecommerce/data/local/data_source.dart';
-import 'package:openflutterecommerce/domain/entities/product/product_review_entity.dart';
+import '../data/local/data_source.dart';
+import '../domain/entities/product/product_review_entity.dart';
 
 class ProductReviewDataSource extends DataSource {
   @override
   Future<List<ProductReviewEntity>> all() async {
     checkDatabaseConnection();
 
-    final List<Map<String, dynamic>> maps = await db.query(tableName);
+    final List<Map<String, dynamic>> maps = await db!.query(tableName);
 
     return List.generate(maps.length, (i) {
       return ProductReviewEntity(
@@ -23,11 +23,11 @@ class ProductReviewDataSource extends DataSource {
   }
 
   @override
-  Future<ProductReviewEntity> get(int id) async {
+  Future<ProductReviewEntity> get(int? id) async {
     checkDatabaseConnection();
 
     final List<Map<String, dynamic>> maps =
-        await db.query(tableName, where: '$primaryKey = ?', whereArgs: [id]);
+        await db!.query(tableName, where: '$primaryKey = ?', whereArgs: [id]);
 
     return ProductReviewEntity(
       id: maps[0]['id'],

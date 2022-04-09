@@ -1,10 +1,10 @@
-import 'package:openflutterecommerce/domain/entities/entity.dart';
+import '../domain/entities/entity.dart';
 
-class HashTagEntity extends Entity<int> {
-  final String title;
+class HashTagEntity extends Entity<int?> {
+  final String? title;
 
   HashTagEntity({
-    int id,
+    int? id,
     this.title,
   }) : super(id);
 
@@ -17,5 +17,5 @@ class HashTagEntity extends Entity<int> {
   }
 
   @override
-  List<Object> get props => [id, title];
+  List<Object?> get props => [id, title];
 }

@@ -3,9 +3,9 @@
  * @copyright 2020 Open E-commerce App
  * @see shipping_address_repository_impl.dart
  */
-import 'package:openflutterecommerce/data/model/payment_method.dart';
-import 'package:openflutterecommerce/data/repositories/abstract/payment_method_repository.dart';
-import 'package:openflutterecommerce/data/repositories/fake_repos/payment_method_repository.dart';
+import '../data/model/payment_method.dart';
+import '../data/repositories/abstract/payment_method_repository.dart';
+import '../data/repositories/fake_repos/payment_method_repository.dart';
 
 class PaymentMethodRepositoryImpl implements PaymentMethodRepository{
 
@@ -52,7 +52,7 @@ class PaymentMethodRepositoryImpl implements PaymentMethodRepository{
   @override
   Future<PaymentMethodModel> getDefaultPaymentMethod() async {
     PaymentMethodModel paymentMethod = 
-      await dataStorage.paymentMethods.firstWhere((paymentMethod) => paymentMethod.isDefault);
+      await dataStorage.paymentMethods.firstWhere((paymentMethod) => paymentMethod.isDefault!);
     return paymentMethod;
   }
 }

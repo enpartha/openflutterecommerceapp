@@ -4,16 +4,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import '../config/theme.dart';
+import '../presentation/widgets/widgets.dart';
 
 import '../../wrapper.dart';
 import '../checkout.dart';
 
 class AddShippingAddressView extends StatefulWidget {
-  final Function changeView;
+  final Function? changeView;
 
-  const AddShippingAddressView({Key key, this.changeView}) : super(key: key);
+  const AddShippingAddressView({Key? key, this.changeView}) : super(key: key);
 
   @override
   _AddShippingAddressViewState createState() => _AddShippingAddressViewState();
@@ -22,12 +22,12 @@ class AddShippingAddressView extends StatefulWidget {
 class _AddShippingAddressViewState extends State<AddShippingAddressView> {
   int paymentCardIndex = 0;
 
-  TextEditingController _fullNameController;
-  TextEditingController _addressController;
-  TextEditingController _cityController;
-  TextEditingController _stateController;
-  TextEditingController _postalController;
-  TextEditingController _countryController;
+  TextEditingController? _fullNameController;
+  TextEditingController? _addressController;
+  TextEditingController? _cityController;
+  TextEditingController? _stateController;
+  TextEditingController? _postalController;
+  TextEditingController? _countryController;
 
   @override
   void initState() {
@@ -64,7 +64,7 @@ class _AddShippingAddressViewState extends State<AddShippingAddressView> {
             return Container(
                 padding: EdgeInsets.all(AppSizes.sidePadding),
                 child: Text('An error occured',
-                    style: _theme.textTheme.headline4
+                    style: _theme.textTheme.headline4!
                         .copyWith(color: _theme.errorColor)));
           }
           return Container();
@@ -127,13 +127,13 @@ class _AddShippingAddressViewState extends State<AddShippingAddressView> {
                       onPressed: (() => {
                             bloc
                               ..add(CheckoutAddNewShippingAddressEvent(
-                                  fullName: _fullNameController.text,
-                                  address: _addressController.text,
-                                  city: _cityController.text,
-                                  state: _stateController.text,
-                                  postal: _postalController.text,
-                                  country: _countryController.text)),
-                            widget.changeView(
+                                  fullName: _fullNameController!.text,
+                                  address: _addressController!.text,
+                                  city: _cityController!.text,
+                                  state: _stateController!.text,
+                                  postal: _postalController!.text,
+                                  country: _countryController!.text)),
+                            widget.changeView!(
                                 changeType: ViewChangeType.Backward)
                           }),
                     )

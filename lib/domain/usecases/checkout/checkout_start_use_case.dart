@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/model/cart_item.dart';
-import 'package:openflutterecommerce/data/model/payment_method.dart';
-import 'package:openflutterecommerce/data/model/shipping_address.dart';
-import 'package:openflutterecommerce/data/repositories/abstract/cart_repository.dart';
-import 'package:openflutterecommerce/data/repositories/abstract/payment_method_repository.dart';
-import 'package:openflutterecommerce/data/repositories/abstract/shipping_address_repository.dart';
-import 'package:openflutterecommerce/domain/usecases/base_use_case.dart';
-import 'package:openflutterecommerce/locator.dart';
+import '../data/model/cart_item.dart';
+import '../data/model/payment_method.dart';
+import '../data/model/shipping_address.dart';
+import '../data/repositories/abstract/cart_repository.dart';
+import '../data/repositories/abstract/payment_method_repository.dart';
+import '../data/repositories/abstract/shipping_address_repository.dart';
+import '../domain/usecases/base_use_case.dart';
+import '../locator.dart';
 
 /// # 6. Checkout screen
 /// 6.1. Checkout start screen use-case: User clicks “Checkout button” 
@@ -55,25 +55,25 @@ class CheckoutStartUseCaseImpl implements CheckoutStartUseCase {
 }
 
 class ChekcoutStartResult extends UseCaseResult {
-  final List<PaymentMethodModel> paymentMethods;
-  final List<ShippingAddressModel> shippingAddress;
-  final List<CartItem> cartItems;
-  final ShippingAddressModel currentShippingAddress;
-  final PaymentMethodModel currentPaymentMethod;
-  final double totalCalculatedPrice;
-  final double deliveryPrice;
-  final double summaryPrice;
+  final List<PaymentMethodModel>? paymentMethods;
+  final List<ShippingAddressModel>? shippingAddress;
+  final List<CartItem>? cartItems;
+  final ShippingAddressModel? currentShippingAddress;
+  final PaymentMethodModel? currentPaymentMethod;
+  final double? totalCalculatedPrice;
+  final double? deliveryPrice;
+  final double? summaryPrice;
 
   ChekcoutStartResult({
     this.paymentMethods,
     this.shippingAddress,
     this.cartItems,
     this.currentShippingAddress,
-    @required this.currentPaymentMethod,
-    @required this.totalCalculatedPrice,
-    @required this.deliveryPrice,
+    required this.currentPaymentMethod,
+    required this.totalCalculatedPrice,
+    required this.deliveryPrice,
     this.summaryPrice,
-    Exception exception, bool result}) 
+    Exception? exception, bool? result}) 
     : super(exception: exception, result: result);
 }
 

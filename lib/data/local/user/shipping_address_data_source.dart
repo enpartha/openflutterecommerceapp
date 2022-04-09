@@ -1,12 +1,12 @@
-import 'package:openflutterecommerce/data/local/data_source.dart';
-import 'package:openflutterecommerce/domain/entities/user/shipping_address_entity.dart';
+import '../data/local/data_source.dart';
+import '../domain/entities/user/shipping_address_entity.dart';
 
 class ShippingAddressDataSource extends DataSource {
   @override
   Future<List<ShippingAddressEntity>> all() async {
     checkDatabaseConnection();
 
-    final List<Map<String, dynamic>> maps = await db.query(tableName);
+    final List<Map<String, dynamic>> maps = await db!.query(tableName);
 
     return List.generate(maps.length, (i) {
       return ShippingAddressEntity(
@@ -22,11 +22,11 @@ class ShippingAddressDataSource extends DataSource {
   }
 
   @override
-  Future<ShippingAddressEntity> get(int id) async {
+  Future<ShippingAddressEntity> get(int? id) async {
     checkDatabaseConnection();
 
     final List<Map<String, dynamic>> maps =
-        await db.query(tableName, where: '$primaryKey = ?', whereArgs: [id]);
+        await db!.query(tableName, where: '$primaryKey = ?', whereArgs: [id]);
 
     return ShippingAddressEntity(
       id: maps[0]['id'],

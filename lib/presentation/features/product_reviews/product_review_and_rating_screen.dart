@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/data/model/product.dart';
-import 'package:openflutterecommerce/data/model/product_review.dart';
-import 'package:openflutterecommerce/data/repositories/fake_repos/product_review_repository.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import '../data/model/product.dart';
+import '../data/model/product_review.dart';
+import '../data/repositories/fake_repos/product_review_repository.dart';
+import '../presentation/widgets/widgets.dart';
 
 import 'product_review_bloc.dart';
 import 'product_review_event.dart';
 import 'product_review_state.dart';
 
 class ProductReviewRatingScreen extends StatefulWidget {
-  final Product product;
+  final Product? product;
 
   const ProductReviewRatingScreen({
-    Key key,
+    Key? key,
     this.product,
   }) : super(key: key);
 
@@ -60,7 +60,7 @@ class ProductReviewRatingScreenState extends State<ProductReviewRatingScreen> {
         ),
         BlocProvider<ProductReviewBloc>(
           create: (context) {
-            return ProductReviewBloc(ProductReviewRepository())..add(ProductReviewStartEvent(widget.product.id, false));
+            return ProductReviewBloc(ProductReviewRepository())..add(ProductReviewStartEvent(widget.product!.id, false));
           },
           child: ProductReviewWrapper(
             product: widget.product,
@@ -113,11 +113,11 @@ class ProductReviewRatingScreenState extends State<ProductReviewRatingScreen> {
 }
 
 class ProductReviewWrapper extends StatefulWidget {
-  final Product product;
+  final Product? product;
   final summaryAndFilterIndex = 2;
 
   const ProductReviewWrapper({
-    Key key,
+    Key? key,
     this.product,
   }) : super(key: key);
 
@@ -128,7 +128,7 @@ class ProductReviewWrapper extends StatefulWidget {
 }
 
 class ProductReviewWrapperState extends State<ProductReviewWrapper> {
-  List<ProductReview> comments;
+  List<ProductReview>? comments;
   int reviewCount = 0;
   bool withPhotos = false;
 
@@ -150,7 +150,7 @@ class ProductReviewWrapperState extends State<ProductReviewWrapper> {
                 );
               },
               childCount:
-                  comments != null ? comments.length + widget.summaryAndFilterIndex : widget.summaryAndFilterIndex + 1,
+                  comments != null ? comments!.length + widget.summaryAndFilterIndex : widget.summaryAndFilterIndex + 1,
             ),
           );
         });
@@ -187,8 +187,8 @@ class ProductReviewWrapperState extends State<ProductReviewWrapper> {
       ),
       child: OpenFlutterRatingSummary(
         barColor: Theme.of(context).accentColor,
-        ratingQuantity: widget.product.ratingCount,
-        rating: widget.product.averageRating,
+        ratingQuantity: widget.product!.ratingCount,
+        rating: widget.product!.averageRating,
       ),
     );
   }
@@ -214,7 +214,7 @@ class ProductReviewWrapperState extends State<ProductReviewWrapper> {
                 checked: withPhotos,
                 title: 'with photos',
                 onTap: (value) {
-                  BlocProvider.of<ProductReviewBloc>(context).add(ProductReviewStartEvent(widget.product.id, value));
+                  BlocProvider.of<ProductReviewBloc>(context).add(ProductReviewStartEvent(widget.product!.id, value));
                 },
               ),
             ),
@@ -231,15 +231,15 @@ class ProductReviewWrapperState extends State<ProductReviewWrapper> {
       return _buildIndicator();
     }
 
-    if (comments.isNotEmpty) {
-      var productReview = _getProductReview(index, comments);
+    if (comments!.isNotEmpty) {
+      var productReview = _getProductReview(index, comments!);
 
       return Padding(
         padding: const EdgeInsets.only(
           bottom: 16.0,
         ),
         child: OpenFlutterProductReviewItem(
-          rating: productReview.rating.roundToDouble(),
+          rating: productReview.rating!.roundToDouble(),
           writerName: productReview.authorName,
           isHelpfulMarked: productReview.isHelpful,
           comment: productReview.comment,

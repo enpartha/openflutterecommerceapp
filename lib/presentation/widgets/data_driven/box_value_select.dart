@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/model/category.dart';
+import '../config/theme.dart';
+import '../data/model/category.dart';
 
 import '../independent/block_subtitle.dart';
 
@@ -8,15 +8,15 @@ class OpenFlutterSelectValuesBoxes<T> extends StatefulWidget {
   final List<T> availableValues;
   final List<T> selectedValues;
   final String label;
-  final Function(List<T>) onClick;
-  final double boxWidth;
+  final Function(List<T>?) onClick;
+  final double? boxWidth;
 
   const OpenFlutterSelectValuesBoxes(
-      {Key key,
-      @required this.availableValues,
-      @required this.selectedValues,
-      @required this.label,
-      @required this.onClick,
+      {Key? key,
+      required this.availableValues,
+      required this.selectedValues,
+      required this.label,
+      required this.onClick,
       this.boxWidth})
       : super(key: key);
 
@@ -25,7 +25,7 @@ class OpenFlutterSelectValuesBoxes<T> extends StatefulWidget {
 }
 
 class _OpenFlutterSelectValuesBoxesState<T> extends State<OpenFlutterSelectValuesBoxes<T>> {
-  List<T> selectedValues;
+  List<T>? selectedValues;
 
   @override
   void initState() {
@@ -83,16 +83,16 @@ class _OpenFlutterSelectValuesBoxesState<T> extends State<OpenFlutterSelectValue
       padding: EdgeInsets.symmetric(
           vertical: AppSizes.sidePadding, horizontal: widget.boxWidth == null ? AppSizes.sidePadding : 0),
       child: Text(
-        convertValueToString(currentValue).toUpperCase(),
+        convertValueToString(currentValue)!.toUpperCase(),
         overflow: TextOverflow.ellipsis,
-        style: _theme.textTheme.headline2.copyWith(
+        style: _theme.textTheme.headline2!.copyWith(
           color: widget.selectedValues.contains(currentValue) ? AppColors.white : _theme.accentColor,
         ),
       ),
     );
   }
 
-  String convertValueToString(T currentValue) {
+  String? convertValueToString(T currentValue) {
     if (currentValue is CategoryView) return currentValue.title;
     if (currentValue is ProductCategory) {
       return currentValue.name;
@@ -102,10 +102,10 @@ class _OpenFlutterSelectValuesBoxesState<T> extends State<OpenFlutterSelectValue
 
   void updateSelectedBoxes(T currentValue) {
     if (selectedValues != null) {
-      if (selectedValues.contains(currentValue)) {
-        selectedValues.remove(currentValue);
+      if (selectedValues!.contains(currentValue)) {
+        selectedValues!.remove(currentValue);
       } else {
-        selectedValues.add(currentValue);
+        selectedValues!.add(currentValue);
       }
     }
     setState(() {});

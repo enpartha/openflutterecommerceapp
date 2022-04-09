@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/presentation/widgets/independent/base_product_list_item.dart';
+import '../config/theme.dart';
+import '../presentation/widgets/independent/base_product_list_item.dart';
 
 class BlankProductListItem extends BaseProductListItem {
   BlankProductListItem()

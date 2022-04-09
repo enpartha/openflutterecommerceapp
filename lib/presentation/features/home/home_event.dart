@@ -4,12 +4,12 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/model/product.dart';
+import '../data/model/product.dart';
 
 @immutable
 abstract class HomeEvent extends Equatable {
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 @immutable
@@ -19,11 +19,11 @@ class HomeLoadEvent extends HomeEvent {
 }
 
 class HomeAddToFavoriteEvent extends HomeEvent {
-  final bool isFavorite;
-  final Product product;
+  final bool? isFavorite;
+  final Product? product;
 
   HomeAddToFavoriteEvent({this.isFavorite, this.product});
 
   @override
-  List<Object> get props => [isFavorite, product];
+  List<Object?> get props => [isFavorite, product];
 }

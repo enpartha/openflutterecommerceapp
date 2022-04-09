@@ -3,18 +3,18 @@
 // Date: 2020-02-06
 
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/config/theme.dart';
+import '../config/theme.dart';
 
 class OpenFlutterBlockSubtitle extends StatelessWidget {
-  final double width;
-  final String title;
-  final String linkText;
-  final Function onLinkTap;
+  final double? width;
+  final String? title;
+  final String? linkText;
+  final Function? onLinkTap;
 
   const OpenFlutterBlockSubtitle({
-    Key key,
+    Key? key,
     this.width,
-    @required this.title,
+    required this.title,
     this.linkText,
     this.onLinkTap,
   }) : super(key: key);
@@ -32,19 +32,19 @@ class OpenFlutterBlockSubtitle extends StatelessWidget {
             Row(
               children: <Widget>[
                 Container(
-                    child: Text(title,
-                        style: _theme.textTheme.headline4
+                    child: Text(title!,
+                        style: _theme.textTheme.headline4!
                             .copyWith(fontWeight: FontWeight.bold, color: _theme.primaryColor))),
                 linkText != null
                     ? InkWell(
-                        onTap: (() => {onLinkTap()}),
+                        onTap: (() => {onLinkTap!()}),
                         child: Container(
                           width: rightLinkWidth,
                           child: Align(
                             alignment: Alignment.centerRight,
                             child: Text(
-                              linkText,
-                              style: _theme.textTheme.headline4.copyWith(color: _theme.accentColor),
+                              linkText!,
+                              style: _theme.textTheme.headline4!.copyWith(color: _theme.accentColor),
                             ),
                           ),
                         ),

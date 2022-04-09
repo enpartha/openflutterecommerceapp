@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/config/routes.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/domain/entities/validator.dart';
-import 'package:openflutterecommerce/presentation/features/sign_up/sign_up.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import '../config/routes.dart';
+import '../config/theme.dart';
+import '../domain/entities/validator.dart';
+import '../presentation/features/sign_up/sign_up.dart';
+import '../presentation/widgets/widgets.dart';
 
 import 'forget_password.dart';
 
@@ -19,7 +19,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   final TextEditingController emailController = TextEditingController();
   final GlobalKey<OpenFlutterInputFieldState> emailKey = GlobalKey();
 
-  double sizeBetween;
+  double? sizeBetween;
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +94,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   ),
                   OpenFlutterButton(title: 'SEND', onPressed: _validateAndSend),
                   SizedBox(
-                    height: sizeBetween * 2,
+                    height: sizeBetween! * 2,
                   ),
                   Padding(
                     padding: EdgeInsets.only(bottom: AppSizes.linePadding),
@@ -140,7 +140,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   }
 
   void _validateAndSend() {
-    if (emailKey.currentState.validate() != null) {
+    if (emailKey.currentState!.validate() != null) {
       return;
     }
     BlocProvider.of<ForgetPasswordBloc>(context).add(

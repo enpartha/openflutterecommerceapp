@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import '../presentation/widgets/widgets.dart';
 
 class MyShippingAddressesView extends StatefulWidget {
-  final Function changeView;
+  final Function? changeView;
 
-  const MyShippingAddressesView({Key key, this.changeView}) : super(key: key);
+  const MyShippingAddressesView({Key? key, this.changeView}) : super(key: key);
 
   @override
   _MyShippingAddressesViewState createState() => _MyShippingAddressesViewState();

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:openflutterecommerce/config/theme.dart';
+import '../config/theme.dart';
 
 class ErrorDialog extends StatelessWidget {
-  final String mainText;
+  final String? mainText;
 
-  const ErrorDialog({Key key, this.mainText}) : super(key: key);
+  const ErrorDialog({Key? key, this.mainText}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +27,8 @@ class ErrorDialog extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text(mainText,
-                style: Theme.of(context).textTheme.headline4.copyWith(color: Theme.of(context).errorColor)),
+            child: Text(mainText!,
+                style: Theme.of(context).textTheme.headline4!.copyWith(color: Theme.of(context).errorColor)),
           ),
           SizedBox(
             height: 12.0,
@@ -59,7 +59,7 @@ class ErrorDialog extends StatelessWidget {
     );
   }
 
-  static Future showErrorDialog(BuildContext context, String text) {
+  static Future showErrorDialog(BuildContext context, String? text) {
     return showDialog(
         context: context,
         builder: (context) {

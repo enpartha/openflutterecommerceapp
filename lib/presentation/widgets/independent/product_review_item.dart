@@ -3,29 +3,29 @@
 // Date: 2020-02-23
 
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import '../presentation/widgets/widgets.dart';
 
 class OpenFlutterProductReviewItem extends StatelessWidget {
   final double avatarSize;
-  final String writerName;
+  final String? writerName;
   final String reviewDateTime;
-  final String comment;
-  final String avatarUrl;
+  final String? comment;
+  final String? avatarUrl;
 
   final bool withPhotos;
-  final List<String> photos;
+  final List<String>? photos;
   final double photoSize;
 
   final double rating;
   final int starCount;
 
-  final Function onHelpfulTapped;
-  final bool isHelpfulMarked;
+  final Function? onHelpfulTapped;
+  final bool? isHelpfulMarked;
   final double helpfulIconSize;
   final double helpfulFontSize;
 
   const OpenFlutterProductReviewItem({
-    Key key,
+    Key? key,
     this.avatarUrl = '',
     this.avatarSize = 40.0,
     this.writerName = '',
@@ -90,7 +90,7 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
         alignment: Alignment.topLeft,
         child: CircleAvatar(
           backgroundImage: NetworkImage(
-            avatarUrl,
+            avatarUrl!,
           ),
         ),
       );
@@ -99,13 +99,13 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
     return SizedBox();
   }
 
-  bool _hasAnAvatar() => avatarUrl != null && avatarUrl.isNotEmpty;
+  bool _hasAnAvatar() => avatarUrl != null && avatarUrl!.isNotEmpty;
 
   Widget _buildTitle(BuildContext context) {
     return Container(
       width: double.infinity,
       child: Text(
-        writerName,
+        writerName!,
         style: Theme.of(context).textTheme.subtitle2,
         textAlign: TextAlign.start,
       ),
@@ -127,7 +127,7 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
         Expanded(
           child: Text(
             reviewDateTime,
-            style: Theme.of(context).textTheme.caption.copyWith(
+            style: Theme.of(context).textTheme.caption!.copyWith(
                   fontSize: 12,
                 ),
             textAlign: TextAlign.end,
@@ -141,8 +141,8 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
     return Container(
       width: double.infinity,
       child: Text(
-        comment,
-        style: Theme.of(context).textTheme.bodyText2.copyWith(
+        comment!,
+        style: Theme.of(context).textTheme.bodyText2!.copyWith(
               fontSize: 14.0,
             ),
         textAlign: TextAlign.start,
@@ -151,7 +151,7 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
   }
 
   Widget _buildPhotos(BuildContext context) {
-    if (withPhotos && photos != null && photos.isNotEmpty) {
+    if (withPhotos && photos != null && photos!.isNotEmpty) {
       return Padding(
         padding: const EdgeInsets.only(
           top: 8.0,
@@ -170,7 +170,7 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
   }
 
   List<Widget> _buildPhotosItems() {
-    var list = List<Widget>.generate(photos.length, (index) => _buildPhotoItem(photos[index]));
+    var list = List<Widget>.generate(photos!.length, (index) => _buildPhotoItem(photos![index]));
     return list;
   }
 
@@ -185,12 +185,12 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
         child: Image.network(
           photoUrl,
           fit: BoxFit.fill,
-          loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
+          loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
             if (loadingProgress == null) return child;
             return Center(
               child: CircularProgressIndicator(
                 value: loadingProgress.expectedTotalBytes != null
-                    ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes
+                    ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
                     : null,
               ),
             );
@@ -202,7 +202,7 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
 
   Widget _buildIsHelpful(BuildContext context) {
     return GestureDetector(
-      onTap: onHelpfulTapped,
+      onTap: onHelpfulTapped as void Function()?,
       child: ConstrainedBox(
         constraints: BoxConstraints(
           minHeight: 32.0,
@@ -215,7 +215,7 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
               child: Text(
                 'Helpful',
                 textAlign: TextAlign.end,
-                style: Theme.of(context).textTheme.caption.copyWith(
+                style: Theme.of(context).textTheme.caption!.copyWith(
                       color: _getHelpfulColor(context),
                       fontSize: helpfulFontSize,
                     ),
@@ -238,6 +238,6 @@ class OpenFlutterProductReviewItem extends StatelessWidget {
   }
 
   Color _getHelpfulColor(BuildContext context) {
-    return isHelpfulMarked ? Theme.of(context).accentColor : Theme.of(context).unselectedWidgetColor;
+    return isHelpfulMarked! ? Theme.of(context).accentColor : Theme.of(context).unselectedWidgetColor;
   }
 }

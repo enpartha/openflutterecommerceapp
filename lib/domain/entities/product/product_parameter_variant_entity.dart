@@ -1,12 +1,12 @@
-import 'package:openflutterecommerce/domain/entities/entity.dart';
+import '../domain/entities/entity.dart';
 
-class ProductParameterVariantEntity extends Entity<int> {
-  final String title;
-  final int productParameterId;
-  final double additionalPrice;
+class ProductParameterVariantEntity extends Entity<int?> {
+  final String? title;
+  final int? productParameterId;
+  final double? additionalPrice;
 
   ProductParameterVariantEntity(
-      {int id, 
+      {int? id, 
       this.title, 
       this.productParameterId, 
       this.additionalPrice}) : super(id);
@@ -22,7 +22,7 @@ class ProductParameterVariantEntity extends Entity<int> {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
     id, 
     title, 
     productParameterId, 

@@ -4,8 +4,8 @@ abstract class BaseUseCase<TResult, TParams> {
 }
 
 class UseCaseResult {
-  final Exception exception;
-  final bool result;
+  final Exception? exception;
+  final bool? result;
 
   UseCaseResult({
     this.exception,

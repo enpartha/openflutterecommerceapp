@@ -4,7 +4,7 @@
  * @see payment_method_repository.dart
  */
 
-import 'package:openflutterecommerce/data/model/payment_method.dart';
+import '../data/model/payment_method.dart';
 
 abstract class PaymentMethodRepository {
   //Get list of user payment method

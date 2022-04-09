@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/config/routes.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/domain/entities/validator.dart';
-import 'package:openflutterecommerce/presentation/features/sign_up/sign_up.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import '../config/routes.dart';
+import '../config/theme.dart';
+import '../domain/entities/validator.dart';
+import '../presentation/features/sign_up/sign_up.dart';
+import '../presentation/widgets/widgets.dart';
 
 import 'sign_in.dart';
 
@@ -21,7 +21,7 @@ class _SignInScreenState extends State<SignInScreen> {
   final GlobalKey<OpenFlutterInputFieldState> emailKey = GlobalKey();
   final GlobalKey<OpenFlutterInputFieldState> passwordKey = GlobalKey();
 
-  double sizeBetween;
+  double? sizeBetween;
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +95,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   OpenFlutterButton(
                       title: 'LOGIN', onPressed: _validateAndSend),
                   SizedBox(
-                    height: sizeBetween * 2,
+                    height: sizeBetween! * 2,
                   ),
                   Padding(
                     padding: EdgeInsets.only(bottom: AppSizes.linePadding),
@@ -141,10 +141,10 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   void _validateAndSend() {
-    if (emailKey.currentState.validate() != null) {
+    if (emailKey.currentState!.validate() != null) {
       return;
     }
-    if (passwordKey.currentState.validate() != null) {
+    if (passwordKey.currentState!.validate() != null) {
       return;
     }
     BlocProvider.of<SignInBloc>(context).add(

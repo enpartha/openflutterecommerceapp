@@ -4,17 +4,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/presentation/widgets/independent/payment_card_preview.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import '../config/theme.dart';
+import '../presentation/widgets/independent/payment_card_preview.dart';
+import '../presentation/widgets/widgets.dart';
 
 import '../../wrapper.dart';
 import '../checkout.dart';
 
 class PaymentMethodView extends StatefulWidget {
-  final Function changeView;
+  final Function? changeView;
 
-  const PaymentMethodView({Key key, this.changeView}) : super(key: key);
+  const PaymentMethodView({Key? key, this.changeView}) : super(key: key);
 
   @override
   _PaymentMethodViewState createState() => _PaymentMethodViewState();
@@ -23,10 +23,10 @@ class PaymentMethodView extends StatefulWidget {
 class _PaymentMethodViewState extends State<PaymentMethodView> {
   int paymentCardIndex = 0;
 
-  TextEditingController _nameOnCardController;
-  TextEditingController _cardNumberController;
-  TextEditingController _expirationDateController;
-  TextEditingController _cvvController;
+  TextEditingController? _nameOnCardController;
+  TextEditingController? _cardNumberController;
+  TextEditingController? _expirationDateController;
+  TextEditingController? _cvvController;
 
   @override
   void initState() {
@@ -60,7 +60,7 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
             return Container(
                 padding: EdgeInsets.all(AppSizes.sidePadding),
                 child: Text('An error occured',
-                    style: _theme.textTheme.headline4
+                    style: _theme.textTheme.headline4!
                         .copyWith(color: _theme.errorColor)));
           }
           return Container();
@@ -174,16 +174,16 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
                                     bloc
                                       ..add(CheckoutAddNewCardEvent(
                                           nameOnCard:
-                                              _nameOnCardController.text,
+                                              _nameOnCardController!.text,
                                           cardNumber:
-                                              _cardNumberController.text,
+                                              _cardNumberController!.text,
                                           expirationMonth: int.parse(
-                                              _expirationDateController.text
+                                              _expirationDateController!.text
                                                   .split('/')[0]),
                                           expirationYear: int.parse(
-                                              _expirationDateController.text
+                                              _expirationDateController!.text
                                                   .split('/')[1]),
-                                          cvv: int.parse(_cvvController.text)))
+                                          cvv: int.parse(_cvvController!.text)))
                                   }),
                             )
                           ],
@@ -196,7 +196,7 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
 
   void _changeDefaultPaymentCard(CheckoutBloc bloc, int cardId) {
     bloc..add(CheckoutSetDefaultCardEvent(cardId));
-    widget.changeView(changeType: ViewChangeType.Exact, index: 0);
+    widget.changeView!(changeType: ViewChangeType.Exact, index: 0);
     //TODO: implement change of default payment card
   }
 }

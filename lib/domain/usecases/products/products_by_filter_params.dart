@@ -1,10 +1,10 @@
-import 'package:openflutterecommerce/data/model/filter_rules.dart';
-import 'package:openflutterecommerce/data/model/sort_rules.dart';
+import '../data/model/filter_rules.dart';
+import '../data/model/sort_rules.dart';
 
 class ProductsByFilterParams {
-  final int categoryId;
-  final SortRules sortBy;
-  final FilterRules filterRules;
+  final int? categoryId;
+  final SortRules? sortBy;
+  final FilterRules? filterRules;
 
   ProductsByFilterParams({
     this.categoryId,

@@ -1,16 +1,16 @@
-import 'package:openflutterecommerce/domain/entities/entity.dart';
+import '../domain/entities/entity.dart';
 
-class ProductReviewEntity extends Entity<int> {
-  final String description;
-  final int productId;
-  final double rating;
-  final bool hasPhoto;
-  final String date;
-  final String author;
-  final String thumb;
+class ProductReviewEntity extends Entity<int?> {
+  final String? description;
+  final int? productId;
+  final double? rating;
+  final bool? hasPhoto;
+  final String? date;
+  final String? author;
+  final String? thumb;
 
   ProductReviewEntity(
-    {int id,
+    {int? id,
     this.description,
     this.productId,
     this.rating,
@@ -34,7 +34,7 @@ class ProductReviewEntity extends Entity<int> {
   }
 
   @override
-  List<Object> get props =>
+  List<Object?> get props =>
     [id, 
     description, 
     productId, 

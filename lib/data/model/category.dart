@@ -1,30 +1,30 @@
 import 'package:equatable/equatable.dart';
-import 'package:openflutterecommerce/data/error/exceptions.dart';
-import 'package:openflutterecommerce/domain/entities/entity.dart';
-import 'package:openflutterecommerce/domain/entities/product/product_category_entity.dart';
+import '../data/error/exceptions.dart';
+import '../domain/entities/entity.dart';
+import '../domain/entities/product/product_category_entity.dart';
 
 import 'commerce_image.dart';
 
 class ProductCategory extends Equatable {
-  final int id;
+  final int? id;
   final int parentId;
-  final String name;
-  final String description;
-  final CommerceImage image;
+  final String? name;
+  final String? description;
+  final CommerceImage? image;
   final bool isCategoryContainer;
 
   ProductCategory(
     this.id, {
-    int parentId,
+    int? parentId,
     this.name,
     this.description,
     this.image,
-    bool isCategoryContainer,
+    bool? isCategoryContainer,
   })  : parentId = parentId ?? 0,
         isCategoryContainer = isCategoryContainer ?? false;
 
   @override
-  List<Object> get props => [id, parentId, name, image];
+  List<Object?> get props => [id, parentId, name, image];
 
   @override
   bool get stringify => true;

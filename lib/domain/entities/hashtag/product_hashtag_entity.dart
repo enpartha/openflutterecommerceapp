@@ -1,10 +1,10 @@
-import 'package:openflutterecommerce/domain/entities/entity.dart';
+import '../domain/entities/entity.dart';
 
-class ProductHashTagEntity extends Entity<int> {
-  final int hashTagId;
-  final int productId;
+class ProductHashTagEntity extends Entity<int?> {
+  final int? hashTagId;
+  final int? productId;
 
-  ProductHashTagEntity({int id, this.hashTagId, this.productId}) : super(id);
+  ProductHashTagEntity({int? id, this.hashTagId, this.productId}) : super(id);
 
   @override
   Map<String, dynamic> toMap() {
@@ -16,5 +16,5 @@ class ProductHashTagEntity extends Entity<int> {
   }
 
   @override
-  List<Object> get props => [id, hashTagId, productId];
+  List<Object?> get props => [id, hashTagId, productId];
 }

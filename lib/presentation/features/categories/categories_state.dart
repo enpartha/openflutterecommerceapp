@@ -4,16 +4,16 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/model/category.dart';
+import '../data/model/category.dart';
 
 @immutable
 abstract class CategoryState extends Equatable {
-  final int parentCategoryId;
+  final int? parentCategoryId;
 
   CategoryState({this.parentCategoryId = 0});
 
   @override
-  List<Object> get props => [parentCategoryId];
+  List<Object?> get props => [parentCategoryId];
 }
 
 @immutable
@@ -24,18 +24,18 @@ class CategoryLoadingState extends CategoryState {
 
 @immutable
 abstract class CategoryViewState extends CategoryState {
-  final List<ProductCategory> categories;
+  final List<ProductCategory>? categories;
 
-  CategoryViewState({int parentCategoryId, this.categories})
+  CategoryViewState({int? parentCategoryId, this.categories})
       : super(parentCategoryId: parentCategoryId);
 
   @override
-  List<Object> get props => [categories, parentCategoryId];
+  List<Object?> get props => [categories, parentCategoryId];
 }
 
 @immutable
 class CategoryListViewState extends CategoryViewState {
-  CategoryListViewState({int parentCategoryId, List<ProductCategory> categories})
+  CategoryListViewState({int? parentCategoryId, List<ProductCategory>? categories})
       : super(parentCategoryId: parentCategoryId, categories: categories);
 
   @override
@@ -45,8 +45,8 @@ class CategoryListViewState extends CategoryViewState {
 @immutable
 class CategoryTileViewState extends CategoryViewState {
   CategoryTileViewState({
-    int parentCategoryId,
-    List<ProductCategory> categories,
+    int? parentCategoryId,
+    List<ProductCategory>? categories,
   }) : super(
           parentCategoryId: parentCategoryId,
           categories: categories,

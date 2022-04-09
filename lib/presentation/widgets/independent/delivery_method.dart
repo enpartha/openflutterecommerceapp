@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/config/theme.dart';
+import '../config/theme.dart';
 
 class OpenFlutterDeliveryMethod extends StatelessWidget {
   @override
@@ -48,7 +48,7 @@ class OpenFlutterDeliveryMethod extends StatelessWidget {
                   width: 61,
                 ),
               ),
-              Text(title, style: _theme.textTheme.bodyText2.copyWith(color: _theme.primaryColorLight))
+              Text(title, style: _theme.textTheme.bodyText2!.copyWith(color: _theme.primaryColorLight))
             ],
           ),
         ));

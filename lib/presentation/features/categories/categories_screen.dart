@@ -4,16 +4,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/presentation/features/wrapper.dart';
-import 'package:openflutterecommerce/presentation/widgets/independent/loading_view.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import '../presentation/features/wrapper.dart';
+import '../presentation/widgets/independent/loading_view.dart';
+import '../presentation/widgets/widgets.dart';
 
 import 'categories.dart';
 
 class CategoriesScreen extends StatefulWidget {
-  final CategoriesParameters parameters;
+  final CategoriesParameters? parameters;
 
-  const CategoriesScreen({Key key, this.parameters}) : super(key: key);
+  const CategoriesScreen({Key? key, this.parameters}) : super(key: key);
 
   @override
   _CategoriesScreenState createState() => _CategoriesScreenState();
@@ -35,7 +35,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               return CategoryBloc()
                 ..add(CategoryShowListEvent(widget.parameters == null
                     ? 0
-                    : widget.parameters.categoryId));
+                    : widget.parameters!.categoryId));
             },
             child: CategoriesWrapper()));
   }

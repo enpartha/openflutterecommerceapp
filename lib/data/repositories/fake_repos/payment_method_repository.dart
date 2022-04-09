@@ -3,8 +3,8 @@
  * @copyright 2020 Open E-commerce App
  * @see payment_method_repository.dart
  */
-import 'package:openflutterecommerce/data/model/payment_method.dart';
-import 'package:openflutterecommerce/data/repositories/abstract/payment_method_repository.dart';
+import '../data/model/payment_method.dart';
+import '../data/repositories/abstract/payment_method_repository.dart';
 
 class FakePaymentMethodRepository implements PaymentMethodRepository{
 

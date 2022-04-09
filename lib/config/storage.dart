@@ -14,5 +14,5 @@ class Storage {
   Storage._internal();
 
   FlutterSecureStorage secureStorage = FlutterSecureStorage();
-  String token = '';
+  String? token = '';
 }

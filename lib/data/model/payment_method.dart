@@ -1,16 +1,16 @@
 
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/domain/entities/checkout/payment_method_entity.dart';
+import '../domain/entities/checkout/payment_method_entity.dart';
 
 class PaymentMethodModel extends PaymentMethodEntity {
   PaymentMethodModel(
-    {@required int id,
-    String nameOnCard, 
-    String cardNumber, 
-    int expiryDateMonth,
-    int expiryDateYear,
-    int cvv,
-    bool isDefault}
+    {required int? id,
+    String? nameOnCard, 
+    String? cardNumber, 
+    int? expiryDateMonth,
+    int? expiryDateYear,
+    int? cvv,
+    bool? isDefault}
   ) : super(
       id: id,
       nameOnCard: nameOnCard,
@@ -21,13 +21,13 @@ class PaymentMethodModel extends PaymentMethodEntity {
       isDefault: isDefault);
 
   PaymentMethodModel copyWith(
-    {int id,
-    String nameOnCard, 
-    String cardNumber, 
-    int expiryDateMonth,
-    int expiryDateYear,
-    int cvv,
-    bool isDefault})  
+    {int? id,
+    String? nameOnCard, 
+    String? cardNumber, 
+    int? expiryDateMonth,
+    int? expiryDateYear,
+    int? cvv,
+    bool? isDefault})  
   {
     return PaymentMethodModel(
       id: id ?? id,

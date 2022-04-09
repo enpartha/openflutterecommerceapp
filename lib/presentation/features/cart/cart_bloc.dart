@@ -3,21 +3,21 @@
 // Date: 2020-02-06
 
 import 'package:bloc/bloc.dart';
-import 'package:openflutterecommerce/data/model/favorite_product.dart';
-import 'package:openflutterecommerce/domain/usecases/cart/change_cart_item_quantity_use_case.dart';
-import 'package:openflutterecommerce/domain/usecases/cart/get_cart_products_use_case.dart';
-import 'package:openflutterecommerce/domain/usecases/cart/remove_product_from_cart_use_case.dart';
-import 'package:openflutterecommerce/domain/usecases/favorites/add_to_favorites_use_case.dart';
-import 'package:openflutterecommerce/domain/usecases/promos/get_promos_use_case.dart';
-import 'package:openflutterecommerce/locator.dart';
+import '../data/model/favorite_product.dart';
+import '../domain/usecases/cart/change_cart_item_quantity_use_case.dart';
+import '../domain/usecases/cart/get_cart_products_use_case.dart';
+import '../domain/usecases/cart/remove_product_from_cart_use_case.dart';
+import '../domain/usecases/favorites/add_to_favorites_use_case.dart';
+import '../domain/usecases/promos/get_promos_use_case.dart';
+import '../locator.dart';
 
 import 'cart.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
-  final GetCartProductsUseCase getCartProductsUseCase;
-  final RemoveProductFromCartUseCase removeProductFromCartUseCase;
-  final AddToFavoritesUseCase addToFavoritesUseCase;
-  final GetPromosUseCase getPromosUseCase;
+  final GetCartProductsUseCase? getCartProductsUseCase;
+  final RemoveProductFromCartUseCase? removeProductFromCartUseCase;
+  final AddToFavoritesUseCase? addToFavoritesUseCase;
+  final GetPromosUseCase? getPromosUseCase;
   
   CartBloc() 
   : getCartProductsUseCase = sl(),
@@ -30,8 +30,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   Stream<CartState> mapEventToState(CartEvent event) async* {
     if (event is CartLoadedEvent) {
       if (state is CartInitialState) {
-        final cartResults = await getCartProductsUseCase.execute(GetCartProductParams());
-        var promos = await getPromosUseCase.execute(GetPromosParams());
+        final cartResults = await getCartProductsUseCase!.execute(GetCartProductParams());
+        var promos = await getPromosUseCase!.execute(GetPromosParams());
         
         yield CartLoadedState(
           showPromoPopup: false, 
@@ -46,16 +46,16 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     } else if (event is CartQuantityChangedEvent) {
       var state = this.state as CartLoadedState;
       yield CartLoadingState();
-      ChangeCartItemQuantityUseCase changeCartItemQuantityUseCase = sl();
-      if (event.newQuantity < 1) {
-        await removeProductFromCartUseCase.execute(event.item);
+      ChangeCartItemQuantityUseCase? changeCartItemQuantityUseCase = sl();
+      if (event.newQuantity! < 1) {
+        await removeProductFromCartUseCase!.execute(event.item);
       } else {
         await changeCartItemQuantityUseCase.execute(ChangeCartItemQuantityParams(
         item: event.item,
         quantity: event.newQuantity
       ));
       }
-      final cartResults = await getCartProductsUseCase.execute(GetCartProductParams());
+      final cartResults = await getCartProductsUseCase!.execute(GetCartProductParams());
       yield CartLoadedState(
         cartProducts: cartResults.cartItems, 
         promos: state.promos, 
@@ -65,8 +65,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     } else if (event is CartRemoveFromCartEvent) {
       var state = this.state as CartLoadedState;
       yield CartLoadingState();
-      await removeProductFromCartUseCase.execute(event.item);
-      final cartResults = await getCartProductsUseCase.execute(GetCartProductParams());
+      await removeProductFromCartUseCase!.execute(event.item);
+      final cartResults = await getCartProductsUseCase!.execute(GetCartProductParams());
       yield CartLoadedState(
         cartProducts: cartResults.cartItems, 
         promos: state.promos, 
@@ -74,16 +74,16 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         totalPrice: cartResults.cartItems.isEmpty ? 0.0 : cartResults.totalPrice,
       );
     } else if (event is CartAddToFavsEvent) {
-      await addToFavoritesUseCase.execute(
+      await addToFavoritesUseCase!.execute(
         FavoriteProduct(
-          event.item.product,
-          event.item.selectedAttributes
+          event.item!.product,
+          event.item!.selectedAttributes
         )
       );
     } else if (event is CartPromoAppliedEvent) {
       //TODO: apply promo code
       var state = this.state as CartLoadedState;
-      final cartResults = await getCartProductsUseCase.execute(
+      final cartResults = await getCartProductsUseCase!.execute(
         GetCartProductParams(appliedPromo: event.promo)
       );
       yield state.copyWith(

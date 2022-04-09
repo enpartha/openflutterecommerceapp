@@ -3,15 +3,15 @@
 // Date: 2020-02-17
 
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import '../config/theme.dart';
+import '../presentation/widgets/widgets.dart';
 
 import '../../wrapper.dart';
 
 class Success2View extends StatefulWidget {
-  final Function changeView;
+  final Function? changeView;
 
-  const Success2View({Key key, this.changeView}) : super(key: key);
+  const Success2View({Key? key, this.changeView}) : super(key: key);
 
   @override
   _Success2ViewState createState() => _Success2ViewState();
@@ -43,7 +43,7 @@ class _Success2ViewState extends State<Success2View> {
                     style: _theme.textTheme.headline4)),
             OpenFlutterButton(
               title: 'CONTINUE SHOPPING',
-              onPressed: (() => {widget.changeView(changeType: ViewChangeType.Exact, index: 0)}),
+              onPressed: (() => {widget.changeView!(changeType: ViewChangeType.Exact, index: 0)}),
             ),
           ],
         ));

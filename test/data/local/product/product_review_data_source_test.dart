@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:openflutterecommerce/data/local/product/product_review_data_source.dart';
-import 'package:openflutterecommerce/domain/entities/product/product_review_entity.dart';
+import '../data/local/product/product_review_data_source.dart';
+import '../domain/entities/product/product_review_entity.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   group('Test ProductReview Data Source', () {
-    ProductReviewDataSource dataSource;
+    late ProductReviewDataSource dataSource;
 
     setUp(() async {
       dataSource = ProductReviewDataSource();

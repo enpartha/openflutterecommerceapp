@@ -3,25 +3,25 @@
 // Date: 2020-02-06
 
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/config/theme.dart';
+import '../config/theme.dart';
 
 class OpenFlutterButton extends StatelessWidget {
-  final double width;
-  final double height;
-  final Function onPressed;
+  final double? width;
+  final double? height;
+  final Function? onPressed;
   final String title;
-  final IconData icon;
+  final IconData? icon;
   final double iconSize;
   final Color backgroundColor;
   final Color textColor;
   final Color borderColor;
 
   OpenFlutterButton({
-    Key key,
+    Key? key,
     this.width,
     this.height,
-    @required this.title,
-    @required this.onPressed,
+    required this.title,
+    required this.onPressed,
     this.icon,
     this.backgroundColor = AppColors.red,
     this.textColor = AppColors.white,
@@ -39,7 +39,7 @@ class OpenFlutterButton extends StatelessWidget {
     return Padding(
       padding: edgeInsets,
       child: InkWell(
-        onTap: onPressed,
+        onTap: onPressed as void Function()?,
         child: Container(
           width: width,
           height: height,
@@ -91,8 +91,8 @@ class OpenFlutterButton extends StatelessWidget {
   Widget _buildTitle(ThemeData _theme) {
     return Text(
       title,
-      style: _theme.textTheme.button.copyWith(
-        backgroundColor: _theme.textTheme.button.backgroundColor,
+      style: _theme.textTheme.button!.copyWith(
+        backgroundColor: _theme.textTheme.button!.backgroundColor,
         color: textColor,
       ),
     );
@@ -107,7 +107,7 @@ class OpenFlutterButton extends StatelessWidget {
         child: Icon(
           icon,
           size: iconSize,
-          color: theme.textTheme.button.color,
+          color: theme.textTheme.button!.color,
         ),
       );
     }

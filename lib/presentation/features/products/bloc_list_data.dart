@@ -1,11 +1,11 @@
-import 'package:openflutterecommerce/data/model/category.dart';
-import 'package:openflutterecommerce/data/model/filter_rules.dart';
-import 'package:openflutterecommerce/data/model/product.dart';
+import '../data/model/category.dart';
+import '../data/model/filter_rules.dart';
+import '../data/model/product.dart';
 
 class ProductListData {
   final List<Product> products;
   final ProductCategory category;
-  final FilterRules filterRules;
+  final FilterRules? filterRules;
 
   ProductListData(this.products, this.category, this.filterRules);
 

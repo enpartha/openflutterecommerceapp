@@ -1,19 +1,19 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/model/hashtag.dart';
+import '../config/theme.dart';
+import '../data/model/hashtag.dart';
 
 class VisualFilter extends StatelessWidget {
-  final List<HashTag> hashTags;
-  final HashMap<HashTag, bool> selecteHashTags;
+  final List<HashTag>? hashTags;
+  final HashMap<HashTag, bool>? selecteHashTags;
   final FilterChanged onFilterChanged;
 
   const VisualFilter(
     this.hashTags,
     this.selecteHashTags,
     this.onFilterChanged, {
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -28,14 +28,14 @@ class VisualFilter extends StatelessWidget {
             padding: EdgeInsets.only(right: AppSizes.sidePadding / 2),
             child: ChoiceChip(
               selected: selecteHashTags!=null ? 
-                selecteHashTags[optionHashTag] ?? false : false,
+                selecteHashTags![optionHashTag] ?? false : false,
               padding: EdgeInsets.all(
                 AppSizes.linePadding,
               ),
               backgroundColor: Theme.of(context).primaryColor,
               selectedColor: Theme.of(context).accentColor,
               label: Text(
-                optionHashTag.title,
+                optionHashTag.title!,
                 style: Theme.of(context).textTheme.button,
               ),
               onSelected: (value) {

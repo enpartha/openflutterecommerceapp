@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/model/sort_rules.dart';
+import '../config/theme.dart';
+import '../data/model/sort_rules.dart';
 
 import '../widgets.dart';
 
 class OpenFlutterSortBy extends StatelessWidget {
-  final Function(SortRules) onSelect;
-  final SortRules currentSortBy;
+  final Function(SortRules)? onSelect;
+  final SortRules? currentSortBy;
 
-  const OpenFlutterSortBy({Key key, this.onSelect, this.currentSortBy})
+  const OpenFlutterSortBy({Key? key, this.onSelect, this.currentSortBy})
       : super(key: key);
 
   @override
@@ -32,7 +32,7 @@ class OpenFlutterSortBy extends StatelessWidget {
               backgroundColor:
                   rule == currentSortBy ? _theme.accentColor : null,
               textColor: rule == currentSortBy ? AppColors.white : null,
-              onTap: ((rule) => {onSelect(rule)}),
+              onTap: ((rule) => {onSelect!(rule)}),
             ))
         .toList(growable: false);
   }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/config/theme.dart';
+import '../config/theme.dart';
 
 class OpenFlutterServiceButton extends StatelessWidget {
   final ServiceType serviceType;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   const OpenFlutterServiceButton(
-      {Key key, this.serviceType = ServiceType.Google, this.onPressed})
+      {Key? key, this.serviceType = ServiceType.Google, this.onPressed})
       : super(key: key);
 
   @override

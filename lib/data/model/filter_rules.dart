@@ -1,25 +1,25 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/model/favorite_product.dart';
-import 'package:openflutterecommerce/data/model/hashtag.dart';
-import 'package:openflutterecommerce/data/model/product.dart';
+import '../data/model/favorite_product.dart';
+import '../data/model/hashtag.dart';
+import '../data/model/product.dart';
 
 import 'category.dart';
 import 'product_attribute.dart';
 
 class FilterRules {
-  final HashMap<ProductCategory, bool> categories;
-  final HashMap<ProductAttribute, List<String>> selectableAttributes;
-  final HashMap<ProductAttribute, List<String>> selectedAttributes;
-  final PriceRange selectedPriceRange;
+  final HashMap<ProductCategory, bool>? categories;
+  final HashMap<ProductAttribute?, List<String>>? selectableAttributes;
+  final HashMap<ProductAttribute?, List<String>> selectedAttributes;
+  final PriceRange? selectedPriceRange;
   final List<HashTag> hashTags;
   final HashMap<HashTag, bool> selectedHashTags;
 
   FilterRules( 
     {this.categories, 
-    @required this.hashTags, 
-    @required this.selectedHashTags, 
+    required this.hashTags, 
+    required this.selectedHashTags, 
     selectedAttributes, 
     this.selectableAttributes, 
     this.selectedPriceRange}) 
@@ -28,10 +28,10 @@ class FilterRules {
 
   FilterRules copyWithAdditionalAttribute(
       ProductAttribute attribute, String value) {
-    HashMap<ProductAttribute, List<String>> updatedAttributes =
-        selectableAttributes;
+    HashMap<ProductAttribute?, List<String>> updatedAttributes =
+        selectableAttributes!;
     if (updatedAttributes.containsKey(attribute)) {
-      updatedAttributes[attribute].add(value);
+      updatedAttributes[attribute]!.add(value);
     } else {
       updatedAttributes[attribute] = [value];
     }
@@ -44,7 +44,7 @@ class FilterRules {
   }
 
   /// this behavior can be changed in subclasses to show special attribute instead of first
-  MapEntry<ProductAttribute, List<String>> get topmostOption =>
+  MapEntry<ProductAttribute?, List<String>>? get topmostOption =>
       selectableAttributes?.entries?.isNotEmpty ? 
       selectableAttributes?.entries?.first 
       : MapEntry<ProductAttribute, List<String>>(
@@ -54,10 +54,10 @@ class FilterRules {
 
   FilterRules copyWithRemovedAttributeValue(
       ProductAttribute attribute, String value) {
-    HashMap<ProductAttribute, List<String>> updatedAttributes =
-        selectableAttributes;
-    updatedAttributes[attribute].remove(value);
-    if (updatedAttributes[attribute].isEmpty) {
+    HashMap<ProductAttribute?, List<String>> updatedAttributes =
+        selectableAttributes!;
+    updatedAttributes[attribute]!.remove(value);
+    if (updatedAttributes[attribute]!.isEmpty) {
       updatedAttributes.remove(attribute);
     }
     return FilterRules(
@@ -77,22 +77,22 @@ class FilterRules {
         selectableAttributes: selectableAttributes);
   }
 
-  factory FilterRules.getSelectableAttributes(List<Product> products) {
-    HashMap<ProductAttribute, List<String>> returnAttributes = HashMap();
+  factory FilterRules.getSelectableAttributes(List<Product?> products) {
+    HashMap<ProductAttribute?, List<String>> returnAttributes = HashMap();
     //hashmap to store option list by id
-    HashMap<int, List<String>> attributesIdToString = HashMap();
+    HashMap<int?, List<String>> attributesIdToString = HashMap();
     //hashmap to store ProductAttribute by id
-    HashMap<int, ProductAttribute> attributesIdToAttribute = HashMap();
+    HashMap<int?, ProductAttribute> attributesIdToAttribute = HashMap();
     //price ranges
     double maxPrice = 0;
     double minPrice = 0;
-    List<int> categoryIds = [];
+    List<int?> categoryIds = [];
     HashMap<ProductCategory, bool> categories = HashMap();
-    List<int> hashTagIds = [];
+    List<int?> hashTagIds = [];
     List<HashTag> hashTags = []; 
 
     products.forEach((product) => {
-      product.hashTags != null ?
+      product!.hashTags != null ?
         product.hashTags.forEach((HashTag hashTag) =>  {
           if ( !hashTagIds.contains(hashTag.id) ) {
             hashTagIds.add(hashTag.id),
@@ -101,13 +101,13 @@ class FilterRules {
         }) : { },
       product.selectableAttributes != null ?
        // returnAttributes.addAll({for (var attribute in product.selectableAttributes) attribute: []})
-        product.selectableAttributes.forEach((attribute)=> {
+        product.selectableAttributes!.forEach((attribute)=> {
           if ( attribute != null ) { 
             if ( attributesIdToString[attribute.id] == null ) {
               attributesIdToString[attribute.id] = [],
               attributesIdToAttribute[attribute.id] = attribute
             },
-            attributesIdToString[attribute.id].addAll(attribute.options)
+            attributesIdToString[attribute.id]!.addAll(attribute.options!)
           }
         }) : { },
       if ( product.price > maxPrice ) maxPrice = product.price,
@@ -121,7 +121,7 @@ class FilterRules {
       })
     });
     attributesIdToString.keys.forEach((attributeById) => {
-      returnAttributes[attributesIdToAttribute[attributeById]]=attributesIdToString[attributeById].toSet().toList()
+      returnAttributes[attributesIdToAttribute[attributeById]]=attributesIdToString[attributeById]!.toSet().toList()
     });
 
     return  FilterRules(
@@ -134,7 +134,7 @@ class FilterRules {
   }
 
   factory FilterRules.getFavoriteSelectableAttributes(List<FavoriteProduct> favoriteProducts) {
-    List<Product> products = [];
+    List<Product?> products = [];
     favoriteProducts.forEach((favoriteProduct) { 
       products.add(favoriteProduct.product);
     });

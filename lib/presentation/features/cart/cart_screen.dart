@@ -4,9 +4,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/presentation/features/cart/views/cart_view.dart';
-import 'package:openflutterecommerce/presentation/features/wrapper.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import '../presentation/features/cart/views/cart_view.dart';
+import '../presentation/features/wrapper.dart';
+import '../presentation/widgets/widgets.dart';
 
 import 'cart.dart';
 

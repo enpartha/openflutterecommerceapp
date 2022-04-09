@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:openflutterecommerce/data/local/promo/promo_code_data_source.dart';
-import 'package:openflutterecommerce/domain/entities/promo/promo_code_entity.dart';
+import '../data/local/promo/promo_code_data_source.dart';
+import '../domain/entities/promo/promo_code_entity.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   group('Test PromoCode Data Source', () {
-    PromoCodeDataSource dataSource;
+    late PromoCodeDataSource dataSource;
 
     setUp(() async {
       dataSource = PromoCodeDataSource();

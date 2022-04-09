@@ -4,21 +4,21 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/config/routes.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/model/product.dart';
-import 'package:openflutterecommerce/presentation/features/categories/categories.dart';
-import 'package:openflutterecommerce/presentation/features/home/home_bloc.dart';
-import 'package:openflutterecommerce/presentation/features/home/home_event.dart';
-import 'package:openflutterecommerce/presentation/features/wrapper.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import '../config/routes.dart';
+import '../config/theme.dart';
+import '../data/model/product.dart';
+import '../presentation/features/categories/categories.dart';
+import '../presentation/features/home/home_bloc.dart';
+import '../presentation/features/home/home_event.dart';
+import '../presentation/features/wrapper.dart';
+import '../presentation/widgets/widgets.dart';
 
 class Main2View extends StatefulWidget {
-  final Function changeView;
-  final List<Product> salesProducts;
-  final List<Product> newProducts;
+  final Function? changeView;
+  final List<Product>? salesProducts;
+  final List<Product>? newProducts;
 
-  const Main2View({Key key, this.changeView, this.salesProducts, this.newProducts}) : super(key: key);
+  const Main2View({Key? key, this.changeView, this.salesProducts, this.newProducts}) : super(key: key);
 
   @override
   _Main2ViewState createState() => _Main2ViewState();
@@ -48,7 +48,7 @@ class _Main2ViewState extends State<Main2View> {
               Container(
                   padding: EdgeInsets.only(left: AppSizes.sidePadding),
                   width: width,
-                  child: Text('Street clothes', style: _theme.textTheme.headline5.copyWith(fontSize: 34)))
+                  child: Text('Street clothes', style: _theme.textTheme.headline5!.copyWith(fontSize: 34)))
             ],
           )),
       OpenFlutterBlockHeader(
@@ -87,7 +87,7 @@ class _Main2ViewState extends State<Main2View> {
         title: 'Next Home Page',
         width: 160,
         height: 48,
-        onPressed: (() => widget.changeView(changeType: ViewChangeType.Forward)),
+        onPressed: (() => widget.changeView!(changeType: ViewChangeType.Forward)),
       )
     ]));
   }

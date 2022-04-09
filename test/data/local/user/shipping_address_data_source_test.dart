@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:openflutterecommerce/data/local/user/shipping_address_data_source.dart';
-import 'package:openflutterecommerce/domain/entities/user/shipping_address_entity.dart';
+import '../data/local/user/shipping_address_data_source.dart';
+import '../domain/entities/user/shipping_address_entity.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   group('Test ShippingAddress Data Source', () {
-    ShippingAddressDataSource dataSource;
+    late ShippingAddressDataSource dataSource;
 
     setUp(() async {
       dataSource = ShippingAddressDataSource();

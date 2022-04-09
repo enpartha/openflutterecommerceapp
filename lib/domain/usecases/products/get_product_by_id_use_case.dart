@@ -1,7 +1,7 @@
-import 'package:openflutterecommerce/data/model/product.dart';
-import 'package:openflutterecommerce/data/repositories/abstract/product_repository.dart';
-import 'package:openflutterecommerce/domain/usecases/base_use_case.dart';
-import 'package:openflutterecommerce/locator.dart';
+import '../data/model/product.dart';
+import '../data/repositories/abstract/product_repository.dart';
+import '../domain/usecases/base_use_case.dart';
+import '../locator.dart';
 
 abstract class GetProductByIdUseCase
     implements BaseUseCase<ProductDetailsResults, ProductDetailsParams> {}
@@ -16,8 +16,8 @@ class GetProductByIdUseCaseImpl implements GetProductByIdUseCase {
     ProductRepository productRepository = sl();
     //TODO: 
     List<Product> products =
-        await productRepository.getProducts(categoryId: params.categoryId);
-    Product product;
+        await productRepository.getProducts(categoryId: params.categoryId)!;
+    Product? product;
     products.forEach((Product f) => {
         if ( f.id == params.productId) product = f
       }
@@ -29,14 +29,14 @@ class GetProductByIdUseCaseImpl implements GetProductByIdUseCase {
 }
 
 class ProductDetailsResults{
-  final Product productDetails;
-  final List<Product> similarProducts;
+  final Product? productDetails;
+  final List<Product>? similarProducts;
 
   ProductDetailsResults({this.productDetails, this.similarProducts});
 }
 class ProductDetailsParams{
-  final int productId;
-  final int categoryId;
+  final int? productId;
+  final int? categoryId;
 
   ProductDetailsParams({this.productId, this.categoryId});
 }

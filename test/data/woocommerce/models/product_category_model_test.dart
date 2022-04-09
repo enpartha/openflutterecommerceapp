@@ -2,8 +2,8 @@ import 'dart:convert';
 
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:openflutterecommerce/data/woocommerce/models/product_category_model.dart';
-import 'package:openflutterecommerce/domain/entities/product/product_category_entity.dart';
+import '../data/woocommerce/models/product_category_model.dart';
+import '../domain/entities/product/product_category_entity.dart';
 
 import '../../../fixtures/fixture_reader.dart';
 

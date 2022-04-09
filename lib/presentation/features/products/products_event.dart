@@ -6,16 +6,16 @@ import 'dart:collection';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/model/filter_rules.dart';
-import 'package:openflutterecommerce/data/model/hashtag.dart';
-import 'package:openflutterecommerce/data/model/product.dart';
-import 'package:openflutterecommerce/data/model/product_attribute.dart';
-import 'package:openflutterecommerce/data/model/sort_rules.dart';
+import '../data/model/filter_rules.dart';
+import '../data/model/hashtag.dart';
+import '../data/model/product.dart';
+import '../data/model/product_attribute.dart';
+import '../data/model/sort_rules.dart';
 
 @immutable
 abstract class ProductsListEvent extends Equatable {
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 @immutable
@@ -72,10 +72,10 @@ class ProductSearchEvent extends ProductsListEvent {
 class ProductMakeFavoriteEvent extends ProductsListEvent {
   final bool isFavorite;
   final Product product;
-  final HashMap<ProductAttribute, String> favoriteAttributes;
+  final HashMap<ProductAttribute, String>? favoriteAttributes;
 
   ProductMakeFavoriteEvent(this.isFavorite, this.product, {this.favoriteAttributes});
 
   @override
-  List<Object> get props => [isFavorite, product, favoriteAttributes];
+  List<Object?> get props => [isFavorite, product, favoriteAttributes];
 }

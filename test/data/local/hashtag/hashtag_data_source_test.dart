@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:openflutterecommerce/data/local/hashtag/hashtag_data_source.dart';
-import 'package:openflutterecommerce/domain/entities/hashtag/hashtag_entity.dart';
+import '../data/local/hashtag/hashtag_data_source.dart';
+import '../domain/entities/hashtag/hashtag_entity.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   group('Test HashTag Data Source', () {
-    HashTagDataSource dataSource;
+    late HashTagDataSource dataSource;
 
     setUp(() async {
       dataSource = HashTagDataSource();

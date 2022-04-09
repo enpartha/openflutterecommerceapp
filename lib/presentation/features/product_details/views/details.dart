@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/config/routes.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/model/category.dart';
-import 'package:openflutterecommerce/data/model/product.dart';
-import 'package:openflutterecommerce/data/model/product_attribute.dart';
-import 'package:openflutterecommerce/presentation/features/home/home.dart';
-import 'package:openflutterecommerce/presentation/features/product_details/views/attribute_bottom_sheet.dart';
-import 'package:openflutterecommerce/presentation/features/product_reviews/product_review_and_rating_screen.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import '../config/routes.dart';
+import '../config/theme.dart';
+import '../data/model/category.dart';
+import '../data/model/product.dart';
+import '../data/model/product_attribute.dart';
+import '../presentation/features/home/home.dart';
+import '../presentation/features/product_details/views/attribute_bottom_sheet.dart';
+import '../presentation/features/product_reviews/product_review_and_rating_screen.dart';
+import '../presentation/widgets/widgets.dart';
 
 import '../product.dart';
 
 class ProductDetailsView extends StatefulWidget {
   final Product product;
   final Function changeView;
-  final ProductCategory category;
+  final ProductCategory? category;
   final bool hasReviews;
 
-  final List<Product> similarProducts;
+  final List<Product>? similarProducts;
 
   const ProductDetailsView(
-      {Key key,
-      @required this.product,
-      @required this.changeView,
-      @required this.similarProducts,
+      {Key? key,
+      required this.product,
+      required this.changeView,
+      required this.similarProducts,
       this.category,
       this.hasReviews = false})
       : assert(product != null),
@@ -35,9 +35,9 @@ class ProductDetailsView extends StatefulWidget {
 }
 
 class _ProductDetailsViewState extends State<ProductDetailsView> {
-  Orientation orientation;
-  bool favorite;
-  ProductBloc bloc;
+  Orientation? orientation;
+  bool? favorite;
+  ProductBloc? bloc;
 
   @override
   void initState() {
@@ -55,12 +55,12 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
     bloc = BlocProvider.of<ProductBloc>(context);
     return BlocListener(
         bloc: bloc,
-        listener: (context, state) {
+        listener: (context, dynamic state) {
           if (state is ProductErrorState) {
             return Container(
                 padding: EdgeInsets.all(AppSizes.sidePadding),
                 child: Text('An error occured',
-                    style: _theme.textTheme.headline4
+                    style: _theme.textTheme.headline4!
                         .copyWith(color: _theme.errorColor)));
           }
           return Container();
@@ -84,9 +84,9 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                                 padding: EdgeInsets.only(
                                     right: AppSizes.sidePadding),
                                 child: Image.network(
-                                    state.product.images[index].address)),
+                                    state.product!.images![index].address!)),
                             scrollDirection: Axis.horizontal,
-                            itemCount: state.product.images.length,
+                            itemCount: state.product!.images!.length,
                           ),
                         ),
                         Container(
@@ -95,9 +95,9 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                           child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               mainAxisSize: MainAxisSize.max,
-                              children: (state.product.selectableAttributes !=
+                              children: (state.product!.selectableAttributes !=
                                           null
-                                      ? state.product.selectableAttributes
+                                      ? state.product!.selectableAttributes!
                                           .map((value) =>
                                               selectionOutlineButton(
                                                   deviceWidth,
@@ -169,7 +169,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                                     fontWeight: FontWeight.w600),
                               ),
                               Text(
-                                widget.similarProducts.length.toString() +
+                                widget.similarProducts!.length.toString() +
                                     ' items',
                                 style: TextStyle(color: AppColors.lightGray),
                               )
@@ -195,21 +195,21 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
             }));
   }
 
-  void setFavourite(ProductBloc bloc) {
-    if (!favorite) {
-      bloc.add(
+  void setFavourite(ProductBloc? bloc) {
+    if (!favorite!) {
+      bloc!.add(
           ProductAddToFavoritesEvent()); //TODO ask for real parameters if required
     } else {
-      bloc.add(ProductRemoveFromFavoritesEvent());
+      bloc!.add(ProductRemoveFromFavoritesEvent());
     }
     setState(() {
-      favorite = !favorite;
+      favorite = !favorite!;
     });
   }
 
   void _showSelectAttributeBottomSheet(
       BuildContext context, ProductAttribute attribute,
-      {Function onSelect, String selectedValue}) {
+      {Function? onSelect, String? selectedValue}) {
     showModalBottomSheet(
         context: context,
         isScrollControlled: true,
@@ -224,12 +224,12 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                 {
                   bloc..add(ProductSetAttributeEvent(value, productAttribute)),
                   Navigator.pop(context),
-                  onSelect()
+                  onSelect!()
                 })));
   } //modelBottomSheet for selecting size
 
   Widget selectionOutlineButton(var deviceWidth, ProductAttribute attribute,
-      String alreadySelectedValue) {
+      String? alreadySelectedValue) {
     //select size and select color widget
     return OutlineButton(
       onPressed: () => _showSelectAttributeBottomSheet(context, attribute,
@@ -272,7 +272,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
-                widget.product.title,
+                widget.product.title!,
                 style: theme.textTheme.headline6,
               ),
               Text(
@@ -284,7 +284,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
           widget.category == null
               ? Container()
               : Text(
-                  widget.category.name,
+                  widget.category!.name!,
                   style: theme.textTheme.bodyText1,
                 ),
           SizedBox(
@@ -319,12 +319,12 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
 
   void _addItemToCart(BuildContext context, ProductLoadedState state) async {
     if (state.productAttributes.selectedAttributes.length ==
-        state.product.selectableAttributes.length) {
+        state.product!.selectableAttributes!.length) {
       BlocProvider.of<ProductBloc>(context).add(ProductAddToCartEvent());
       await Navigator.pushNamed(context, OpenFlutterEcommerceRoutes.cart);
     } else {
-      for (int i = 0; i < state.product.selectableAttributes.length; i++) {
-        final attribute = state.product.selectableAttributes[i];
+      for (int i = 0; i < state.product!.selectableAttributes!.length; i++) {
+        final attribute = state.product!.selectableAttributes![i];
         if (!state.productAttributes.selectedAttributes
             .containsKey(attribute)) {
           await _showSelectAttributeBottomSheet(context, attribute,

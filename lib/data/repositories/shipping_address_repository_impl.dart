@@ -3,9 +3,9 @@
  * @copyright 2020 Open E-commerce App
  * @see shipping_address_repository_impl.dart
  */
-import 'package:openflutterecommerce/data/model/shipping_address.dart';
-import 'package:openflutterecommerce/data/repositories/abstract/shipping_address_repository.dart';
-import 'package:openflutterecommerce/data/repositories/fake_repos/shipping_address_repository.dart';
+import '../data/model/shipping_address.dart';
+import '../data/repositories/abstract/shipping_address_repository.dart';
+import '../data/repositories/fake_repos/shipping_address_repository.dart';
 
 class ShippingAddressRepositoryImpl implements ShippingAddressRepository{
 
@@ -49,7 +49,7 @@ class ShippingAddressRepositoryImpl implements ShippingAddressRepository{
   @override
   Future<ShippingAddressModel> getDefaultShippingAddress() async {
     ShippingAddressModel shippingAddress = 
-      await dataStorage.shippingAddresses.firstWhere((shippingAddress) => shippingAddress.isDefault);
+      await dataStorage.shippingAddresses.firstWhere((shippingAddress) => shippingAddress.isDefault!);
     return shippingAddress;
   }
 }

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
-import 'package:openflutterecommerce/data/model/user_order.dart';
+import '../data/model/user_order.dart';
 
 @immutable
 class ProfileState extends Equatable {
@@ -16,14 +16,14 @@ class ProfileMyOrdersProcessingState extends ProfileState {}
 
 @immutable
 class ProfileMyOrdersState extends ProfileState {
-  final List<UserOrder> orderData;
+  final List<UserOrder>? orderData;
 
   ProfileMyOrdersState({this.orderData});
 }
 
 @immutable
 class ProfileMyOrderDetailsState extends ProfileState {
-  final UserOrder orderData;
+  final UserOrder? orderData;
 
   ProfileMyOrderDetailsState({this.orderData});
 }

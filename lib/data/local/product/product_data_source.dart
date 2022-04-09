@@ -1,13 +1,13 @@
-import 'package:openflutterecommerce/data/local/data_source.dart';
-import 'package:openflutterecommerce/domain/entities/product/product_category_entity.dart';
-import 'package:openflutterecommerce/domain/entities/product/product_entity.dart';
+import '../data/local/data_source.dart';
+import '../domain/entities/product/product_category_entity.dart';
+import '../domain/entities/product/product_entity.dart';
 
 class ProductDataSource extends DataSource {
   @override
   Future<List<ProductEntity>> all() async {
     checkDatabaseConnection();
 
-    final List<Map<String, dynamic>> maps = await db.query(tableName);
+    final List<Map<String, dynamic>> maps = await db!.query(tableName);
 
     return List.generate(maps.length, (i) {
       return ProductEntity(
@@ -33,11 +33,11 @@ class ProductDataSource extends DataSource {
   }
 
   @override
-  Future<ProductEntity> get(int id) async {
+  Future<ProductEntity> get(int? id) async {
     checkDatabaseConnection();
 
     final List<Map<String, dynamic>> maps =
-        await db.query(tableName, where: '$primaryKey = ?', whereArgs: [id]);
+        await db!.query(tableName, where: '$primaryKey = ?', whereArgs: [id]);
 
     return ProductEntity(
       id: maps[0]['id'],

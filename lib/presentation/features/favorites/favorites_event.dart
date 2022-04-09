@@ -4,9 +4,9 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/model/favorite_product.dart';
-import 'package:openflutterecommerce/data/model/filter_rules.dart';
-import 'package:openflutterecommerce/data/model/sort_rules.dart';
+import '../data/model/favorite_product.dart';
+import '../data/model/filter_rules.dart';
+import '../data/model/sort_rules.dart';
 
 @immutable
 abstract class FavouriteEvent extends Equatable {

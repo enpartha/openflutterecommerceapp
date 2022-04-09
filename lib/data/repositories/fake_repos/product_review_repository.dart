@@ -107,7 +107,7 @@ class ProductReviewRepository {
   ];
 
   Future<List<ProductReview>> findReviewsByProductId(
-      int productId, bool withPhotos) async {
+      int? productId, bool withPhotos) async {
     await Future.delayed(Duration(
       seconds: 2,
     ));

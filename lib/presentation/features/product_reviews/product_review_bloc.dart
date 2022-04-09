@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/data/model/product_review.dart';
-import 'package:openflutterecommerce/data/repositories/fake_repos/product_review_repository.dart';
+import '../data/model/product_review.dart';
+import '../data/repositories/fake_repos/product_review_repository.dart';
 
 import 'product_review_event.dart';
 import 'product_review_state.dart';
@@ -25,7 +25,7 @@ class ProductReviewBloc extends Bloc<ProductReviewEvent, ProductReviewState> {
   }
 
   Future<List<ProductReview>> _getCommentsReviews(
-      int productId, bool withPhotos) async {
+      int? productId, bool withPhotos) async {
     return await productReviewRepository.findReviewsByProductId(
         productId, withPhotos);
   }

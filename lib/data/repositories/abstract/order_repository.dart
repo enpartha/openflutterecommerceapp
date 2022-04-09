@@ -1,4 +1,4 @@
-import 'package:openflutterecommerce/config/theme.dart';
+import '../config/theme.dart';
 
 import '../../model/user_order.dart';
 

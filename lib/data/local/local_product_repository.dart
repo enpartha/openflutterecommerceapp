@@ -1,8 +1,8 @@
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/model/filter_rules.dart';
-import 'package:openflutterecommerce/data/model/product.dart';
-import 'package:openflutterecommerce/data/model/sort_rules.dart';
-import 'package:openflutterecommerce/data/repositories/abstract/product_repository.dart';
+import '../config/theme.dart';
+import '../data/model/filter_rules.dart';
+import '../data/model/product.dart';
+import '../data/model/sort_rules.dart';
+import '../data/repositories/abstract/product_repository.dart';
 
 class LocalProductRepository implements ProductRepository {
   @override
@@ -19,19 +19,19 @@ class LocalProductRepository implements ProductRepository {
   }
 
   @override
-  Future<List<Product>> getProducts(
+  Future<List<Product>>? getProducts(
       {int pageIndex = 0,
       int pageSize = AppConsts.page_size,
-      int categoryId = 0,
+      int? categoryId = 0,
       bool isFavorite = false,
       SortRules sortRules = const SortRules(),
-      FilterRules filterRules}) {
+      FilterRules? filterRules}) {
     // TODO: implement getProducts
     return null;
   }
 
   @override
-  Future<FilterRules> getPossibleFilterOptions(int categoryId) {
+  Future<FilterRules>? getPossibleFilterOptions(int categoryId) {
     // TODO: implement getPossibleFilterOptions
     return null;
   }

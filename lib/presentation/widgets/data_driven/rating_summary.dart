@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import '../widgets.dart';
 
 class OpenFlutterRatingSummary extends StatelessWidget {
-  final double rating;
-  final List<StarQuantity> ratingDetail;
+  final double? rating;
+  final List<StarQuantity>? ratingDetail;
   final int startCount;
   final int ratingQuantity;
   final bool showLabel;
@@ -19,7 +19,7 @@ class OpenFlutterRatingSummary extends StatelessWidget {
   final double reviewCounterLabelFontSize;
 
   const OpenFlutterRatingSummary({
-    Key key,
+    Key? key,
     this.startCount = 5,
     this.rating = 5,
     this.ratingQuantity = 0,
@@ -51,7 +51,7 @@ class OpenFlutterRatingSummary extends StatelessWidget {
       children: <Widget>[
         Text(
           rating.toString(),
-          style: Theme.of(context).textTheme.headline3.copyWith(
+          style: Theme.of(context).textTheme.headline3!.copyWith(
                 color: Colors.black,
               ),
         ),
@@ -75,7 +75,7 @@ class OpenFlutterRatingSummary extends StatelessWidget {
     if (showLabel) {
       return Text(
         '${ratingQuantity.toString()} ratings',
-        style: Theme.of(context).textTheme.caption.copyWith(
+        style: Theme.of(context).textTheme.caption!.copyWith(
               color: Colors.grey,
               fontSize: labelFontSize,
             ),
@@ -90,8 +90,8 @@ class OpenFlutterRatingSummary extends StatelessWidget {
 
   List<Widget> _buildList(BuildContext context) {
     var list = <Widget>[];
-    if (ratingDetail != null && ratingDetail.isNotEmpty) {
-      ratingDetail.forEach((starQuantity) {
+    if (ratingDetail != null && ratingDetail!.isNotEmpty) {
+      ratingDetail!.forEach((starQuantity) {
         list.add(_buildItem(context, starQuantity));
       });
     }
@@ -171,8 +171,8 @@ class OpenFlutterRatingSummary extends StatelessWidget {
   Widget _buildCounter(BuildContext context, StarQuantity starQuantity) {
     return Center(
       child: Text(
-        starQuantity.quantity.toInt().toString(),
-        style: Theme.of(context).textTheme.caption.copyWith(
+        starQuantity.quantity!.toInt().toString(),
+        style: Theme.of(context).textTheme.caption!.copyWith(
               fontSize: reviewCounterLabelFontSize,
             ),
         textAlign: TextAlign.center,
@@ -181,24 +181,24 @@ class OpenFlutterRatingSummary extends StatelessWidget {
     );
   }
 
-  int _calculateBarWithByQuantity(int quantity) {
+  int _calculateBarWithByQuantity(int? quantity) {
     if (quantity == 0) {
       return 0;
     }
-    return (quantity * 100) ~/ ratingQuantity;
+    return (quantity! * 100) ~/ ratingQuantity;
   }
 
-  int _calculateTransparentBarWithByQuantity(int quantity) {
+  int _calculateTransparentBarWithByQuantity(int? quantity) {
     if (quantity == 0) {
       return 1;
     }
-    return 100 - (quantity * 100) ~/ ratingQuantity;
+    return 100 - (quantity! * 100) ~/ ratingQuantity;
   }
 }
 
 class StarQuantity {
-  final double rating;
-  final int quantity;
+  final double? rating;
+  final int? quantity;
 
   StarQuantity({
     this.rating,

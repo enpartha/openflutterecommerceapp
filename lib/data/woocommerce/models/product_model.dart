@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/model/product_attribute.dart';
-import 'package:openflutterecommerce/domain/entities/hashtag/hashtag_entity.dart';
-import 'package:openflutterecommerce/domain/entities/product/product_category_entity.dart';
-import 'package:openflutterecommerce/domain/entities/product/product_entity.dart';
+import '../data/model/product_attribute.dart';
+import '../domain/entities/hashtag/hashtag_entity.dart';
+import '../domain/entities/product/product_category_entity.dart';
+import '../domain/entities/product/product_entity.dart';
 
 class ProductModel extends ProductEntity {
 
   ProductModel(
-    {@required int id,
-    @required title,
-    @required subTitle,
-    @required description,
-    @required images,
-    @required double price,
-    @required salePrice,
-    @required thumb,
-    @required selectableAttributes,
+    {required int id,
+    required title,
+    required subTitle,
+    required description,
+    required images,
+    required double price,
+    required salePrice,
+    required thumb,
+    required selectableAttributes,
     rating,
-    List<ProductCategoryEntity> categories,
-    List<HashTagEntity> hashTags,
+    List<ProductCategoryEntity>? categories,
+    List<HashTagEntity>? hashTags,
     orderNumber,
     count}) : super(
       id: id, 
@@ -36,7 +36,7 @@ class ProductModel extends ProductEntity {
     );
       
   factory ProductModel.fromJson(Map<String, dynamic> json) {
-    List<String> images = [];
+    List<String?> images = [];
     if ( json['images']!=null ) {
       (json['images'] as List).forEach((f) => images.add(f['src']));
     }
@@ -112,7 +112,7 @@ class ProductModel extends ProductEntity {
       'name': title,
       'description': description,
       'image': {
-        'src': images.isNotEmpty?images[0]:'',
+        'src': images!.isNotEmpty?images![0]:'',
       }
     };
   }

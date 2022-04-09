@@ -1,6 +1,6 @@
 class CommerceImage {
   final int id;
-  final String address;
+  final String? address;
 
   final String altText;
   final bool isLocal;

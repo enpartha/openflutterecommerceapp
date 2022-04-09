@@ -4,30 +4,30 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/config/routes.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/model/cart_item.dart';
-import 'package:openflutterecommerce/data/model/product.dart';
-import 'package:openflutterecommerce/data/model/promo.dart';
-import 'package:openflutterecommerce/presentation/widgets/data_driven/cart_tile.dart';
-import 'package:openflutterecommerce/presentation/widgets/data_driven/promo_tile.dart';
-import 'package:openflutterecommerce/presentation/widgets/independent/summary_line.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import '../config/routes.dart';
+import '../config/theme.dart';
+import '../data/model/cart_item.dart';
+import '../data/model/product.dart';
+import '../data/model/promo.dart';
+import '../presentation/widgets/data_driven/cart_tile.dart';
+import '../presentation/widgets/data_driven/promo_tile.dart';
+import '../presentation/widgets/independent/summary_line.dart';
+import '../presentation/widgets/widgets.dart';
 
 import '../cart.dart';
 
 class CartView extends StatefulWidget {
-  final List<Product> products;
-  final Function changeView;
+  final List<Product>? products;
+  final Function? changeView;
 
-  const CartView({Key key, this.products, this.changeView}) : super(key: key);
+  const CartView({Key? key, this.products, this.changeView}) : super(key: key);
 
   @override
   _CartViewState createState() => _CartViewState();
 }
 
 class _CartViewState extends State<CartView> {
-  TextEditingController _promoController;
+  TextEditingController? _promoController;
 
   @override
   void initState() {
@@ -51,7 +51,7 @@ class _CartViewState extends State<CartView> {
         return Container(
             padding: EdgeInsets.all(AppSizes.sidePadding),
             child: Text('An error occured',
-                style: _theme.textTheme.headline4
+                style: _theme.textTheme.headline4!
                     .copyWith(color: _theme.errorColor)));
       }
       return Container();
@@ -70,7 +70,7 @@ class _CartViewState extends State<CartView> {
             ),
             OpenFlutterInputButton(
               placeHolder: state.appliedPromo != null
-                  ? state.appliedPromo.promoCode
+                  ? state.appliedPromo!.promoCode
                   : 'Enter your promo code',
               controller: _promoController,
               width: width,
@@ -87,7 +87,7 @@ class _CartViewState extends State<CartView> {
                     OpenFlutterSummaryLine(
                         title: 'Discount percent:',
                         summary:
-                            state.appliedPromo.discount.toStringAsFixed(0) +
+                            state.appliedPromo!.discount!.toStringAsFixed(0) +
                                 '%'),
                     OpenFlutterSummaryLine(
                         title: 'Total amount:',
@@ -121,7 +121,7 @@ class _CartViewState extends State<CartView> {
                               bloc
                                 ..add(CartPromoCodeAppliedEvent(
                                     //TODO: check that code is valid
-                                    promoCode: _promoController.text))
+                                    promoCode: _promoController!.text))
                             }),
                       ),
                       Padding(
@@ -131,7 +131,7 @@ class _CartViewState extends State<CartView> {
                         width: width,
                         title: 'Your Promo Codes',
                       ),
-                      Column(children: buildPromos(state.promos, bloc))
+                      Column(children: buildPromos(state.promos!, bloc))
                     ],
                   ),
                 )

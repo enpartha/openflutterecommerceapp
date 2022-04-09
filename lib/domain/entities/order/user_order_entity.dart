@@ -1,20 +1,20 @@
-import 'package:openflutterecommerce/domain/entities/entity.dart';
+import '../domain/entities/entity.dart';
 
-class UserOrderEntity extends Entity<int> {
-  final int orderNumber;
-  final String trackingNumber;
-  final int productCount;
-  final int promoCodeId;
-  final double discountPercent;
-  final String discountTitle;
-  final int shippingAddressId;
-  final String orderStatus;
-  final double totalAmount;
-  final int deliveryMethodId;
-  final double deliveryPrice;
+class UserOrderEntity extends Entity<int?> {
+  final int? orderNumber;
+  final String? trackingNumber;
+  final int? productCount;
+  final int? promoCodeId;
+  final double? discountPercent;
+  final String? discountTitle;
+  final int? shippingAddressId;
+  final String? orderStatus;
+  final double? totalAmount;
+  final int? deliveryMethodId;
+  final double? deliveryPrice;
 
   UserOrderEntity(
-      {int id,
+      {int? id,
       this.orderNumber,
       this.trackingNumber,
       this.productCount,
@@ -46,7 +46,7 @@ class UserOrderEntity extends Entity<int> {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         id,
         orderNumber,
         trackingNumber,

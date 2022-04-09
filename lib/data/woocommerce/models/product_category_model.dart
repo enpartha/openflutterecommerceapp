@@ -1,15 +1,15 @@
 
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/domain/entities/product/product_category_entity.dart';
+import '../domain/entities/product/product_category_entity.dart';
 
 class ProductCategoryModel extends ProductCategoryEntity {
 
   ProductCategoryModel(
-    {@required int id,
-    @required title,
-    @required description,
-    @required image,
-    @required thumb,
+    {required int id,
+    required title,
+    required description,
+    required image,
+    required thumb,
     parentId,
     orderNumber,
     count}) : super(

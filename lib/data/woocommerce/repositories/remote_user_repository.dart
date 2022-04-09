@@ -8,20 +8,20 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:openflutterecommerce/config/server_addresses.dart';
-import 'package:openflutterecommerce/data/model/app_user.dart';
-import 'package:openflutterecommerce/data/repositories/abstract/user_repository.dart';
+import '../config/server_addresses.dart';
+import '../data/model/app_user.dart';
+import '../data/repositories/abstract/user_repository.dart';
 
 import '../utils.dart';
 
 class RemoteUserRepository extends UserRepository {
   @override
-  Future<String> signIn({
-    @required String email,
-    @required String password,
+  Future<String?> signIn({
+    required String? email,
+    required String? password,
   }) async {
     var route = HttpClient().createUri(ServerAddresses.authToken);
-    var data = <String, String>{
+    var data = <String, String?>{
       'username': email,
       'password': password,
     };
@@ -35,14 +35,14 @@ class RemoteUserRepository extends UserRepository {
   }
 
   @override
-  Future<String> signUp({
-    @required String name,
-    @required String email,
-    @required String password,
+  Future<String?> signUp({
+    required String? name,
+    required String? email,
+    required String? password,
   }) async {
     try {
       var route = HttpClient().createUri(ServerAddresses.signUp);
-      var data = <String, String>{
+      var data = <String, String?>{
         'name': name,
         'username': email,
         'password': password,
@@ -73,7 +73,7 @@ class RemoteUserRepository extends UserRepository {
 
   @override
   Future<void> forgotPassword({
-    @required String email,
+    required String email,
   }) async {
     try {
       var route = HttpClient().createUri(ServerAddresses.forgotPassword);
@@ -82,9 +82,9 @@ class RemoteUserRepository extends UserRepository {
       };
 
       var response = await http.post(route, body: data);
-      Map jsonResponse = json.decode(response.body);
+      Map? jsonResponse = json.decode(response.body);
       if (response.statusCode != 200) {
-        throw jsonResponse['message'];
+        throw jsonResponse!['message'];
       }
     } catch (error) {
       rethrow;

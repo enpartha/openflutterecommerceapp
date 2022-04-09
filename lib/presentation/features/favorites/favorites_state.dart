@@ -4,18 +4,18 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/model/favorite_product.dart';
-import 'package:openflutterecommerce/data/model/filter_rules.dart';
-import 'package:openflutterecommerce/data/model/hashtag.dart';
-import 'package:openflutterecommerce/data/model/sort_rules.dart';
+import '../data/model/favorite_product.dart';
+import '../data/model/filter_rules.dart';
+import '../data/model/hashtag.dart';
+import '../data/model/sort_rules.dart';
 
 @immutable
 class FavouriteState extends Equatable {
-  final List<FavoriteProduct> data;
-  final List<HashTag> hashtags;
-  final SortRules sortBy;
-  final FilterRules filterRules;
-  final String error;
+  final List<FavoriteProduct>? data;
+  final List<HashTag>? hashtags;
+  final SortRules? sortBy;
+  final FilterRules? filterRules;
+  final String? error;
   final bool isList;
 
   FavouriteState(
@@ -27,12 +27,12 @@ class FavouriteState extends Equatable {
       this.isList = true});
 
   FavouriteState copyWith({
-    List<FavoriteProduct> data,
-    List<HashTag> hashtags,
-    SortRules sortBy,
-    FilterRules filterRules,
-    String error,
-    bool isList,
+    List<FavoriteProduct>? data,
+    List<HashTag>? hashtags,
+    SortRules? sortBy,
+    FilterRules? filterRules,
+    String? error,
+    bool? isList,
   }) {
     return FavouriteState(
         data: data ?? this.data,
@@ -51,5 +51,5 @@ class FavouriteState extends Equatable {
   }
 
   @override
-  List<Object> get props => [data, hashtags, sortBy, filterRules, error, isProductsLoading];
+  List<Object?> get props => [data, hashtags, sortBy, filterRules, error, isProductsLoading];
 }

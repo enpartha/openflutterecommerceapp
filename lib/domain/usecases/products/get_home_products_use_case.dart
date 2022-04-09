@@ -3,10 +3,10 @@
 /// for home page are loaded and displayed in the app.
 /// https://medium.com/@openflutterproject/open-flutter-project-e-commerce-app-use-cases-and-features-6b7414a6e708
 
-import 'package:openflutterecommerce/data/model/product.dart';
-import 'package:openflutterecommerce/data/repositories/abstract/product_repository.dart';
-import 'package:openflutterecommerce/domain/usecases/base_use_case.dart';
-import 'package:openflutterecommerce/locator.dart';
+import '../data/model/product.dart';
+import '../data/repositories/abstract/product_repository.dart';
+import '../domain/usecases/base_use_case.dart';
+import '../locator.dart';
 
 abstract class GetHomePageProductsUseCase
     implements BaseUseCase<HomeProductsResult, HomeProductParams> {}
@@ -37,10 +37,10 @@ class GetHomePageProductsUseCaseImpl implements GetHomePageProductsUseCase {
 class HomeProductParams {}
 
 class HomeProductsResult extends UseCaseResult {
-  final List<Product> salesProducts;
-  final List<Product> newProducts;
+  final List<Product>? salesProducts;
+  final List<Product>? newProducts;
 
-  HomeProductsResult({this.salesProducts, this.newProducts, Exception exception, bool result})
+  HomeProductsResult({this.salesProducts, this.newProducts, Exception? exception, bool? result})
     : super(exception: exception, result: result);
 }
 

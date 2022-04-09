@@ -7,19 +7,19 @@ import 'package:flutter/material.dart';
 import '../widgets.dart';
 
 class OpenFlutterScaffold extends StatelessWidget {
-  final Color background;
-  final String title;
+  final Color? background;
+  final String? title;
   final Widget body;
   final int bottomMenuIndex;
-  final List<String> tabBarList;
-  final TabController tabController;
+  final List<String>? tabBarList;
+  final TabController? tabController;
 
   const OpenFlutterScaffold(
-      {Key key,
+      {Key? key,
       this.background,
-      @required this.title,
-      @required this.body,
-      @required this.bottomMenuIndex,
+      required this.title,
+      required this.body,
+      required this.bottomMenuIndex,
       this.tabBarList,
       this.tabController})
       : super(key: key);
@@ -29,11 +29,11 @@ class OpenFlutterScaffold extends StatelessWidget {
     var tabBars = <Tab>[];
     var _theme = Theme.of(context);
     if (tabBarList != null) {
-      for (var i = 0; i < tabBarList.length; i++) {
-        tabBars.add(Tab(key: UniqueKey(), text: tabBarList[i]));
+      for (var i = 0; i < tabBarList!.length; i++) {
+        tabBars.add(Tab(key: UniqueKey(), text: tabBarList![i]));
       }
     }
-    Widget tabWidget = tabBars.isNotEmpty
+    Widget? tabWidget = tabBars.isNotEmpty
         ? TabBar(
             unselectedLabelColor: _theme.primaryColor,
             unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
@@ -47,7 +47,7 @@ class OpenFlutterScaffold extends StatelessWidget {
     return Scaffold(
       backgroundColor: background,
       appBar: title != null
-          ? AppBar(title: Text(title), bottom: tabWidget, actions: <Widget>[
+          ? AppBar(title: Text(title!), bottom: tabWidget as PreferredSizeWidget?, actions: <Widget>[
               Row(children: <Widget>[
                 Icon(Icons.share),
               ])

@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/model/filter_rules.dart';
-import 'package:openflutterecommerce/data/model/sort_rules.dart';
-import 'package:openflutterecommerce/presentation/features/products/products.dart';
-import 'package:openflutterecommerce/presentation/features/products/views/visual_filter.dart';
-import 'package:openflutterecommerce/presentation/widgets/independent/view_options.dart';
+import '../config/theme.dart';
+import '../data/model/filter_rules.dart';
+import '../data/model/sort_rules.dart';
+import '../presentation/features/products/products.dart';
+import '../presentation/features/products/views/visual_filter.dart';
+import '../presentation/widgets/independent/view_options.dart';
 
 class SizeChangingAppBar extends StatelessWidget {
-  final String title;
-  final FilterRules filterRules;
-  final SortRules sortRules;
+  final String? title;
+  final FilterRules? filterRules;
+  final SortRules? sortRules;
   final bool isListView;
-  final Function(FilterRules) onFilterRulesChanged;
-  final Function(SortRules) onSortRulesChanged;
-  final VoidCallback onViewChanged;
+  final Function(FilterRules)? onFilterRulesChanged;
+  final Function(SortRules)? onSortRulesChanged;
+  final VoidCallback? onViewChanged;
 
   const SizeChangingAppBar(
-      {Key key,
+      {Key? key,
       this.title,
-      @required this.filterRules,
+      required this.filterRules,
       this.sortRules,
       this.isListView = true,
       this.onFilterRulesChanged,

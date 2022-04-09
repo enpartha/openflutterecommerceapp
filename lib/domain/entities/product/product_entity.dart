@@ -1,20 +1,20 @@
 
-import 'package:openflutterecommerce/data/model/product_attribute.dart';
-import 'package:openflutterecommerce/domain/entities/entity.dart';
-import 'package:openflutterecommerce/domain/entities/hashtag/hashtag_entity.dart';
-import 'package:openflutterecommerce/domain/entities/product/product_category_entity.dart';
+import '../data/model/product_attribute.dart';
+import '../domain/entities/entity.dart';
+import '../domain/entities/hashtag/hashtag_entity.dart';
+import '../domain/entities/product/product_category_entity.dart';
 
-class ProductEntity extends Entity<int> {
-  final String title;
-  final String subTitle;
-  final List<String> images;
-  final String thumb;
+class ProductEntity extends Entity<int?> {
+  final String? title;
+  final String? subTitle;
+  final List<String?>? images;
+  final String? thumb;
   final double price;
   final double discountPercent;
   final List<ProductCategoryEntity> categories;
   final List<HashTagEntity> hashTags;
-  final int amount;
-  final String description;
+  final int? amount;
+  final String? description;
   final bool isFavourite;
   final double rating;
   final int rating1Count;
@@ -22,22 +22,22 @@ class ProductEntity extends Entity<int> {
   final int rating3Count;
   final int rating4Count;
   final int rating5Count;
-  final List<ProductAttribute> selectableAttributes;
+  final List<ProductAttribute>? selectableAttributes;
 
   ProductEntity(
-    {int id,
+    {int? id,
     this.title,
     this.subTitle,
     this.images,
     this.thumb,
-    double price,
-    double discountPercent,
-    List<ProductCategoryEntity> categories,
-    List<HashTagEntity> hashTags,
+    double? price,
+    double? discountPercent,
+    List<ProductCategoryEntity>? categories,
+    List<HashTagEntity>? hashTags,
     this.amount,
     this.description,
     this.selectableAttributes,
-    bool isFavourite,
+    bool? isFavourite,
     rating,
     rating1Count,
     rating2Count,
@@ -63,7 +63,7 @@ class ProductEntity extends Entity<int> {
       'id': id,
       'title': title,
       //TODO: serialize all images and add tests
-      'image': images.isNotEmpty?images[0]:'',
+      'image': images!.isNotEmpty?images![0]:'',
       'thumb': thumb,
       'price': price,
       'discountPercent': discountPercent,
@@ -82,7 +82,7 @@ class ProductEntity extends Entity<int> {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
     id, 
     title,
     isFavourite,

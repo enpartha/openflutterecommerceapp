@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/data/repositories/abstract/user_repository.dart';
-import 'package:openflutterecommerce/presentation/features/authentication/authentication.dart';
+import '../data/repositories/abstract/user_repository.dart';
+import '../presentation/features/authentication/authentication.dart';
 
 import 'sign_in.dart';
 
@@ -10,8 +10,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   final AuthenticationBloc authenticationBloc;
 
   SignInBloc({
-    @required this.userRepository,
-    @required this.authenticationBloc,
+    required this.userRepository,
+    required this.authenticationBloc,
   })  : assert(userRepository != null),
         assert(authenticationBloc != null),
         super(SignInInitialState());

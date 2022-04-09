@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:openflutterecommerce/config/storage.dart';
+import '../config/storage.dart';
 
 import 'authentication_event.dart';
 import 'authentication_state.dart';
@@ -42,12 +42,12 @@ class AuthenticationBloc
   }
 
   /// write to keystore/keychain
-  Future<void> _saveToken(String token) async {
+  Future<void> _saveToken(String? token) async {
     await Storage().secureStorage.write(key: 'access_token', value: token);
   }
 
   /// read to keystore/keychain
   Future<String> _getToken() async {
-    return await Storage().secureStorage.read(key: 'access_token') ?? '';
+    return await (Storage().secureStorage.read(key: 'access_token') as FutureOr<String>?) ?? '';
   }
 }

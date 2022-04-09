@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:openflutterecommerce/data/local/hashtag/category_hashtag_data_source.dart';
-import 'package:openflutterecommerce/domain/entities/hashtag/category_hashtag_entity.dart';
+import '../data/local/hashtag/category_hashtag_data_source.dart';
+import '../domain/entities/hashtag/category_hashtag_entity.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   group('Test CategoryHashTag Data Source', () {
-    CategoryHashTagDataSource dataSource;
+    late CategoryHashTagDataSource dataSource;
 
     setUp(() async {
       dataSource = CategoryHashTagDataSource();

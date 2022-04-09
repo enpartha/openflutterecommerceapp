@@ -1,12 +1,12 @@
-import 'package:openflutterecommerce/data/local/data_source.dart';
-import 'package:openflutterecommerce/domain/entities/hashtag/product_hashtag_entity.dart';
+import '../data/local/data_source.dart';
+import '../domain/entities/hashtag/product_hashtag_entity.dart';
 
 class ProductHashTagDataSource extends DataSource {
   @override
   Future<List<ProductHashTagEntity>> all() async {
     checkDatabaseConnection();
 
-    final List<Map<String, dynamic>> maps = await db.query(tableName);
+    final List<Map<String, dynamic>> maps = await db!.query(tableName);
 
     return List.generate(maps.length, (i) {
       return ProductHashTagEntity(
@@ -18,11 +18,11 @@ class ProductHashTagDataSource extends DataSource {
   }
 
   @override
-  Future<ProductHashTagEntity> get(int id) async {
+  Future<ProductHashTagEntity> get(int? id) async {
     checkDatabaseConnection();
 
     final List<Map<String, dynamic>> maps =
-        await db.query(tableName, where: '$primaryKey = ?', whereArgs: [id]);
+        await db!.query(tableName, where: '$primaryKey = ?', whereArgs: [id]);
 
     return ProductHashTagEntity(
       id: maps[0]['id'],

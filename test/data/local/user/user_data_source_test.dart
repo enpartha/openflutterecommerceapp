@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:openflutterecommerce/data/local/user/user_data_source.dart';
-import 'package:openflutterecommerce/domain/entities/user/user_entity.dart';
+import '../data/local/user/user_data_source.dart';
+import '../domain/entities/user/user_entity.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   group('Test User Data Source', () {
-    UserDataSource dataSource;
+    late UserDataSource dataSource;
 
     setUp(() async {
       dataSource = UserDataSource();

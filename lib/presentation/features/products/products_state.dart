@@ -4,16 +4,16 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/model/filter_rules.dart';
-import 'package:openflutterecommerce/data/model/sort_rules.dart';
+import '../data/model/filter_rules.dart';
+import '../data/model/sort_rules.dart';
 
 import 'bloc_list_data.dart';
 
 abstract class ProductsState extends Equatable {
-  final ProductListData data;
-  final SortRules sortBy;
-  final FilterRules filterRules;
-  final String error;
+  final ProductListData? data;
+  final SortRules? sortBy;
+  final FilterRules? filterRules;
+  final String? error;
 
   ProductsState({
     this.data,
@@ -23,10 +23,10 @@ abstract class ProductsState extends Equatable {
   });
 
   ProductsState copyWith({
-    ProductListData data,
-    SortRules sortBy,
-    FilterRules filterRules,
-    String error,
+    ProductListData? data,
+    SortRules? sortBy,
+    FilterRules? filterRules,
+    String? error,
   });
 
   ProductsState getLoading() {
@@ -38,7 +38,7 @@ abstract class ProductsState extends Equatable {
   bool get hasError => error != null;
 
   @override
-  List<Object> get props => [data, filterRules, sortBy];
+  List<Object?> get props => [data, filterRules, sortBy];
 
   @override
   bool get stringify => true;
@@ -47,10 +47,10 @@ abstract class ProductsState extends Equatable {
 @immutable
 class ProductsListViewState extends ProductsState {
   ProductsListViewState({
-    ProductListData data,
-    SortRules sortBy,
-    FilterRules filterRules,
-    String error,
+    ProductListData? data,
+    SortRules? sortBy,
+    FilterRules? filterRules,
+    String? error,
   }) : super(
     data: data, sortBy: sortBy, filterRules: filterRules, error: error);
 
@@ -61,10 +61,10 @@ class ProductsListViewState extends ProductsState {
 
   @override
   ProductsListViewState copyWith({
-    ProductListData data,
-    SortRules sortBy,
-    FilterRules filterRules,
-    String error,
+    ProductListData? data,
+    SortRules? sortBy,
+    FilterRules? filterRules,
+    String? error,
   }) {
     return ProductsListViewState(
       data: data ?? this.data,
@@ -78,19 +78,19 @@ class ProductsListViewState extends ProductsState {
 @immutable
 class ProductsTileViewState extends ProductsState {
   ProductsTileViewState(
-      {ProductListData data,
-      SortRules sortBy,
-      FilterRules filterRules,
-      String error})
+      {ProductListData? data,
+      SortRules? sortBy,
+      FilterRules? filterRules,
+      String? error})
       : super(
             data: data, sortBy: sortBy, filterRules: filterRules, error: error);
 
   @override
   ProductsTileViewState copyWith({
-    ProductListData data,
-    SortRules sortBy,
-    FilterRules filterRules,
-    String error,
+    ProductListData? data,
+    SortRules? sortBy,
+    FilterRules? filterRules,
+    String? error,
   }) {
     return ProductsTileViewState(
       data: data ?? this.data,

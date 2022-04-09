@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/config/theme.dart';
+import '../config/theme.dart';
 
 import 'block_subtitle.dart';
 
@@ -7,14 +7,14 @@ class OpenFlutterColorSelect extends StatefulWidget {
   final List<Color> availableColors;
   final List<Color> selectedColors;
   final String label;
-  final Function(List<Color>) onClick;
+  final Function(List<Color>?) onClick;
 
   const OpenFlutterColorSelect(
-      {Key key,
-      @required this.availableColors,
-      @required this.selectedColors,
-      @required this.label,
-      @required this.onClick})
+      {Key? key,
+      required this.availableColors,
+      required this.selectedColors,
+      required this.label,
+      required this.onClick})
       : super(key: key);
 
   @override
@@ -22,7 +22,7 @@ class OpenFlutterColorSelect extends StatefulWidget {
 }
 
 class _OpenFlutterColorSelectState extends State<OpenFlutterColorSelect> {
-  List<Color> selectedColors;
+  List<Color>? selectedColors;
 
   @override
   void initState() {
@@ -90,10 +90,10 @@ class _OpenFlutterColorSelectState extends State<OpenFlutterColorSelect> {
   }
 
   void updateSelectedColors(Color color) {
-    if (selectedColors.contains(color)) {
-      selectedColors.remove(color);
+    if (selectedColors!.contains(color)) {
+      selectedColors!.remove(color);
     } else {
-      selectedColors.add(color);
+      selectedColors!.add(color);
     }
     setState(() {});
     widget.onClick(selectedColors);

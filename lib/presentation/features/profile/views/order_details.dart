@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/model/cart_item.dart';
-import 'package:openflutterecommerce/presentation/widgets/data_driven/cart_tile.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import '../config/theme.dart';
+import '../data/model/cart_item.dart';
+import '../presentation/widgets/data_driven/cart_tile.dart';
+import '../presentation/widgets/widgets.dart';
 
 import '../profile_bloc.dart';
 import '../profile_state.dart';
@@ -12,7 +12,7 @@ import '../profile_state.dart';
 class MyOrderDetailsView extends StatefulWidget {
   final Function changeView;
 
-  const MyOrderDetailsView({Key key, @required this.changeView}) : super(key: key);
+  const MyOrderDetailsView({Key? key, required this.changeView}) : super(key: key);
 
   @override
   _MyOrderDetailsViewState createState() => _MyOrderDetailsViewState();
@@ -43,12 +43,12 @@ class _MyOrderDetailsViewState extends State<MyOrderDetailsView> {
                               style: _theme.textTheme.headline4,
                             ),
                             TextSpan(
-                              text: '#' + state.orderData.orderNumber.toString(),
-                              style: _theme.textTheme.headline4.copyWith(fontWeight: FontWeight.w700),
+                              text: '#' + state.orderData!.orderNumber.toString(),
+                              style: _theme.textTheme.headline4!.copyWith(fontWeight: FontWeight.w700),
                             ),
                           ])),
-                          Text(DateFormat('yyyy-MM-dd').format(state.orderData.orderDate),
-                              style: _theme.textTheme.headline3.copyWith(color: AppColors.lightGray))
+                          Text(DateFormat('yyyy-MM-dd').format(state.orderData!.orderDate),
+                              style: _theme.textTheme.headline3!.copyWith(color: AppColors.lightGray))
                         ],
                       ),
                       SizedBox(
@@ -59,14 +59,14 @@ class _MyOrderDetailsViewState extends State<MyOrderDetailsView> {
                             text: TextSpan(children: <TextSpan>[
                           TextSpan(
                             text: 'Tacking Number: ',
-                            style: _theme.textTheme.headline4.copyWith(color: _theme.primaryColorLight),
+                            style: _theme.textTheme.headline4!.copyWith(color: _theme.primaryColorLight),
                           ),
                           TextSpan(
-                            text: state.orderData.trackingNumber,
+                            text: state.orderData!.trackingNumber,
                             style: _theme.textTheme.headline4,
                           ),
                         ])),
-                        Text('Delivered', style: _theme.textTheme.headline4.copyWith(color: AppColors.green)),
+                        Text('Delivered', style: _theme.textTheme.headline4!.copyWith(color: AppColors.green)),
                       ]),
                       SizedBox(
                         height: AppSizes.sidePadding,
@@ -77,7 +77,7 @@ class _MyOrderDetailsViewState extends State<MyOrderDetailsView> {
                           Row(
                             children: <Widget>[
                               Text(
-                                state.orderData.totalQuantity.toString(),
+                                state.orderData!.totalQuantity.toString(),
                                 style: _theme.textTheme.headline4,
                               ),
                               Padding(
@@ -100,20 +100,20 @@ class _MyOrderDetailsViewState extends State<MyOrderDetailsView> {
                       SizedBox(
                         height: AppSizes.sidePadding,
                       ),
-                      buildSummaryLine('Shipping Address:', state.orderData.shippingAddress.toString(), _theme, width),
+                      buildSummaryLine('Shipping Address:', state.orderData!.shippingAddress.toString(), _theme, width),
                       SizedBox(
                         height: AppSizes.sidePadding,
                       ),
-                      buildSummaryLine('Payment Methods:', state.orderData.paymentMethod, _theme, width),
+                      buildSummaryLine('Payment Methods:', state.orderData!.paymentMethod!, _theme, width),
                       SizedBox(
                         height: AppSizes.sidePadding,
                       ),
-                      buildSummaryLine('Discount:', state.orderData.promo.toString(), _theme, width),
+                      buildSummaryLine('Discount:', state.orderData!.promo.toString(), _theme, width),
                       SizedBox(
                         height: AppSizes.sidePadding,
                       ),
                       buildSummaryLine(
-                          'Total Amount:', '\$' + state.orderData.totalPrice.toStringAsFixed(0), _theme, width),
+                          'Total Amount:', '\$' + state.orderData!.totalPrice!.toStringAsFixed(0), _theme, width),
                       SizedBox(
                         height: AppSizes.sidePadding,
                       ),
@@ -151,7 +151,7 @@ class _MyOrderDetailsViewState extends State<MyOrderDetailsView> {
 
   List<Widget> _buildCartProductItems(ProfileMyOrderDetailsState state) {
     return <Widget>[
-      for (CartItem item in state.orderData.products)
+      for (CartItem item in state.orderData!.products)
         OpenFlutterCartTile(
           item: item,
           onAddToFav: (() => {}),
@@ -170,7 +170,7 @@ class _MyOrderDetailsViewState extends State<MyOrderDetailsView> {
         children: <Widget>[
           Text(
             label,
-            style: _theme.textTheme.headline4.copyWith(color: _theme.primaryColorLight),
+            style: _theme.textTheme.headline4!.copyWith(color: _theme.primaryColorLight),
           ),
           Container(
             width: width / 2,

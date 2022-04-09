@@ -3,18 +3,18 @@
 // Date: 2020-02-06
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/config/routes.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/model/category.dart';
-import 'package:openflutterecommerce/presentation/features/products/products.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import '../config/routes.dart';
+import '../config/theme.dart';
+import '../data/model/category.dart';
+import '../presentation/features/products/products.dart';
+import '../presentation/widgets/widgets.dart';
 
 import '../categories.dart';
 
 class CategoriesTileView extends StatefulWidget {
-  final Function changeView;
+  final Function? changeView;
 
-  const CategoriesTileView({Key key, this.changeView}) : super(key: key);
+  const CategoriesTileView({Key? key, this.changeView}) : super(key: key);
 
   @override
   _CategoriesTileViewState createState() => _CategoriesTileViewState();
@@ -24,7 +24,7 @@ class _CategoriesTileViewState extends State<CategoriesTileView>
     with SingleTickerProviderStateMixin {
   final List<String> types = ['Women', 'Men', 'Kids'];
   final List<int> categotyIds = [1, 2, 3];
-  TabController _tabController;
+  TabController? _tabController;
 
   @override
   void initState() {
@@ -46,7 +46,7 @@ class _CategoriesTileViewState extends State<CategoriesTileView>
       return Container(
           padding: EdgeInsets.all(AppSizes.sidePadding),
           child: Text('An error occured',
-              style: _theme.textTheme.headline4
+              style: _theme.textTheme.headline4!
                   .copyWith(color: _theme.errorColor)));
     }, child:
             BlocBuilder<CategoryBloc, CategoryState>(builder: (context, state) {
@@ -68,10 +68,10 @@ class _CategoriesTileViewState extends State<CategoriesTileView>
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Text('SUMMER SALES',
-                            style: _theme.textTheme.headline4
+                            style: _theme.textTheme.headline4!
                                 .copyWith(color: AppColors.white)),
                         Text('Up to 50% off',
-                            style: _theme.textTheme.headline4
+                            style: _theme.textTheme.headline4!
                                 .copyWith(color: AppColors.white))
                       ],
                     ))),
@@ -79,7 +79,7 @@ class _CategoriesTileViewState extends State<CategoriesTileView>
                 padding: EdgeInsets.all(AppSizes.sidePadding),
                 child: Column(
                     children: buildCategoryList(
-                        state.categories, width - AppSizes.sidePadding * 3)))
+                        state.categories!, width - AppSizes.sidePadding * 3)))
           ])));
         }
         return SafeArea(

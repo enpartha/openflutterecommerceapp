@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/presentation/widgets/independent/custom_button.dart';
+import '../config/theme.dart';
+import '../presentation/widgets/independent/custom_button.dart';
 
 class AcceptBottomNavigation extends StatelessWidget {
-  final VoidCallback onApply;
+  final VoidCallback? onApply;
 
-  const AcceptBottomNavigation({Key key, this.onApply}) : super(key: key);
+  const AcceptBottomNavigation({Key? key, this.onApply}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

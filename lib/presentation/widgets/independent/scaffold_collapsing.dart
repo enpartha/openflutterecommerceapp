@@ -3,20 +3,20 @@
 //Date: 2020-02-13
 
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/config/theme.dart';
+import '../config/theme.dart';
 
 import 'bottom_menu.dart';
 
 class OpenFlutterCollapsingScaffold extends StatelessWidget {
-  final Color background;
-  final String title;
-  final Widget body;
-  final int bottomMenuIndex;
-  final List<String> tabBarList;
-  final TabController tabController;
+  final Color? background;
+  final String? title;
+  final Widget? body;
+  final int? bottomMenuIndex;
+  final List<String>? tabBarList;
+  final TabController? tabController;
 
   const OpenFlutterCollapsingScaffold(
-      {Key key, this.background, this.title, this.body, this.bottomMenuIndex, this.tabBarList, this.tabController})
+      {Key? key, this.background, this.title, this.body, this.bottomMenuIndex, this.tabBarList, this.tabController})
       : super(key: key);
 
   @override
@@ -30,7 +30,7 @@ class OpenFlutterCollapsingScaffold extends StatelessWidget {
                 return _buildSilverAppBar(context);
               }
             : null,
-        body: body,
+        body: body!,
       ),
       backgroundColor: background,
       bottomNavigationBar: OpenFlutterBottomMenu(bottomMenuIndex),
@@ -41,12 +41,12 @@ class OpenFlutterCollapsingScaffold extends StatelessWidget {
     var tabBars = <Tab>[];
     var _theme = Theme.of(context);
     if (tabBarList != null) {
-      for (var i = 0; i < tabBarList.length; i++) {
-        tabBars.add(Tab(key: UniqueKey(), text: tabBarList[i]));
+      for (var i = 0; i < tabBarList!.length; i++) {
+        tabBars.add(Tab(key: UniqueKey(), text: tabBarList![i]));
       }
     }
 
-    Widget tabWidget = tabBars.isNotEmpty
+    Widget? tabWidget = tabBars.isNotEmpty
         ? TabBar(
             unselectedLabelColor: _theme.primaryColor,
             unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
@@ -63,7 +63,7 @@ class OpenFlutterCollapsingScaffold extends StatelessWidget {
           expandedHeight: AppSizes.app_bar_expanded_size,
           floating: false,
           pinned: true,
-          bottom: tabWidget,
+          bottom: tabWidget as PreferredSizeWidget?,
           actions: <Widget>[
             Row(children: <Widget>[
               IconButton(
@@ -94,7 +94,7 @@ class OpenFlutterCollapsingScaffold extends StatelessWidget {
                     padding: const EdgeInsets.only(top: kToolbarHeight / 4, left: 0.0),
                     child: Transform.translate(
                       child: Text(
-                        title,
+                        title!,
                         style: _theme.textTheme.caption,
                       ),
                       offset: Offset(dx, constraints.maxHeight - kToolbarHeight),

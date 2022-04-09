@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
-import 'package:openflutterecommerce/config/server_addresses.dart';
-import 'package:openflutterecommerce/data/model/filter_rules.dart';
-import 'package:openflutterecommerce/data/model/sort_rules.dart';
-import 'package:openflutterecommerce/data/error/exceptions.dart';
+import '../config/server_addresses.dart';
+import '../data/model/filter_rules.dart';
+import '../data/model/sort_rules.dart';
+import '../data/error/exceptions.dart';
 
 class NetworkRequest {
   static const STATUS_OK = 200;
@@ -16,19 +16,19 @@ class NetworkRequest {
   final http.Client client;
   final RequestType type;
   final Uri address;
-  final Map<String, dynamic> body;
-  Map<String, String> headers;
-  final List<int> listBody;
-  final String plainBody;
+  final Map<String, dynamic>? body;
+  Map<String, String>? headers;
+  final List<int>? listBody;
+  final String? plainBody;
 
   NetworkRequest(this.type, this.address,
-      {@required this.client,
+      {required this.client,
       this.body,
       this.plainBody,
       this.listBody,
       this.headers});
 
-  Future<http.Response> getResult() async {
+  Future<http.Response?> getResult() async {
     print('ADDRESS: $address');
     if (listBody != null) {
       print('listBody: ${jsonEncode(listBody)}');
@@ -39,7 +39,7 @@ class NetworkRequest {
     if (body != null) {
       print('body: ${jsonEncode(body)}');
     }
-    http.Response response;
+    http.Response? response;
     headers ??= _jsonHeaders;
     try {
       Uri uri = address; //Uri.parse(address);

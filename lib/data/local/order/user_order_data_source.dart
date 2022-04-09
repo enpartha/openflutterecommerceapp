@@ -1,12 +1,12 @@
-import 'package:openflutterecommerce/data/local/data_source.dart';
-import 'package:openflutterecommerce/domain/entities/order/user_order_entity.dart';
+import '../data/local/data_source.dart';
+import '../domain/entities/order/user_order_entity.dart';
 
 class UserOrderDataSource extends DataSource {
   @override
   Future<List<UserOrderEntity>> all() async {
     checkDatabaseConnection();
 
-    final List<Map<String, dynamic>> maps = await db.query(tableName);
+    final List<Map<String, dynamic>> maps = await db!.query(tableName);
 
     return List.generate(maps.length, (i) {
       return UserOrderEntity(
@@ -27,11 +27,11 @@ class UserOrderDataSource extends DataSource {
   }
 
   @override
-  Future<UserOrderEntity> get(int id) async {
+  Future<UserOrderEntity> get(int? id) async {
     checkDatabaseConnection();
 
     final List<Map<String, dynamic>> maps =
-        await db.query(tableName, where: '$primaryKey = ?', whereArgs: [id]);
+        await db!.query(tableName, where: '$primaryKey = ?', whereArgs: [id]);
 
     return UserOrderEntity(
       id: maps[0]['id'],

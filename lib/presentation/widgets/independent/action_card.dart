@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/config/theme.dart';
+import '../config/theme.dart';
 
 class OpenFlutterActionCard extends StatelessWidget {
-  final String title;
-  final String linkText;
-  final Function onLinkTap;
-  final Widget child;
+  final String? title;
+  final String? linkText;
+  final Function? onLinkTap;
+  final Widget? child;
 
-  const OpenFlutterActionCard({Key key, @required this.title, this.linkText, this.child, this.onLinkTap})
+  const OpenFlutterActionCard({Key? key, required this.title, this.linkText, this.child, this.onLinkTap})
       : super(key: key);
 
   @override
@@ -33,15 +33,15 @@ class OpenFlutterActionCard extends StatelessWidget {
                   children: <Widget>[
                     Container(
                         width: width / 3 * 2,
-                        child: Text(title, style: _theme.textTheme.headline2.copyWith(color: _theme.primaryColor))),
+                        child: Text(title!, style: _theme.textTheme.headline2!.copyWith(color: _theme.primaryColor))),
                     linkText != null
                         ? Container(
                             alignment: Alignment.centerRight,
                             width: width / 3,
                             child: InkWell(
-                              onTap: (() => {onLinkTap()}),
+                              onTap: (() => {onLinkTap!()}),
                               child:
-                                  Text(linkText, style: _theme.textTheme.headline2.copyWith(color: _theme.accentColor)),
+                                  Text(linkText!, style: _theme.textTheme.headline2!.copyWith(color: _theme.accentColor)),
                             ))
                         : Container()
                   ],

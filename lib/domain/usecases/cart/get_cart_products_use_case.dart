@@ -5,12 +5,12 @@
 /// https://medium.com/@openflutterproject/open-flutter-project-e-commerce-app-use-cases-and-features-6b7414a6e708
 
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/model/cart_item.dart';
-import 'package:openflutterecommerce/data/model/promo.dart';
-import 'package:openflutterecommerce/data/repositories/abstract/cart_repository.dart';
-import 'package:openflutterecommerce/data/repositories/cart_repository_impl.dart';
-import 'package:openflutterecommerce/domain/usecases/base_use_case.dart';
-import 'package:openflutterecommerce/locator.dart';
+import '../data/model/cart_item.dart';
+import '../data/model/promo.dart';
+import '../data/repositories/abstract/cart_repository.dart';
+import '../data/repositories/cart_repository_impl.dart';
+import '../domain/usecases/base_use_case.dart';
+import '../locator.dart';
 
 abstract class GetCartProductsUseCase
   implements BaseUseCase<GetCartProductsResult, GetCartProductParams> {}
@@ -46,7 +46,7 @@ class GetCartProductsUseCaseImpl implements GetCartProductsUseCase {
 }
 
 class GetCartProductParams {
-  final Promo appliedPromo;
+  final Promo? appliedPromo;
 
   GetCartProductParams({this.appliedPromo});
 }
@@ -57,15 +57,15 @@ class GetCartProductsResult extends UseCaseResult {
   final List<CartItem> cartItems;
   final double totalPrice;
   final double calculatedPrice;
-  final Promo appliedPromo;
+  final Promo? appliedPromo;
 
   GetCartProductsResult({
-    @required this.cartItems, 
-    @required this.totalPrice,
-    @required this.calculatedPrice,
+    required this.cartItems, 
+    required this.totalPrice,
+    required this.calculatedPrice,
     this.appliedPromo,
-    Exception exception, 
-    bool result
+    Exception? exception, 
+    bool? result
   }) 
     : super(exception: exception, result: result);
 }

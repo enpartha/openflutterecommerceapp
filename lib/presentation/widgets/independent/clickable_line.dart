@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/model/sort_rules.dart';
+import '../config/theme.dart';
+import '../data/model/sort_rules.dart';
 
 class OpenFlutterClickableLine extends StatelessWidget {
   final double width;
   final double height;
   final String title;
   final SortRules sortRules;
-  final Color backgroundColor;
-  final Color textColor;
+  final Color? backgroundColor;
+  final Color? textColor;
   final Function(SortRules) onTap;
 
   const OpenFlutterClickableLine(
-      {Key key,
-      @required this.width,
-      @required this.height,
-      @required this.title,
-      @required this.onTap,
-      @required this.sortRules,
+      {Key? key,
+      required this.width,
+      required this.height,
+      required this.title,
+      required this.onTap,
+      required this.sortRules,
       this.backgroundColor,
       this.textColor})
       : super(key: key);
@@ -34,6 +34,6 @@ class OpenFlutterClickableLine extends StatelessWidget {
             width: width,
             color: backgroundColor,
             child: Text(title,
-                style: _theme.textTheme.headline4.copyWith(fontWeight: FontWeight.normal, color: textColor))));
+                style: _theme.textTheme.headline4!.copyWith(fontWeight: FontWeight.normal, color: textColor))));
   }
 }

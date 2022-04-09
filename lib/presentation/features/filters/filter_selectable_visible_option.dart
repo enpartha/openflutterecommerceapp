@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/presentation/widgets/independent/block_subtitle.dart';
+import '../config/theme.dart';
+import '../presentation/widgets/independent/block_subtitle.dart';
 
 class FilterSelectableVisibleOption<T> extends StatelessWidget {
-  final Map<T, Widget> children;
-  final ValueChanged<T> onSelected;
-  final String title;
+  final Map<T, Widget>? children;
+  final ValueChanged<T>? onSelected;
+  final String? title;
 
   const FilterSelectableVisibleOption(
-      {Key key, this.onSelected, this.children, this.title})
+      {Key? key, this.onSelected, this.children, this.title})
       : super(key: key);
 
   @override
@@ -28,13 +28,13 @@ class FilterSelectableVisibleOption<T> extends StatelessWidget {
           child: Wrap(
             spacing: AppSizes.sidePadding,
             alignment: WrapAlignment.start,
-            children: children
+            children: children!
                 .map((key, widget) => MapEntry(
                     key,
                     InkWell(
                       child: widget,
                       onTap: () {
-                        onSelected(key);
+                        onSelected!(key);
                       },
                     )))
                 .values

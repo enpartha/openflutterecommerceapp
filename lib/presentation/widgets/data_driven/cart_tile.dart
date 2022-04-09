@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/model/cart_item.dart';
-import 'package:openflutterecommerce/presentation/features/cart/views/selected_attribute_view.dart';
+import '../config/theme.dart';
+import '../data/model/cart_item.dart';
+import '../presentation/features/cart/views/selected_attribute_view.dart';
 
 class OpenFlutterCartTile extends StatefulWidget {
   final CartItem item;
@@ -11,11 +11,11 @@ class OpenFlutterCartTile extends StatefulWidget {
   final bool orderComplete;
 
   const OpenFlutterCartTile(
-      {Key key,
-      @required this.item,
-      @required this.onChangeQuantity,
-      @required this.onAddToFav,
-      @required this.onRemoveFromCart,
+      {Key? key,
+      required this.item,
+      required this.onChangeQuantity,
+      required this.onAddToFav,
+      required this.onRemoveFromCart,
       this.orderComplete = false})
       : super(key: key);
 
@@ -48,9 +48,9 @@ class _OpenFlutterCartTileState extends State<OpenFlutterCartTile> {
                 children: <Widget>[
                   Container(
                       width: 104,
-                      child: widget.item.product.mainImage.isLocal
-                          ? Image.asset(widget.item.product.mainImage.address)
-                          : Image.network(widget.item.product.mainImage.address)),
+                      child: widget.item.product!.mainImage.isLocal
+                          ? Image.asset(widget.item.product!.mainImage.address!)
+                          : Image.network(widget.item.product!.mainImage.address!)),
                   Container(
                       padding: EdgeInsets.only(left: AppSizes.sidePadding),
                       width: width - 134,
@@ -58,8 +58,8 @@ class _OpenFlutterCartTileState extends State<OpenFlutterCartTile> {
                         Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
                           Container(
                             width: width - 173,
-                            child: Text(widget.item.product.title,
-                                style: _theme.textTheme.headline4
+                            child: Text(widget.item.product!.title!,
+                                style: _theme.textTheme.headline4!
                                     .copyWith(fontWeight: FontWeight.bold, color: _theme.primaryColor)),
                           ),
                           !widget.orderComplete
@@ -74,7 +74,7 @@ class _OpenFlutterCartTileState extends State<OpenFlutterCartTile> {
                         ]),
                         Padding(padding: EdgeInsets.only(bottom: AppSizes.linePadding * 2)),
                         Wrap(
-                            children: widget.item.selectedAttributes
+                            children: widget.item.selectedAttributes!
                                 .map((key, value) => MapEntry(
                                     key,
                                     SelectedAttributeView(
@@ -94,7 +94,7 @@ class _OpenFlutterCartTileState extends State<OpenFlutterCartTile> {
                                     children: <Widget>[
                                       InkWell(
                                           onTap: () =>
-                                              {widget.onChangeQuantity(widget.item.productQuantity.quantity - 1)},
+                                              {widget.onChangeQuantity(widget.item.productQuantity.quantity! - 1)},
                                           child: Container(
                                               alignment: Alignment.center,
                                               width: 36,
@@ -117,7 +117,7 @@ class _OpenFlutterCartTileState extends State<OpenFlutterCartTile> {
                                       ),
                                       InkWell(
                                           onTap: (() =>
-                                              {widget.onChangeQuantity(widget.item.productQuantity.quantity + 1)}),
+                                              {widget.onChangeQuantity(widget.item.productQuantity.quantity! + 1)}),
                                           child: Container(
                                               alignment: Alignment.center,
                                               width: 36,
@@ -140,7 +140,7 @@ class _OpenFlutterCartTileState extends State<OpenFlutterCartTile> {
                                   child: Row(children: <Widget>[
                                     Text('Units: ', style: _theme.textTheme.bodyText1),
                                     Text(widget.item.productQuantity.quantity.toString(),
-                                        style: _theme.textTheme.bodyText1.copyWith(color: _theme.primaryColor)),
+                                        style: _theme.textTheme.bodyText1!.copyWith(color: _theme.primaryColor)),
                                   ])),
                           Container(
                             width: width - 280,

@@ -1,12 +1,12 @@
-import 'package:openflutterecommerce/data/local/data_source.dart';
-import 'package:openflutterecommerce/domain/entities/product/product_parameter_variant_entity.dart';
+import '../data/local/data_source.dart';
+import '../domain/entities/product/product_parameter_variant_entity.dart';
 
 class ProductParameterVariantDataSource extends DataSource {
   @override
   Future<List<ProductParameterVariantEntity>> all() async {
     checkDatabaseConnection();
 
-    final List<Map<String, dynamic>> maps = await db.query(tableName);
+    final List<Map<String, dynamic>> maps = await db!.query(tableName);
 
     return List.generate(maps.length, (i) {
       return ProductParameterVariantEntity(
@@ -19,11 +19,11 @@ class ProductParameterVariantDataSource extends DataSource {
   }
 
   @override
-  Future<ProductParameterVariantEntity> get(int id) async {
+  Future<ProductParameterVariantEntity> get(int? id) async {
     checkDatabaseConnection();
 
     final List<Map<String, dynamic>> maps =
-        await db.query(tableName, where: '$primaryKey = ?', whereArgs: [id]);
+        await db!.query(tableName, where: '$primaryKey = ?', whereArgs: [id]);
 
     return ProductParameterVariantEntity(
       id: maps[0]['id'],

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/model/filter_rules.dart';
-import 'package:openflutterecommerce/data/model/product.dart';
-import 'package:openflutterecommerce/data/model/sort_rules.dart';
-import 'package:openflutterecommerce/data/repositories/abstract/product_repository.dart';
-import 'package:openflutterecommerce/data/error/exceptions.dart';
-import 'package:openflutterecommerce/data/woocommerce/models/product_model.dart';
-import 'package:openflutterecommerce/data/woocommerce/repositories/woocommerce_wrapper.dart';
-import 'package:openflutterecommerce/domain/usecases/products/products_by_filter_params.dart';
+import '../config/theme.dart';
+import '../data/model/filter_rules.dart';
+import '../data/model/product.dart';
+import '../data/model/sort_rules.dart';
+import '../data/repositories/abstract/product_repository.dart';
+import '../data/error/exceptions.dart';
+import '../data/woocommerce/models/product_model.dart';
+import '../data/woocommerce/repositories/woocommerce_wrapper.dart';
+import '../domain/usecases/products/products_by_filter_params.dart';
 
 class RemoteProductRepository extends ProductRepository {
   
-  final WoocommercWrapperAbstract woocommerce;
+  final WoocommercWrapperAbstract? woocommerce;
 
-  RemoteProductRepository({@required this.woocommerce});
+  RemoteProductRepository({required this.woocommerce});
 
   @override
   Future<Product> getProduct(int id) {
@@ -29,7 +29,7 @@ class RemoteProductRepository extends ProductRepository {
   }
 
   @override
-  Future<FilterRules> getPossibleFilterOptions(int categoryId) {
+  Future<FilterRules>? getPossibleFilterOptions(int categoryId) {
     // TODO: implement getPossibleFilterOptions
     return null;
   }
@@ -38,20 +38,20 @@ class RemoteProductRepository extends ProductRepository {
   Future<List<Product>> getProducts(
       {int pageIndex = 0,
       int pageSize = AppConsts.page_size,
-      int categoryId = 0,
+      int? categoryId = 0,
       bool isFavorite = false,
       SortRules sortRules = const SortRules(),
-      FilterRules filterRules}) async {
+      FilterRules? filterRules}) async {
     // TODO: implement getProducts
     try
     {
-      List<dynamic> productsData = await woocommerce.getProductList(
+      List<dynamic> productsData = await (woocommerce!.getProductList(
         ProductsByFilterParams(
           categoryId: categoryId,
           sortBy: sortRules, 
           filterRules: filterRules, 
         )
-      );
+      ) as FutureOr<List<dynamic>>);
       List<Product> products = [];
       for(int i = 0; i < productsData.length; i++){
         products.add(

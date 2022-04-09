@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/config/theme.dart';
+import '../config/theme.dart';
 
 class BaseProductListItem extends StatelessWidget {
-  final VoidCallback onClick;
-  final String inactiveMessage;
-  final Widget bottomRoundButton;
-  final ImageProvider image;
-  final WidgetBuilder mainContentBuilder;
-  final String specialMark;
-  final VoidCallback onRemove;
+  final VoidCallback? onClick;
+  final String? inactiveMessage;
+  final Widget? bottomRoundButton;
+  final ImageProvider? image;
+  final WidgetBuilder? mainContentBuilder;
+  final String? specialMark;
+  final VoidCallback? onRemove;
   final double imageHeight;
   final double imageWidth;
 
   const BaseProductListItem(
-      {Key key,
+      {Key? key,
       this.onClick,
       this.inactiveMessage,
       this.bottomRoundButton,
@@ -49,7 +49,7 @@ class BaseProductListItem extends StatelessWidget {
                         width: imageWidth,
                         height: imageHeight,
                         decoration: BoxDecoration(
-                          image: image == null ? null : DecorationImage(image: image, fit: BoxFit.cover),
+                          image: image == null ? null : DecorationImage(image: image!, fit: BoxFit.cover),
                           color: AppColors.background,
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(AppSizes.imageRadius),
@@ -60,7 +60,7 @@ class BaseProductListItem extends StatelessWidget {
                       Expanded(
                         child: Padding(
                           padding: EdgeInsets.all(11.0),
-                          child: mainContentBuilder(context),
+                          child: mainContentBuilder!(context),
                         ),
                       )
                     ],
@@ -73,14 +73,14 @@ class BaseProductListItem extends StatelessWidget {
                 : Positioned(
                     top: imageHeight - 32,
                     right: 0,
-                    child: bottomRoundButton,
+                    child: bottomRoundButton!,
                   ),
             inactiveMessage == null
                 ? Container()
                 : Positioned(
                     top: imageHeight + 4,
                     left: 0,
-                    child: Text(inactiveMessage),
+                    child: Text(inactiveMessage!),
                   ),
             specialMark == null
                 ? Container()
@@ -93,10 +93,10 @@ class BaseProductListItem extends StatelessWidget {
                           borderRadius: BorderRadius.circular(AppSizes.imageRadius),
                           color: specialMark == 'New' ? AppColors.red : AppColors.black,
                         ),
-                        child: Text(specialMark,
+                        child: Text(specialMark!,
                             style: Theme.of(context)
                                 .textTheme
-                                .bodyText1
+                                .bodyText1!
                                 .copyWith(color: AppColors.white, fontWeight: FontWeight.bold))),
                   ),
             onRemove == null

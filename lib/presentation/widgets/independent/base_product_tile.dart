@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/config/theme.dart';
+import '../config/theme.dart';
 
 class BaseProductTile extends StatelessWidget {
-  final VoidCallback onClick;
-  final String inactiveMessage;
-  final Widget bottomRoundButton;
-  final ImageProvider image;
-  final WidgetBuilder mainContentBuilder;
-  final String specialMark;
-  final VoidCallback onRemove;
+  final VoidCallback? onClick;
+  final String? inactiveMessage;
+  final Widget? bottomRoundButton;
+  final ImageProvider? image;
+  final WidgetBuilder? mainContentBuilder;
+  final String? specialMark;
+  final VoidCallback? onRemove;
   final double imageHeight;
   final double imageWidth;
   final double tileHeight;
 
   const BaseProductTile(
-      {Key key,
+      {Key? key,
       this.onClick,
       this.inactiveMessage,
       this.bottomRoundButton,
@@ -49,7 +49,7 @@ class BaseProductTile extends StatelessWidget {
                       width: imageWidth,
                       height: imageHeight,
                       decoration: BoxDecoration(
-                        image: DecorationImage(image: image, fit: BoxFit.cover),
+                        image: DecorationImage(image: image!, fit: BoxFit.cover),
                         color: AppColors.background,
                         borderRadius: BorderRadius.circular(AppSizes.imageRadius),
                       ),
@@ -57,9 +57,9 @@ class BaseProductTile extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.all(4),
-                    child: mainContentBuilder(context),
+                    child: mainContentBuilder!(context),
                   ),
-                  inactiveMessage == null ? Container() : Text(inactiveMessage),
+                  inactiveMessage == null ? Container() : Text(inactiveMessage!),
                 ],
               ),
             ),
@@ -68,7 +68,7 @@ class BaseProductTile extends StatelessWidget {
                 : Positioned(
                     top: imageHeight - 24,
                     right: 0,
-                    child: bottomRoundButton,
+                    child: bottomRoundButton!,
                   ),
             specialMark == null
                 ? Container()
@@ -81,10 +81,10 @@ class BaseProductTile extends StatelessWidget {
                           borderRadius: BorderRadius.circular(AppSizes.imageRadius),
                           color: specialMark == 'New' ? AppColors.red : AppColors.black,
                         ),
-                        child: Text(specialMark,
+                        child: Text(specialMark!,
                             style: Theme.of(context)
                                 .textTheme
-                                .bodyText1
+                                .bodyText1!
                                 .copyWith(color: AppColors.white, fontWeight: FontWeight.bold))),
                   ),
             onRemove == null

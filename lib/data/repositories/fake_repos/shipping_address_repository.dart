@@ -3,8 +3,8 @@
  * @copyright 2020 Open E-commerce App
  * @see shipping_address_repository.dart
  */
-import 'package:openflutterecommerce/data/model/shipping_address.dart';
-import 'package:openflutterecommerce/data/repositories/abstract/shipping_address_repository.dart';
+import '../data/model/shipping_address.dart';
+import '../data/repositories/abstract/shipping_address_repository.dart';
 
 class FakeShippingAddressRepository implements ShippingAddressRepository{
 

@@ -1,15 +1,15 @@
 import 'package:equatable/equatable.dart';
 
 class ProductReview extends Equatable {
-  final int id;
-  final int productId;
-  final String authorName;
-  final String authorPhotoUrl;
-  final int rating;
-  final String comment;
+  final int? id;
+  final int? productId;
+  final String? authorName;
+  final String? authorPhotoUrl;
+  final int? rating;
+  final String? comment;
   final DateTime reviewDate;
-  final bool isHelpful;
-  final List<String> photos;
+  final bool? isHelpful;
+  final List<String>? photos;
 
   ProductReview({
     this.id,
@@ -18,13 +18,13 @@ class ProductReview extends Equatable {
     this.authorPhotoUrl,
     this.rating,
     this.comment,
-    DateTime reviewDate,
+    DateTime? reviewDate,
     this.isHelpful,
     this.photos,
   }) : reviewDate = reviewDate ?? DateTime.now();
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         id,
         productId,
         authorName,
@@ -37,6 +37,6 @@ class ProductReview extends Equatable {
       ];
 
   bool hasPhotos() {
-    return photos != null && photos.isNotEmpty;
+    return photos != null && photos!.isNotEmpty;
   }
 }

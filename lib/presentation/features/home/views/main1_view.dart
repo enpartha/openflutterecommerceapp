@@ -5,21 +5,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:openflutterecommerce/config/routes.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/model/product.dart';
-import 'package:openflutterecommerce/presentation/features/categories/categories.dart';
-import 'package:openflutterecommerce/presentation/features/home/home_bloc.dart';
-import 'package:openflutterecommerce/presentation/features/home/home_event.dart';
-import 'package:openflutterecommerce/presentation/features/home/home_state.dart';
-import 'package:openflutterecommerce/presentation/features/wrapper.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import '../config/routes.dart';
+import '../config/theme.dart';
+import '../data/model/product.dart';
+import '../presentation/features/categories/categories.dart';
+import '../presentation/features/home/home_bloc.dart';
+import '../presentation/features/home/home_event.dart';
+import '../presentation/features/home/home_state.dart';
+import '../presentation/features/wrapper.dart';
+import '../presentation/widgets/widgets.dart';
 
 class Main1View extends StatefulWidget {
-  final Function changeView;
-  final List<Product> products;
+  final Function? changeView;
+  final List<Product>? products;
 
-  const Main1View({Key key, this.products, this.changeView}) : super(key: key);
+  const Main1View({Key? key, this.products, this.changeView}) : super(key: key);
 
   @override
   _Main1ViewState createState() => _Main1ViewState();
@@ -66,7 +66,7 @@ class _Main1ViewState extends State<Main1View> {
                         title: 'Check',
                         width: 160,
                         height: 48,
-                        onPressed: (() => widget.changeView(changeType: ViewChangeType.Forward)),
+                        onPressed: (() => widget.changeView!(changeType: ViewChangeType.Forward)),
                       ),
                     )
                   ],
@@ -92,7 +92,7 @@ class _Main1ViewState extends State<Main1View> {
               title: 'Next Home Page',
               width: 160,
               height: 48,
-              onPressed: (() => widget.changeView(changeType: ViewChangeType.Forward)),
+              onPressed: (() => widget.changeView!(changeType: ViewChangeType.Forward)),
             )
           ],
         ),

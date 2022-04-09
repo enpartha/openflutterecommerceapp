@@ -2,8 +2,8 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/data/model/product_attribute.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import '../data/model/product_attribute.dart';
+import '../presentation/widgets/widgets.dart';
 
 import '../wrapper.dart';
 import 'product_bloc.dart';
@@ -12,11 +12,11 @@ import 'product_state.dart';
 import 'views/details.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  final ProductDetailsParameters parameters;
+  final ProductDetailsParameters? parameters;
 
   const ProductDetailsScreen(
     this.parameters, {
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -24,9 +24,9 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class ProductDetailsParameters {
-  final int productId;
-  final int categoryId;
-  final HashMap<ProductAttribute, String> selectedAttributes;
+  final int? productId;
+  final int? categoryId;
+  final HashMap<ProductAttribute, String>? selectedAttributes;
 
   const ProductDetailsParameters(this.productId, this.categoryId,
       {this.selectedAttributes});
@@ -35,17 +35,17 @@ class ProductDetailsParameters {
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   Widget build(BuildContext context) {
-    print('productId: ${widget.parameters.productId}');
+    print('productId: ${widget.parameters!.productId}');
     return SafeArea(
         child: OpenFlutterScaffold(
       background: null,
       title: null,
       body: BlocProvider<ProductBloc>(
         create: (context) {
-          return ProductBloc(productId: widget.parameters.productId)
+          return ProductBloc(productId: widget.parameters!.productId)
             ..add(ProductScreenLoadedEvent(
-                productId: widget.parameters.productId,
-                categoryId: widget.parameters.categoryId));
+                productId: widget.parameters!.productId,
+                categoryId: widget.parameters!.categoryId));
         },
         child: ProductWrapper(),
       ),
@@ -67,7 +67,7 @@ class _ProductWrapperState extends OpenFlutterWrapperState<ProductWrapper> {
         builder: (BuildContext context, ProductState state) {
           if (state is ProductLoadedState) {
             return ProductDetailsView(
-                product: state.product,
+                product: state.product!,
                 similarProducts: state.similarProducts,
                 changeView: changePage);
           }

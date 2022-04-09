@@ -1,10 +1,10 @@
-import 'package:openflutterecommerce/data/local/config.dart';
+import '../data/local/config.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class SQLiteDbProvider {
 
-  static Database db;
+  static Database? db;
   
   static Future<void> open() async {
     db = await openDatabase(

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:openflutterecommerce/data/local/delivery/delivery_method_data_source.dart';
-import 'package:openflutterecommerce/domain/entities/delivery/delivery_method_entity.dart';
+import '../data/local/delivery/delivery_method_data_source.dart';
+import '../domain/entities/delivery/delivery_method_entity.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   group('Test DeliveryMethod Data Source', () {
-    DeliveryMethodDataSource dataSource;
+    late DeliveryMethodDataSource dataSource;
 
     setUp(() async {
       dataSource = DeliveryMethodDataSource();

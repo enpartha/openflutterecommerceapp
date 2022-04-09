@@ -4,10 +4,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/config/routes.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/presentation/features/product_details/product_screen.dart';
-import 'package:openflutterecommerce/presentation/widgets/extensions/product_view.dart';
+import '../config/routes.dart';
+import '../config/theme.dart';
+import '../presentation/features/product_details/product_screen.dart';
+import '../presentation/widgets/extensions/product_view.dart';
 
 import '../products.dart';
 
@@ -26,24 +26,24 @@ class ProductsTileView extends StatelessWidget {
           (BuildContext context, int index) {
             return Padding(
                 padding: EdgeInsets.symmetric(horizontal: AppSizes.sidePadding),
-                child: state.data.products[index].getTileView(
+                child: state.data!.products[index].getTileView(
                   context: context,
                   onFavoritesClick: () {
                     BlocProvider.of<ProductsBloc>(context).add(
                         ProductMakeFavoriteEvent(
-                            !state.data.products[index].isFavorite,
-                            state.data.products[index]));
+                            !state.data!.products[index].isFavorite,
+                            state.data!.products[index]));
                   },
                   showProductInfo: () {
                     Navigator.of(context).pushNamed(
                         OpenFlutterEcommerceRoutes.product,
                         arguments: ProductDetailsParameters(
-                            state.data.products[index].id,
-                            state.data.category.id));
+                            state.data!.products[index].id,
+                            state.data!.category.id));
                   },
                 ));
           },
-          childCount: state.data.products.length,
+          childCount: state.data!.products.length,
         ),
       );
     });

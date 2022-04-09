@@ -4,11 +4,11 @@
  * @see cart_repository_impl.dart
  */
 
-import 'package:openflutterecommerce/data/repositories/abstract/cart_repository.dart';
-import 'package:openflutterecommerce/data/model/cart_item.dart';
-import 'package:openflutterecommerce/data/model/product.dart';
-import 'package:openflutterecommerce/data/model/product_attribute.dart';
-import 'package:openflutterecommerce/data/model/promo.dart';
+import '../data/repositories/abstract/cart_repository.dart';
+import '../data/model/cart_item.dart';
+import '../data/model/product.dart';
+import '../data/model/product_attribute.dart';
+import '../data/model/promo.dart';
 
 class CartRepositoryImpl extends CartRepository{
   static CartProductDataStorage cartProductDataStorage 
@@ -20,13 +20,13 @@ class CartRepositoryImpl extends CartRepository{
       CartItem(
         product: product,
         productQuantity: ProductQuantity(quantity), 
-        selectedAttributes: selectedAttributes,
+        selectedAttributes: selectedAttributes as HashMap<ProductAttribute, String>?,
       )
     );
   }
 
   @override
-  Future changeQuantity(CartItem item, int newQuantity) async {
+  Future changeQuantity(CartItem? item, int? newQuantity) async {
     for(int i = 0; i < cartProductDataStorage.items.length; i++){
       if ( cartProductDataStorage.items[i] == item ) {
         cartProductDataStorage.items[i].productQuantity.changeQuantity(newQuantity);
@@ -35,7 +35,7 @@ class CartRepositoryImpl extends CartRepository{
   }
 
   @override
-  Future<Promo> getAppliedPromo() async {
+  Future<Promo?> getAppliedPromo() async {
     return cartProductDataStorage.appliedPromo;
   }
 
@@ -45,7 +45,7 @@ class CartRepositoryImpl extends CartRepository{
   }
 
   @override
-  Future setPromo(Promo promo) async {
+  Future setPromo(Promo? promo) async {
     cartProductDataStorage.appliedPromo = promo;
   }
 
@@ -63,7 +63,7 @@ class CartRepositoryImpl extends CartRepository{
     final totalPrice = getTotalPrice();
     final calculatedTotalPrice = 
       cartProductDataStorage.appliedPromo != null ?
-        totalPrice * (1 - cartProductDataStorage.appliedPromo.discount/100)
+        totalPrice * (1 - cartProductDataStorage.appliedPromo!.discount!/100)
         : totalPrice;
     return calculatedTotalPrice;
   }
@@ -72,5 +72,5 @@ class CartRepositoryImpl extends CartRepository{
 
 class CartProductDataStorage {
   List<CartItem> items = [];
-  Promo appliedPromo;
+  Promo? appliedPromo;
 }

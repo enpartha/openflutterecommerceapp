@@ -4,10 +4,10 @@
 /// Complete list of use cases
 /// https://medium.com/@openflutterproject/open-flutter-project-e-commerce-app-use-cases-and-features-6b7414a6e708
 
-import 'package:openflutterecommerce/data/model/promo.dart';
-import 'package:openflutterecommerce/data/repositories/abstract/promo_repository.dart';
-import 'package:openflutterecommerce/domain/usecases/base_use_case.dart';
-import 'package:openflutterecommerce/locator.dart';
+import '../data/model/promo.dart';
+import '../data/repositories/abstract/promo_repository.dart';
+import '../domain/usecases/base_use_case.dart';
+import '../locator.dart';
 
 abstract class GetPromosUseCase
   implements BaseUseCase<GetPromosResult, GetPromosParams> {}
@@ -19,7 +19,7 @@ class GetPromosUseCaseImpl implements GetPromosUseCase {
       GetPromosParams params) async {
     try {
       PromoRepository promoRepository = sl();
-      var promos = await promoRepository.getPromoList();
+      var promos = await promoRepository.getPromoList()!;
 
       if (promos != null && promos.isNotEmpty) {
         return GetPromosResult(  
@@ -45,9 +45,9 @@ class GetPromosUseCaseImpl implements GetPromosUseCase {
 }
 
 class GetPromosResult extends UseCaseResult {
-  List<Promo> promos;
+  List<Promo>? promos;
   
-  GetPromosResult({this.promos, Exception exception, bool result}) 
+  GetPromosResult({this.promos, Exception? exception, bool? result}) 
     : super(exception: exception, result: result);
 }
   

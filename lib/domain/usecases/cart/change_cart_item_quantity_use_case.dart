@@ -4,10 +4,10 @@
 /// The cart item price changes and total amount changes.
 /// https://medium.com/@openflutterproject/open-flutter-project-e-commerce-app-use-cases-and-features-6b7414a6e708
 
-import 'package:openflutterecommerce/data/repositories/abstract/cart_repository.dart';
-import 'package:openflutterecommerce/data/model/cart_item.dart';
-import 'package:openflutterecommerce/domain/usecases/base_use_case.dart';
-import 'package:openflutterecommerce/locator.dart';
+import '../data/repositories/abstract/cart_repository.dart';
+import '../data/model/cart_item.dart';
+import '../domain/usecases/base_use_case.dart';
+import '../locator.dart';
 
 abstract class ChangeCartItemQuantityUseCase
   implements BaseUseCase<ChangeCartItemQuantityResult, ChangeCartItemQuantityParams> {}
@@ -31,16 +31,16 @@ class ChangeCartItemQuantityUseCaseImpl implements ChangeCartItemQuantityUseCase
 }
 
 class ChangeCartItemQuantityParams {
-  final CartItem item;
-  final int quantity;
+  final CartItem? item;
+  final int? quantity;
 
   ChangeCartItemQuantityParams({this.item, this.quantity});
 }
 
 class ChangeCartItemQuantityResult extends UseCaseResult {
   ChangeCartItemQuantityResult({
-    Exception exception, 
-    bool result
+    Exception? exception, 
+    bool? result
   }) 
     : super(exception: exception, result: result);
 }

@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 enum ViewChangeType { Start, Forward, Backward, Exact }
 
 class OpenFlutterWrapperState<T> extends State {
-  PageController _viewController;
+  PageController? _viewController;
 
   PageView getPageView(List<Widget> widgets) {
     return PageView(
@@ -16,21 +16,21 @@ class OpenFlutterWrapperState<T> extends State {
         children: widgets);
   }
 
-  void changePage({@required ViewChangeType changeType, int index}) {
+  void changePage({required ViewChangeType changeType, int? index}) {
     switch (changeType) {
       case ViewChangeType.Forward:
-        _viewController.nextPage(
+        _viewController!.nextPage(
             duration: Duration(milliseconds: 300), curve: Curves.elasticIn);
         break;
       case ViewChangeType.Backward:
-        _viewController.previousPage(
+        _viewController!.previousPage(
             duration: Duration(milliseconds: 300), curve: Curves.elasticIn);
         break;
       case ViewChangeType.Start:
-        _viewController.jumpToPage(0);
+        _viewController!.jumpToPage(0);
         break;
       case ViewChangeType.Exact:
-        _viewController.jumpToPage(index);
+        _viewController!.jumpToPage(index!);
         break;
     }
   }

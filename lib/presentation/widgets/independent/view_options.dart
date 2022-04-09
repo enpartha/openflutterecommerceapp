@@ -4,26 +4,26 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:openflutterecommerce/config/routes.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/model/filter_rules.dart';
-import 'package:openflutterecommerce/data/model/sort_rules.dart';
+import '../config/routes.dart';
+import '../config/theme.dart';
+import '../data/model/filter_rules.dart';
+import '../data/model/sort_rules.dart';
 
 class OpenFlutterViewOptions extends StatelessWidget {
-  final SortRules sortRules;
-  final FilterRules filterRules;
+  final SortRules? sortRules;
+  final FilterRules? filterRules;
   final bool isListView;
-  final Function(FilterRules) onFilterChanged;
-  final Function(SortRules) onSortChanged;
-  final Function onChangeViewClicked;
+  final Function(FilterRules)? onFilterChanged;
+  final Function(SortRules)? onSortChanged;
+  final Function? onChangeViewClicked;
 
   const OpenFlutterViewOptions(
-      {Key key,
-      @required this.onFilterChanged,
-      @required this.onSortChanged,
-      @required this.onChangeViewClicked,
-      @required this.sortRules,
-      @required this.filterRules,
+      {Key? key,
+      required this.onFilterChanged,
+      required this.onSortChanged,
+      required this.onChangeViewClicked,
+      required this.sortRules,
+      required this.filterRules,
       this.isListView = true})
       : super(key: key);
 
@@ -62,7 +62,7 @@ class OpenFlutterViewOptions extends StatelessWidget {
                 ])),
             IconButton(
               padding: EdgeInsets.only(top: 0),
-              onPressed: onChangeViewClicked,
+              onPressed: onChangeViewClicked as void Function()?,
               icon: Icon(
                 isListView ? Icons.view_list : Icons.view_module,
               ),
@@ -101,42 +101,42 @@ class OpenFlutterViewOptions extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(top: AppSizes.sidePadding),
             ),
-            ...sortRules.sortTextVariants
+            ...sortRules!.sortTextVariants
                 .map((key, value) => MapEntry(
                       key,
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: AppSizes.sidePadding, vertical: AppSizes.linePadding),
                         alignment: Alignment.centerLeft,
-                        color: sortRules.sortType == key ? AppColors.red : AppColors.white,
+                        color: sortRules!.sortType == key ? AppColors.red : AppColors.white,
                         child: Row(
                           children: <Widget>[
                             Expanded(
                               child: InkWell(
                                 child: Text(value,
-                                    style: Theme.of(context).textTheme.headline4.copyWith(
+                                    style: Theme.of(context).textTheme.headline4!.copyWith(
                                         fontWeight: FontWeight.normal,
-                                        color: sortRules.sortType == key ? AppColors.white : AppColors.black)),
+                                        color: sortRules!.sortType == key ? AppColors.white : AppColors.black)),
                                 onTap: () {
-                                  onSortChanged(SortRules(
-                                      sortOrder: sortRules.sortType == key
-                                          ? (sortRules.sortOrder == SortOrder.FromLowestToHighest
+                                  onSortChanged!(SortRules(
+                                      sortOrder: sortRules!.sortType == key
+                                          ? (sortRules!.sortOrder == SortOrder.FromLowestToHighest
                                               ? SortOrder.FromHighestToLowest
                                               : SortOrder.FromLowestToHighest)
-                                          : sortRules.sortOrder,
+                                          : sortRules!.sortOrder,
                                       sortType: key));
                                   Navigator.pop(context);
                                 },
                               ),
                             ),
                             IconButton(
-                              icon: Icon(sortRules.sortOrder == SortOrder.FromHighestToLowest
+                              icon: Icon(sortRules!.sortOrder == SortOrder.FromHighestToLowest
                                   ? FontAwesomeIcons.sortAlphaUp
                                   : FontAwesomeIcons.sortAlphaDown),
-                              color: sortRules.sortType == key
+                              color: sortRules!.sortType == key
                                   ? Theme.of(context).primaryColor
                                   : Theme.of(context).backgroundColor,
                               onPressed: () {
-                                onSortChanged(sortRules.copyWithChangedOrder());
+                                onSortChanged!(sortRules!.copyWithChangedOrder());
                                 Navigator.pop(context);
                               },
                             )

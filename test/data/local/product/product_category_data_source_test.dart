@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:openflutterecommerce/data/local/product/product_category_data_source.dart';
-import 'package:openflutterecommerce/domain/entities/product/product_category_entity.dart';
+import '../data/local/product/product_category_data_source.dart';
+import '../domain/entities/product/product_category_entity.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   group('Test ProductCategory Data Source', () {
-    ProductCategoryDataSource dataSource;
+    late ProductCategoryDataSource dataSource;
 
     setUp(() async {
       dataSource = ProductCategoryDataSource();

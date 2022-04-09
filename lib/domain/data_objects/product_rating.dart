@@ -1,6 +1,6 @@
 class ProductRating {
-  final double rating;
-  final int quantity;
+  final double? rating;
+  final int? quantity;
 
   ProductRating({
     this.rating,

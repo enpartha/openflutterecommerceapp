@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/model/product_attribute.dart';
+import '../data/model/product_attribute.dart';
 
 @immutable
 class ProductEvent extends Equatable {
@@ -12,12 +12,12 @@ class ProductEvent extends Equatable {
 
 @immutable
 class ProductScreenLoadedEvent extends ProductEvent {
-  final int productId;
-  final int categoryId;
+  final int? productId;
+  final int? categoryId;
 
   ProductScreenLoadedEvent({
-    @required this.productId, 
-    @required this.categoryId
+    required this.productId, 
+    required this.categoryId
   });}
 
 @immutable

@@ -3,20 +3,20 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:openflutterecommerce/config/routes.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/repositories/abstract/favorites_repository.dart';
-import 'package:openflutterecommerce/data/model/filter_rules.dart';
-import 'package:openflutterecommerce/data/repositories/abstract/product_repository.dart';
-import 'package:openflutterecommerce/data/repositories/abstract/user_repository.dart';
-import 'package:openflutterecommerce/locator.dart';
-import 'package:openflutterecommerce/presentation/features/forget_password/forget_password_screen.dart';
-import 'package:openflutterecommerce/presentation/features/sign_in/sign_in.dart';
-import 'package:openflutterecommerce/presentation/features/filters/filters_screen.dart';
-import 'package:openflutterecommerce/presentation/features/product_details/product_screen.dart';
-import 'package:openflutterecommerce/presentation/features/products/products.dart';
-import 'package:openflutterecommerce/presentation/features/sign_in/signin_screen.dart';
-import 'package:openflutterecommerce/presentation/features/sign_up/signup_screen.dart';
+import '../config/routes.dart';
+import '../config/theme.dart';
+import '../data/repositories/abstract/favorites_repository.dart';
+import '../data/model/filter_rules.dart';
+import '../data/repositories/abstract/product_repository.dart';
+import '../data/repositories/abstract/user_repository.dart';
+import '../locator.dart';
+import '../presentation/features/forget_password/forget_password_screen.dart';
+import '../presentation/features/sign_in/sign_in.dart';
+import '../presentation/features/filters/filters_screen.dart';
+import '../presentation/features/product_details/product_screen.dart';
+import '../presentation/features/products/products.dart';
+import '../presentation/features/sign_in/signin_screen.dart';
+import '../presentation/features/sign_up/signup_screen.dart';
 
 import 'config/routes.dart';
 import 'data/repositories/abstract/cart_repository.dart';
@@ -35,7 +35,7 @@ import 'locator.dart' as service_locator;
 
 class SimpleBlocDelegate extends BlocObserver {
   @override
-  void onEvent(Bloc bloc, Object event) {
+  void onEvent(Bloc bloc, Object? event) {
     super.onEvent(bloc, event);
     print(event);
   }
@@ -73,19 +73,19 @@ void main() async {
       create: (context) => AuthenticationBloc()..add(AppStarted()),
       child: MultiRepositoryProvider(
         providers: [
-          RepositoryProvider<CategoryRepository>(
+          RepositoryProvider<CategoryRepository?>(
             create: (context) => sl(),
           ),
-          RepositoryProvider<ProductRepository>(
+          RepositoryProvider<ProductRepository?>(
             create: (context) => sl(),
           ),
-          RepositoryProvider<FavoritesRepository>(
+          RepositoryProvider<FavoritesRepository?>(
             create: (context) => sl(),
           ),
-          RepositoryProvider<UserRepository>(
+          RepositoryProvider<UserRepository?>(
             create: (context) => sl(),
           ),
-          RepositoryProvider<CartRepository>(
+          RepositoryProvider<CartRepository?>(
             create: (context) => sl(),
           ),
         ],
@@ -178,7 +178,7 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
 
   Route _registerRoutesWithParameters(RouteSettings settings) {
     if (settings.name == OpenFlutterEcommerceRoutes.shop) {
-      final CategoriesParameters args = settings.arguments;
+      final CategoriesParameters? args = settings.arguments as CategoriesParameters?;
       return MaterialPageRoute(
         builder: (context) {
           return CategoriesScreen(
@@ -187,20 +187,20 @@ class OpenFlutterEcommerceApp extends StatelessWidget {
         },
       );
     } else if (settings.name == OpenFlutterEcommerceRoutes.productList) {
-      final ProductListScreenParameters productListScreenParameters =
-          settings.arguments;
+      final ProductListScreenParameters? productListScreenParameters =
+          settings.arguments as ProductListScreenParameters?;
       return MaterialPageRoute(builder: (context) {
         return ProductsScreen(
           parameters: productListScreenParameters,
         );
       });
     } else if (settings.name == OpenFlutterEcommerceRoutes.product) {
-      final ProductDetailsParameters parameters = settings.arguments;
+      final ProductDetailsParameters? parameters = settings.arguments as ProductDetailsParameters?;
       return MaterialPageRoute(builder: (context) {
         return ProductDetailsScreen(parameters);
       });
     } else if (settings.name == OpenFlutterEcommerceRoutes.filters) {
-      final FilterRules filterRules = settings.arguments;
+      final FilterRules? filterRules = settings.arguments as FilterRules?;
       return MaterialPageRoute(builder: (context) {
         return FiltersScreen(filterRules);
       });

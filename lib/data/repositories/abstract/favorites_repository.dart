@@ -1,8 +1,8 @@
 import 'dart:collection';
 
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/model/favorite_product.dart';
-import 'package:openflutterecommerce/data/model/product.dart';
+import '../config/theme.dart';
+import '../data/model/favorite_product.dart';
+import '../data/model/product.dart';
 
 import '../../model/filter_rules.dart';
 import '../../model/product_attribute.dart';
@@ -19,8 +19,8 @@ abstract class FavoritesRepository {
   Future<List<FavoriteProduct>> getFavoriteProducts({
     int pageIndex = 0,
     int pageSize = AppConsts.page_size,
-    SortRules sortRules = const SortRules(),
-    FilterRules filterRules,
+    SortRules? sortRules = const SortRules(),
+    FilterRules? filterRules,
   });
 
   ///adds product with [productId] to the list of favorites. It is required
@@ -30,7 +30,7 @@ abstract class FavoritesRepository {
       Product product, HashMap<ProductAttribute, String> selectedAttributes);
 
   ///removes product with [productId] from the list of favorites
-  Future<List<FavoriteProduct>> removeFromFavorites(int productId, HashMap<ProductAttribute, String> selectedAttributes);
+  Future<List<FavoriteProduct>> removeFromFavorites(int? productId, HashMap<ProductAttribute, String>? selectedAttributes);
 
   //check if product was added to favorite
   bool checkFavorite(int productId);

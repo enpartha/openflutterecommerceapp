@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import '../presentation/widgets/widgets.dart';
 
 class PromosView extends StatefulWidget {
-  final Function changeView;
+  final Function? changeView;
 
-  const PromosView({Key key, this.changeView}) : super(key: key);
+  const PromosView({Key? key, this.changeView}) : super(key: key);
 
   @override
   _PromosViewState createState() => _PromosViewState();

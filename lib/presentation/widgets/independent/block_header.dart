@@ -3,17 +3,17 @@
 // Date: 2020-02-06
 
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/config/theme.dart';
+import '../config/theme.dart';
 
 class OpenFlutterBlockHeader extends StatelessWidget {
   final double width;
   final String title;
-  final String linkText;
-  final VoidCallback onLinkTap;
-  final String description;
+  final String? linkText;
+  final VoidCallback? onLinkTap;
+  final String? description;
 
   const OpenFlutterBlockHeader(
-      {Key key, @required this.width, @required this.title, this.linkText, this.onLinkTap, this.description})
+      {Key? key, required this.width, required this.title, this.linkText, this.onLinkTap, this.description})
       : super(key: key);
 
   @override
@@ -38,7 +38,7 @@ class OpenFlutterBlockHeader extends StatelessWidget {
                         width: rightLinkWidth,
                         child: Align(
                           alignment: Alignment.centerRight,
-                          child: Text(linkText, style: _theme.textTheme.bodyText2),
+                          child: Text(linkText!, style: _theme.textTheme.bodyText2),
                         ),
                       )
                     : Container(),
@@ -46,7 +46,7 @@ class OpenFlutterBlockHeader extends StatelessWidget {
             ),
             description != null
                 ? Text(
-                    description,
+                    description!,
                     style: _theme.textTheme.bodyText2,
                   )
                 : Container()

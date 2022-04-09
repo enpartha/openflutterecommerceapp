@@ -1,17 +1,17 @@
 
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/domain/entities/checkout/shipping_address_entity.dart';
+import '../domain/entities/checkout/shipping_address_entity.dart';
 
 class ShippingAddressModel extends ShippingAddressEntity {
   ShippingAddressModel(
-    {@required int id,
-    String fullName,
-    String address,
-    String city,
-    String state,
-    String postal,
-    String country,
-    bool isDefault}
+    {required int? id,
+    String? fullName,
+    String? address,
+    String? city,
+    String? state,
+    String? postal,
+    String? country,
+    bool? isDefault}
   ) : super(
       id: id,
       fullName: fullName,
@@ -23,14 +23,14 @@ class ShippingAddressModel extends ShippingAddressEntity {
       isDefault: isDefault);
 
   ShippingAddressModel copyWith(
-    {int id,
-    String fullName,
-    String address,
-    String city,
-    String state,
-    String postal,
-    String country,
-    bool isDefault})  
+    {int? id,
+    String? fullName,
+    String? address,
+    String? city,
+    String? state,
+    String? postal,
+    String? country,
+    bool? isDefault})  
   {
     return ShippingAddressModel(
       id: id ?? id,

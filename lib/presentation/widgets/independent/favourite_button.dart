@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/config/theme.dart';
+import '../config/theme.dart';
 
 class OpenFlutterFavouriteButton extends StatelessWidget {
-  final bool favourite;
+  final bool? favourite;
   final VoidCallback setFavourite;
-  final double size;
-  final double iconSize;
+  final double? size;
+  final double? iconSize;
 
   OpenFlutterFavouriteButton(
-      {Key key,
+      {Key? key,
       this.size,
       this.iconSize,
-      @required this.favourite,
-      @required this.setFavourite})
+      required this.favourite,
+      required this.setFavourite})
       : super(key: key);
 
   @override
@@ -30,7 +30,7 @@ class OpenFlutterFavouriteButton extends StatelessWidget {
         ),
         height: size ?? 50,
         width: size ?? 50,
-        child: favourite
+        child: favourite!
             ? Icon(Icons.favorite,
                 size: iconSize ?? 20, color: _theme.accentColor)
             : Icon(Icons.favorite_border,

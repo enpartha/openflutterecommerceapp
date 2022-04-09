@@ -1,11 +1,11 @@
-import 'package:openflutterecommerce/domain/entities/entity.dart';
+import '../domain/entities/entity.dart';
 
-class DeliveryMethodEntity extends Entity<int> {
-  final String title;
-  final double price;
+class DeliveryMethodEntity extends Entity<int?> {
+  final String? title;
+  final double? price;
 
   DeliveryMethodEntity(
-    {int id, 
+    {int? id, 
     this.title, 
     this.price}) : super(id);
 
@@ -19,7 +19,7 @@ class DeliveryMethodEntity extends Entity<int> {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
     id, 
     title, 
     price

@@ -1,12 +1,12 @@
-import 'package:openflutterecommerce/data/local/data_source.dart';
-import 'package:openflutterecommerce/domain/entities/user/user_entity.dart';
+import '../data/local/data_source.dart';
+import '../domain/entities/user/user_entity.dart';
 
 class UserDataSource extends DataSource {
   @override
   Future<List<UserEntity>> all() async {
     checkDatabaseConnection();
 
-    final List<Map<String, dynamic>> maps = await db.query(tableName);
+    final List<Map<String, dynamic>> maps = await db!.query(tableName);
 
     return List.generate(maps.length, (i) {
       return UserEntity(
@@ -26,11 +26,11 @@ class UserDataSource extends DataSource {
   }
 
   @override
-  Future<UserEntity> get(int id) async {
+  Future<UserEntity> get(int? id) async {
     checkDatabaseConnection();
 
     final List<Map<String, dynamic>> maps =
-        await db.query(tableName, where: '$primaryKey = ?', whereArgs: [id]);
+        await db!.query(tableName, where: '$primaryKey = ?', whereArgs: [id]);
 
     return UserEntity(
       id: maps[0]['id'],

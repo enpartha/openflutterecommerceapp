@@ -1,11 +1,11 @@
-import 'package:openflutterecommerce/domain/entities/entity.dart';
+import '../domain/entities/entity.dart';
 
-class Product2ParameterEntity extends Entity<int> {
-  final int productParameterId;
-  final int productId;
+class Product2ParameterEntity extends Entity<int?> {
+  final int? productParameterId;
+  final int? productId;
 
   Product2ParameterEntity(
-    {int id, 
+    {int? id, 
     this.productParameterId, 
     this.productId}) : super(id);
 
@@ -19,7 +19,7 @@ class Product2ParameterEntity extends Entity<int> {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
     id, 
     productParameterId, 
     productId

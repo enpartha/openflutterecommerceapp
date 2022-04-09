@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/config/theme.dart';
+import '../config/theme.dart';
 
 class OpenFlutterRightArrow extends StatelessWidget {
   final String text;
-  final VoidCallback onClick;
+  final VoidCallback? onClick;
 
-  const OpenFlutterRightArrow(this.text, {Key key, this.onClick})
+  const OpenFlutterRightArrow(this.text, {Key? key, this.onClick})
       : super(key: key);
 
   @override

@@ -3,15 +3,15 @@
 // Date: 2020-02-06
 
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/model/hashtag.dart';
+import '../config/theme.dart';
+import '../data/model/hashtag.dart';
 
 class OpenFlutterHashTagList extends StatelessWidget {
-  final List<HashTag> tags;
-  final double height;
-  final Function onTap;
+  final List<HashTag>? tags;
+  final double? height;
+  final Function? onTap;
 
-  const OpenFlutterHashTagList({Key key, this.tags, this.onTap, this.height})
+  const OpenFlutterHashTagList({Key? key, this.tags, this.onTap, this.height})
       : super(key: key);
 
   @override
@@ -19,8 +19,8 @@ class OpenFlutterHashTagList extends StatelessWidget {
     var hashtagButtons = <Widget>[];
     var _theme = Theme.of(context);
     if (tags != null) {
-      for (var i = 0; i < tags.length; i++) {
-        hashtagButtons.add(buildButton(tags[i], _theme));
+      for (var i = 0; i < tags!.length; i++) {
+        hashtagButtons.add(buildButton(tags![i], _theme));
       }
     }
     return Container(
@@ -47,7 +47,7 @@ class OpenFlutterHashTagList extends StatelessWidget {
             ),
           ),
           child: Text(
-            tag.title,
+            tag.title!,
             style: _theme.textTheme.button,
           ),
           width: 100,

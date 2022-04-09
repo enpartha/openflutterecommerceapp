@@ -1,15 +1,15 @@
-import 'package:openflutterecommerce/domain/entities/entity.dart';
+import '../domain/entities/entity.dart';
 
-class ShippingAddressEntity extends Entity<int> {
-  final String title;
-  final String address;
-  final String city;
-  final String country;
-  final String postal;
-  final bool isDefault;
+class ShippingAddressEntity extends Entity<int?> {
+  final String? title;
+  final String? address;
+  final String? city;
+  final String? country;
+  final String? postal;
+  final bool? isDefault;
 
   ShippingAddressEntity(
-    {int id,
+    {int? id,
     this.title,
     this.address,
     this.city,
@@ -31,7 +31,7 @@ class ShippingAddressEntity extends Entity<int> {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
     id, 
     title, 
     address, 

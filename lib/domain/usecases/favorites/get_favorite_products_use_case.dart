@@ -1,4 +1,4 @@
-import 'package:openflutterecommerce/config/theme.dart';
+import '../config/theme.dart';
 /// # 7. Product Favorites Screen
 /// 7.1. Favorite product listing use-case: 
 /// User clicks favorite icon at the bottom menu. 
@@ -7,12 +7,12 @@ import 'package:openflutterecommerce/config/theme.dart';
 /// with all the latest price updates.
 /// https://medium.com/@openflutterproject/open-flutter-project-e-commerce-app-use-cases-and-features-6b7414a6e708
 
-import 'package:openflutterecommerce/data/repositories/abstract/favorites_repository.dart';
-import 'package:openflutterecommerce/data/model/favorite_product.dart';
-import 'package:openflutterecommerce/data/model/filter_rules.dart';
-import 'package:openflutterecommerce/data/model/sort_rules.dart';
-import 'package:openflutterecommerce/domain/usecases/base_use_case.dart';
-import 'package:openflutterecommerce/locator.dart';
+import '../data/repositories/abstract/favorites_repository.dart';
+import '../data/model/favorite_product.dart';
+import '../data/model/filter_rules.dart';
+import '../data/model/sort_rules.dart';
+import '../domain/usecases/base_use_case.dart';
+import '../locator.dart';
 
 abstract class GetFavoriteProductsUseCase
   implements BaseUseCase<GetFavoriteProductResult, GetFavoriteProductParams> {}
@@ -47,8 +47,8 @@ class GetFavoriteProductsUseCaseImpl implements GetFavoriteProductsUseCase {
 class GetFavoriteProductParams {
   final int pageIndex;
   final int pageSize;
-  final SortRules sortRules;
-  final FilterRules filterRules;
+  final SortRules? sortRules;
+  final FilterRules? filterRules;
 
   GetFavoriteProductParams(
     {
@@ -61,14 +61,14 @@ class GetFavoriteProductParams {
 }
 
 class GetFavoriteProductResult extends UseCaseResult {
-  final List<FavoriteProduct> products;
-  final FilterRules filterRules;
+  final List<FavoriteProduct>? products;
+  final FilterRules? filterRules;
 
   GetFavoriteProductResult({
     this.products, 
     this.filterRules,
-    Exception exception, 
-    bool result
+    Exception? exception, 
+    bool? result
   }) 
   : super(exception: exception, result: result);
 }

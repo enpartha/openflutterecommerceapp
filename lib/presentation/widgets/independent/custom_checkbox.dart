@@ -6,17 +6,17 @@ import 'package:flutter/material.dart';
 
 //TODO: change to statefull widget
 class OpenFlutterCheckbox extends StatelessWidget {
-  final double width;
+  final double? width;
   final String title;
-  final bool checked;
-  final Function(bool) onTap;
+  final bool? checked;
+  final Function(bool?)? onTap;
 
   final mainAxisAlignment;
 
   const OpenFlutterCheckbox({
-    Key key,
+    Key? key,
     this.width,
-    @required this.title,
+    required this.title,
     this.checked,
     this.onTap,
     this.mainAxisAlignment = MainAxisAlignment.start,
@@ -28,7 +28,7 @@ class OpenFlutterCheckbox extends StatelessWidget {
     var rightLinkWidth = 100.0;
     return Container(
         child: InkWell(
-            onTap: (() => {onTap(!checked)}),
+            onTap: (() => {onTap!(!checked!)}),
             child: Row(
               mainAxisAlignment: mainAxisAlignment,
               children: <Widget>[
@@ -36,12 +36,12 @@ class OpenFlutterCheckbox extends StatelessWidget {
                     activeColor: _theme.primaryColor,
                     checkColor: _theme.backgroundColor,
                     value: checked,
-                    onChanged: ((bool newValue) => {onTap(newValue)})),
+                    onChanged: ((bool? newValue) => {onTap!(newValue)})),
                 Container(
-                  width: width - rightLinkWidth,
+                  width: width! - rightLinkWidth,
                   child: Text(
                     title,
-                    style: _theme.textTheme.headline4.copyWith(
+                    style: _theme.textTheme.headline4!.copyWith(
                         fontWeight: FontWeight.bold,
                         color: _theme.primaryColor),
                   ),

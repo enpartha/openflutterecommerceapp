@@ -3,24 +3,24 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/model/favorite_product.dart';
-import 'package:openflutterecommerce/data/model/product.dart';
-import 'package:openflutterecommerce/data/model/product_attribute.dart';
-import 'package:openflutterecommerce/presentation/widgets/independent/base_product_list_item.dart';
-import 'package:openflutterecommerce/presentation/widgets/independent/base_product_tile.dart';
-import 'package:openflutterecommerce/presentation/widgets/independent/product_rating.dart';
+import '../config/theme.dart';
+import '../data/model/favorite_product.dart';
+import '../data/model/product.dart';
+import '../data/model/product_attribute.dart';
+import '../presentation/widgets/independent/base_product_list_item.dart';
+import '../presentation/widgets/independent/base_product_tile.dart';
+import '../presentation/widgets/independent/product_rating.dart';
 
 import 'commerce_image_view.dart';
 
 extension View on Product {
   Widget getListView(
-      {@required BuildContext context,
-      @required VoidCallback showProductInfo,
-      @required VoidCallback onFavoritesClick}) {
+      {required BuildContext context,
+      required VoidCallback showProductInfo,
+      required VoidCallback onFavoritesClick}) {
     return BaseProductListItem(
       onClick: showProductInfo,
-      inactiveMessage: amountAvailable == null || amountAvailable > 0 ? null : 'Sorry, this item is currently sold out',
+      inactiveMessage: amountAvailable == null || amountAvailable! > 0 ? null : 'Sorry, this item is currently sold out',
       bottomRoundButton: _getFavoritesButton(onFavoritesClick),
       image: mainImage?.getView(),
       specialMark: specialMark,
@@ -28,8 +28,8 @@ extension View on Product {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(title, style: Theme.of(context).textTheme.headline4),
-            Text(subTitle, style: Theme.of(context).textTheme.bodyText1),
+            Text(title!, style: Theme.of(context).textTheme.headline4),
+            Text(subTitle!, style: Theme.of(context).textTheme.bodyText1),
             buildRating(context),
             buildPrice(Theme.of(context)),
           ],
@@ -39,14 +39,14 @@ extension View on Product {
   }
 
   Widget getTileView(
-      {@required BuildContext context,
-      @required VoidCallback showProductInfo,
-      @required VoidCallback onFavoritesClick}) {
+      {required BuildContext context,
+      required VoidCallback showProductInfo,
+      required VoidCallback onFavoritesClick}) {
     return BaseProductTile(
         onClick: showProductInfo,
         bottomRoundButton: _getFavoritesButton(onFavoritesClick),
         inactiveMessage:
-            amountAvailable == null || amountAvailable > 0 ? null : 'Sorry, this item is currently sold out',
+            amountAvailable == null || amountAvailable! > 0 ? null : 'Sorry, this item is currently sold out',
         image: mainImage.getView(),
         mainContentBuilder: (context) {
           return Column(
@@ -55,7 +55,7 @@ extension View on Product {
               buildRating(context),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 4.0),
-                child: Text(title, style: Theme.of(context).textTheme.headline4),
+                child: Text(title!, style: Theme.of(context).textTheme.headline4),
               ),
               Row(
                 children: <Widget>[
@@ -70,7 +70,7 @@ extension View on Product {
 
   Widget _getFavoritesButton(VoidCallback onFavoritesClick) {
     return FloatingActionButton(
-      heroTag: title +
+      heroTag: title! +
           Random()
               .nextInt(1000000)
               .toString(), //TODO make sure that there is only one product with specified id on screen and use it as a tag
@@ -95,7 +95,7 @@ extension View on Product {
     return Row(children: <Widget>[
       Text(
         price != null ? '\$' + price.toStringAsFixed(0) : '',
-        style: _theme.textTheme.headline2.copyWith(
+        style: _theme.textTheme.headline2!.copyWith(
           decoration: hasDiscountPrice ? TextDecoration.lineThrough : TextDecoration.none,
         ),
       ),
@@ -120,20 +120,20 @@ extension View on Product {
 
   Widget buildDiscountPrice(ThemeData _theme) {
     return Text('\$' + discountPrice.toStringAsFixed(0),
-        style: _theme.textTheme.headline2.copyWith(color: _theme.errorColor));
+        style: _theme.textTheme.headline2!.copyWith(color: _theme.errorColor));
   }
 }
 
 extension FavoriteView on FavoriteProduct {
   Widget getListView(
-      {@required BuildContext context,
-      @required VoidCallback showProductInfo,
-      @required VoidCallback onAddToCart,
-      @required VoidCallback onRemoveFromFavorites,
-      @required HashMap<ProductAttribute, String> selectedAttributes}) {
+      {required BuildContext context,
+      required VoidCallback showProductInfo,
+      required VoidCallback onAddToCart,
+      required VoidCallback onRemoveFromFavorites,
+      required HashMap<ProductAttribute, String>? selectedAttributes}) {
     return BaseProductListItem(
       onClick: showProductInfo,
-      inactiveMessage: product.amountAvailable == null || product.amountAvailable > 0
+      inactiveMessage: product!.amountAvailable == null || product!.amountAvailable! > 0
           ? null
           : 'Sorry, this item is currently sold out',
       bottomRoundButton: FloatingActionButton(
@@ -145,14 +145,14 @@ extension FavoriteView on FavoriteProduct {
           color: AppColors.white,
         ),
       ),
-      image: product.mainImage.getView(),
+      image: product!.mainImage.getView(),
       onRemove: onRemoveFromFavorites,
-      specialMark: product.specialMark,
+      specialMark: product!.specialMark,
       mainContentBuilder: (context) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(product.title, style: Theme.of(context).textTheme.headline4),
+            Text(product!.title!, style: Theme.of(context).textTheme.headline4),
             Row(
               children: <Widget>[
                 _buildColor(Theme.of(context), selectedAttributes),
@@ -164,11 +164,11 @@ extension FavoriteView on FavoriteProduct {
             ),
             Row(
               children: <Widget>[
-                product.buildPrice(Theme.of(context)),
+                product!.buildPrice(Theme.of(context)),
                 Padding(
                   padding: EdgeInsets.only(left: AppSizes.linePadding),
                 ),
-                product.buildRating(context)
+                product!.buildRating(context)
               ],
             )
           ],
@@ -178,14 +178,14 @@ extension FavoriteView on FavoriteProduct {
   }
 
   Widget getTileView(
-      {@required BuildContext context,
-      @required VoidCallback showProductInfo,
-      @required VoidCallback onAddToCart,
-      @required VoidCallback onRemoveFromFavorites,
-      @required HashMap<ProductAttribute, String> selectedAttributes}) {
+      {required BuildContext context,
+      required VoidCallback showProductInfo,
+      required VoidCallback onAddToCart,
+      required VoidCallback onRemoveFromFavorites,
+      required HashMap<ProductAttribute, String>? selectedAttributes}) {
     return BaseProductTile(
         onClick: showProductInfo,
-        inactiveMessage: product.amountAvailable == null || product.amountAvailable > 0
+        inactiveMessage: product!.amountAvailable == null || product!.amountAvailable! > 0
             ? null
             : 'Sorry, this item is currently sold out',
         bottomRoundButton: FloatingActionButton(
@@ -197,14 +197,14 @@ extension FavoriteView on FavoriteProduct {
             color: AppColors.white,
           ),
         ),
-        image: product.mainImage.getView(),
+        image: product!.mainImage.getView(),
         onRemove: onRemoveFromFavorites,
-        specialMark: product.specialMark,
+        specialMark: product!.specialMark,
         mainContentBuilder: (context) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(product.title, style: Theme.of(context).textTheme.headline4),
+              Text(product!.title!, style: Theme.of(context).textTheme.headline4),
               Row(
                 children: <Widget>[
                   _buildColor(Theme.of(context), selectedAttributes),
@@ -216,11 +216,11 @@ extension FavoriteView on FavoriteProduct {
               ),
               Row(
                 children: <Widget>[
-                  product.buildPrice(Theme.of(context)),
+                  product!.buildPrice(Theme.of(context)),
                   Padding(
                     padding: EdgeInsets.only(left: AppSizes.linePadding),
                   ),
-                  product.buildRating(context)
+                  product!.buildRating(context)
                 ],
               )
             ],
@@ -228,7 +228,7 @@ extension FavoriteView on FavoriteProduct {
         });
   }
 
-  Widget _buildColor(ThemeData _theme, HashMap<ProductAttribute, String> selectedAttributes) {
+  Widget _buildColor(ThemeData _theme, HashMap<ProductAttribute, String>? selectedAttributes) {
     String colorValue = '';
     selectedAttributes?.forEach((attribute, value) {
       if (attribute.name == 'Color') colorValue = value;
@@ -236,17 +236,17 @@ extension FavoriteView on FavoriteProduct {
     return colorValue.isNotEmpty
         ? Row(
             children: <Widget>[
-              Text('Color:', style: _theme.textTheme.bodyText1.copyWith()),
+              Text('Color:', style: _theme.textTheme.bodyText1!.copyWith()),
               Padding(
                 padding: EdgeInsets.only(left: AppSizes.linePadding),
               ),
-              Text(colorValue, style: _theme.textTheme.bodyText1.copyWith(color: AppColors.black))
+              Text(colorValue, style: _theme.textTheme.bodyText1!.copyWith(color: AppColors.black))
             ],
           )
         : Row();
   }
 
-  Row _buildSize(ThemeData _theme, HashMap<ProductAttribute, String> selectedAttributes) {
+  Row _buildSize(ThemeData _theme, HashMap<ProductAttribute, String>? selectedAttributes) {
     String sizeValue = '';
     selectedAttributes?.forEach((attribute, value) {
       if (attribute.name == 'Size') sizeValue = value;
@@ -254,11 +254,11 @@ extension FavoriteView on FavoriteProduct {
     return sizeValue.isNotEmpty
         ? Row(
             children: <Widget>[
-              Text('Size:', style: _theme.textTheme.bodyText1.copyWith()),
+              Text('Size:', style: _theme.textTheme.bodyText1!.copyWith()),
               Padding(
                 padding: EdgeInsets.only(left: AppSizes.linePadding),
               ),
-              Text(sizeValue, style: _theme.textTheme.bodyText1.copyWith(color: AppColors.black))
+              Text(sizeValue, style: _theme.textTheme.bodyText1!.copyWith(color: AppColors.black))
             ],
           )
         : Row();

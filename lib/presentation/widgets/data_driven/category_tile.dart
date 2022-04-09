@@ -3,17 +3,17 @@
 // Date: 2020-02-06
 
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/model/category.dart';
+import '../config/theme.dart';
+import '../data/model/category.dart';
 
 import '../extensions/commerce_image_view.dart';
 
 class OpenFlutterCategoryTile extends StatelessWidget {
-  final ProductCategory category;
-  final double height;
-  final double width;
+  final ProductCategory? category;
+  final double? height;
+  final double? width;
 
-  const OpenFlutterCategoryTile({Key key, this.category, this.height, this.width}) : super(key: key);
+  const OpenFlutterCategoryTile({Key? key, this.category, this.height, this.width}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +31,12 @@ class OpenFlutterCategoryTile extends StatelessWidget {
               children: <Widget>[
                 Container(
                     alignment: Alignment.centerLeft,
-                    width: width - 200.0,
-                    child: Text(category.name, style: _theme.textTheme.headline4)),
+                    width: width! - 200.0,
+                    child: Text(category!.name!, style: _theme.textTheme.headline4)),
                 Container(
                   width: 200,
                   alignment: Alignment.centerRight,
-                  child: Image(image: category.image.getView()),
+                  child: Image(image: category!.image!.getView()),
                 )
               ],
             )));

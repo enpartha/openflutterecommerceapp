@@ -4,8 +4,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/presentation/widgets/data_driven/size_changing_app_bar.dart';
-import 'package:openflutterecommerce/presentation/widgets/independent/scaffold.dart';
+import '../presentation/widgets/data_driven/size_changing_app_bar.dart';
+import '../presentation/widgets/independent/scaffold.dart';
 
 import 'favorites.dart';
 

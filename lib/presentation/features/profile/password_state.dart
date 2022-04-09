@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 @immutable
 abstract class PasswordState extends Equatable {
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 @immutable
@@ -33,10 +33,10 @@ class PasswordChangedState extends PasswordState {}
 
 @immutable
 class ChangePasswordErrorState extends PasswordState {
-  final String errorMessage;
+  final String? errorMessage;
 
   ChangePasswordErrorState({this.errorMessage}) : super();
 
   @override
-  List<Object> get props => [errorMessage];
+  List<Object?> get props => [errorMessage];
 }

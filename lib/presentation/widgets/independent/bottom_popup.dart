@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/config/theme.dart';
+import '../config/theme.dart';
 
 class OpenFlutterBottomPopup extends StatelessWidget {
   final Widget child;
   final String title;
 
-  const OpenFlutterBottomPopup({Key key, @required this.child, @required this.title}) : super(key: key);
+  const OpenFlutterBottomPopup({Key? key, required this.child, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

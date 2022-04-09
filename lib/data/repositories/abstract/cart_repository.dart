@@ -2,9 +2,9 @@
 // Author: openflutterproject@gmail.com
 // Date: 2020-02-06
 
-import 'package:openflutterecommerce/data/model/cart_item.dart';
-import 'package:openflutterecommerce/data/model/product.dart';
-import 'package:openflutterecommerce/data/model/promo.dart';
+import '../data/model/cart_item.dart';
+import '../data/model/product.dart';
+import '../data/model/promo.dart';
 
 import '../../model/product_attribute.dart';
 
@@ -18,13 +18,13 @@ abstract class CartRepository {
 
   ///sets new quantity for the product in cart. If there is no such product
   ///in cart, does nothing. It can be used also to remove product from cart
-  Future changeQuantity(CartItem item, int newQuantity);
+  Future changeQuantity(CartItem? item, int? newQuantity);
 
   ///gets discount properties
-  Future<Promo> getAppliedPromo();
+  Future<Promo?> getAppliedPromo();
 
   ///applies promo to cart
-  Future setPromo(Promo promo);
+  Future setPromo(Promo? promo);
 
   //get cart total price
   double getTotalPrice();

@@ -1,18 +1,18 @@
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/model/user_order.dart';
-import 'package:openflutterecommerce/presentation/widgets/data_driven/order_tile.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import '../config/theme.dart';
+import '../data/model/user_order.dart';
+import '../presentation/widgets/data_driven/order_tile.dart';
+import '../presentation/widgets/widgets.dart';
 
 import '../../wrapper.dart';
 import '../profile.dart';
 
 class MyOrdersView extends StatefulWidget {
-  final Function changeView;
+  final Function? changeView;
 
-  const MyOrdersView({Key key, this.changeView}) : super(key: key);
+  const MyOrdersView({Key? key, this.changeView}) : super(key: key);
 
   @override
   _MyOrdersViewState createState() => _MyOrdersViewState();
@@ -75,7 +75,7 @@ class _MyOrdersViewState extends State<MyOrdersView> {
                               ),
                               tabs: tabs,
                               unselectedLabelStyle: _theme.textTheme.headline2,
-                              labelStyle: _theme.textTheme.headline2
+                              labelStyle: _theme.textTheme.headline2!
                                   .copyWith(color: AppColors.white),
                             ),
                           ]),
@@ -88,9 +88,9 @@ class _MyOrdersViewState extends State<MyOrdersView> {
                             horizontal: AppSizes.sidePadding),
                         child: TabBarView(
                           children: <Widget>[
-                            buildOrderList(state.orderData, bloc),
-                            buildOrderList(state.orderData, bloc),
-                            buildOrderList(state.orderData, bloc),
+                            buildOrderList(state.orderData!, bloc),
+                            buildOrderList(state.orderData!, bloc),
+                            buildOrderList(state.orderData!, bloc),
                           ],
                         ),
                       ),
@@ -113,7 +113,7 @@ class _MyOrdersViewState extends State<MyOrdersView> {
             order: orders[index],
             onClick: ((int orderId) => {
                   bloc..add(ProfileMyOrderDetailsEvent(orderId)),
-                  widget.changeView(changeType: ViewChangeType.Exact, index: 7)
+                  widget.changeView!(changeType: ViewChangeType.Exact, index: 7)
                 }),
           );
         });

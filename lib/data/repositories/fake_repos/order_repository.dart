@@ -1,11 +1,11 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/data/model/cart_item.dart';
-import 'package:openflutterecommerce/data/model/commerce_image.dart';
-import 'package:openflutterecommerce/data/model/product.dart';
-import 'package:openflutterecommerce/data/model/product_attribute.dart';
-import 'package:openflutterecommerce/data/model/shipping_address.dart';
+import '../data/model/cart_item.dart';
+import '../data/model/commerce_image.dart';
+import '../data/model/product.dart';
+import '../data/model/product_attribute.dart';
+import '../data/model/shipping_address.dart';
 
 import '../../model/promo.dart';
 import '../../model/user_order.dart';

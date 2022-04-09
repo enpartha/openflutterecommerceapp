@@ -4,16 +4,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/config/routes.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/model/category.dart';
-import 'package:openflutterecommerce/presentation/features/products/products.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import '../config/routes.dart';
+import '../config/theme.dart';
+import '../data/model/category.dart';
+import '../presentation/features/products/products.dart';
+import '../presentation/widgets/widgets.dart';
 
 import '../categories.dart';
 
 class CategoriesListView extends StatefulWidget {
-  const CategoriesListView({Key key}) : super(key: key);
+  const CategoriesListView({Key? key}) : super(key: key);
 
   @override
   _CategoriesListViewState createState() => _CategoriesListViewState();
@@ -31,7 +31,7 @@ class _CategoriesListViewState extends State<CategoriesListView> {
         return Container(
             padding: EdgeInsets.all(AppSizes.sidePadding),
             child: Text('An error occured',
-                style: _theme.textTheme.headline4
+                style: _theme.textTheme.headline4!
                     .copyWith(color: _theme.errorColor)));
       }
       return Container();
@@ -69,7 +69,7 @@ class _CategoriesListViewState extends State<CategoriesListView> {
     }));
   }
 
-  List<Widget> buildCategoryList(List<ProductCategory> categories) {
+  List<Widget> buildCategoryList(List<ProductCategory>? categories) {
     var elements = <Widget>[];
     if (categories != null) {
       for (var i = 0; i < categories.length; i++) {

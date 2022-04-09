@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/domain/entities/entity.dart';
+import '../domain/entities/entity.dart';
 
-class ShippingAddressEntity extends Entity<int> {
-  final String fullName;
-  final String address;
-  final String city;
-  final String state;
-  final String postal;
-  final String country;
-  final bool isDefault;
+class ShippingAddressEntity extends Entity<int?> {
+  final String? fullName;
+  final String? address;
+  final String? city;
+  final String? state;
+  final String? postal;
+  final String? country;
+  final bool? isDefault;
 
   ShippingAddressEntity(
-    {int id, 
-    @required this.fullName, 
-    @required this.address, 
-    @required this.city,
-    @required this.state,
-    @required this.postal,
-    @required this.country,
-    @required this.isDefault}) : super(id);
+    {int? id, 
+    required this.fullName, 
+    required this.address, 
+    required this.city,
+    required this.state,
+    required this.postal,
+    required this.country,
+    required this.isDefault}) : super(id);
 
   @override
   Map<String, dynamic> toMap() {
@@ -35,7 +35,7 @@ class ShippingAddressEntity extends Entity<int> {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
     id, 
     fullName, 
     address, 
@@ -48,7 +48,7 @@ class ShippingAddressEntity extends Entity<int> {
 
   @override
   String toString() =>
-      address + ', ' + city + ', ' + state + ' ' + postal + ', ' + country;
+      address! + ', ' + city! + ', ' + state! + ' ' + postal! + ', ' + country!;
 
   @override
   bool get stringify => false;

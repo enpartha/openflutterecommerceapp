@@ -6,11 +6,11 @@ import 'package:flutter/material.dart';
 
 @immutable
 abstract class CategoryEvent extends Equatable {
-  final int parentCategoryId;
+  final int? parentCategoryId;
   CategoryEvent(this.parentCategoryId) : super();
 
   @override
-  List<Object> get props => [parentCategoryId];
+  List<Object?> get props => [parentCategoryId];
 }
 
 @immutable
@@ -24,5 +24,5 @@ class CategoryShowTilesEvent extends CategoryEvent {
 }
 
 class ChangeCategoryParent extends CategoryEvent {
-  ChangeCategoryParent(int parentCategoryId) : super(parentCategoryId);
+  ChangeCategoryParent(int? parentCategoryId) : super(parentCategoryId);
 }

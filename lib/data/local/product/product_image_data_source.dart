@@ -1,12 +1,12 @@
-import 'package:openflutterecommerce/data/local/data_source.dart';
-import 'package:openflutterecommerce/domain/entities/product/product_image_entity.dart';
+import '../data/local/data_source.dart';
+import '../domain/entities/product/product_image_entity.dart';
 
 class ProductImageDataSource extends DataSource {
   @override
   Future<List<ProductImageEntity>> all() async {
     checkDatabaseConnection();
 
-    final List<Map<String, dynamic>> maps = await db.query(tableName);
+    final List<Map<String, dynamic>> maps = await db!.query(tableName);
 
     return List.generate(maps.length, (i) {
       return ProductImageEntity(
@@ -19,11 +19,11 @@ class ProductImageDataSource extends DataSource {
   }
 
   @override
-  Future<ProductImageEntity> get(int id) async {
+  Future<ProductImageEntity> get(int? id) async {
     checkDatabaseConnection();
 
     final List<Map<String, dynamic>> maps =
-        await db.query(tableName, where: '$primaryKey = ?', whereArgs: [id]);
+        await db!.query(tableName, where: '$primaryKey = ?', whereArgs: [id]);
 
     return ProductImageEntity(
       id: maps[0]['id'],

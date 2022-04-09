@@ -4,7 +4,7 @@
  * @see shipping_address_repository.dart
  */
 
-import 'package:openflutterecommerce/data/model/shipping_address.dart';
+import '../data/model/shipping_address.dart';
 
 abstract class ShippingAddressRepository {
   //Get list of user shipping information

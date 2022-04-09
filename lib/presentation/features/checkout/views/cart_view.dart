@@ -4,20 +4,20 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/presentation/widgets/independent/action_card.dart';
-import 'package:openflutterecommerce/presentation/widgets/independent/delivery_method.dart';
-import 'package:openflutterecommerce/presentation/widgets/independent/payment_card.dart';
-import 'package:openflutterecommerce/presentation/widgets/independent/summary_line.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import '../config/theme.dart';
+import '../presentation/widgets/independent/action_card.dart';
+import '../presentation/widgets/independent/delivery_method.dart';
+import '../presentation/widgets/independent/payment_card.dart';
+import '../presentation/widgets/independent/summary_line.dart';
+import '../presentation/widgets/widgets.dart';
 
 import '../../wrapper.dart';
 import '../checkout.dart';
 
 class CartView extends StatefulWidget {
-  final Function changeView;
+  final Function? changeView;
 
-  const CartView({Key key, this.changeView}) : super(key: key);
+  const CartView({Key? key, this.changeView}) : super(key: key);
 
   @override
   _CartViewState createState() => _CartViewState();
@@ -32,12 +32,12 @@ class _CartViewState extends State<CartView> {
 
     return BlocListener(
         bloc: bloc,
-        listener: (context, state) {
+        listener: (context, dynamic state) {
           if (state is CheckoutErrorState) {
             return Container(
                 padding: EdgeInsets.all(AppSizes.sidePadding),
                 child: Text('An error occured',
-                    style: _theme.textTheme.headline4
+                    style: _theme.textTheme.headline4!
                         .copyWith(color: _theme.errorColor)));
           }
           return Container();
@@ -52,16 +52,16 @@ class _CartViewState extends State<CartView> {
                     OpenFlutterBlockSubtitle(
                         title: 'Shipping Address', width: width),
                     OpenFlutterActionCard(
-                        title: state.currentShippingAddress.fullName,
+                        title: state.currentShippingAddress!.fullName,
                         linkText: 'Change',
                         onLinkTap: (() => {
-                              widget.changeView(
+                              widget.changeView!(
                                   changeType: ViewChangeType.Exact, index: 2)
                             }),
                         child: RichText(
                           text: TextSpan(
                               text: state.currentShippingAddress.toString(),
-                              style: _theme.textTheme.headline2
+                              style: _theme.textTheme.headline2!
                                   .copyWith(color: _theme.primaryColor)),
                           maxLines: 2,
                         )),
@@ -70,7 +70,7 @@ class _CartViewState extends State<CartView> {
                       width: width,
                       linkText: 'Change',
                       onLinkTap: (() => {
-                            widget.changeView(
+                            widget.changeView!(
                                 changeType: ViewChangeType.Forward)
                           }),
                     ),
@@ -89,23 +89,23 @@ class _CartViewState extends State<CartView> {
                             EdgeInsets.only(top: AppSizes.sidePadding * 3)),
                     OpenFlutterSummaryLine(
                         title: 'Order',
-                        summary: '\$' + state.orderPrice.toStringAsFixed(2)),
+                        summary: '\$' + state.orderPrice!.toStringAsFixed(2)),
                     Padding(
                         padding: EdgeInsets.only(top: AppSizes.sidePadding)),
                     OpenFlutterSummaryLine(
                         title: 'Delivery',
-                        summary: '\$' + state.deliveryPrice.toStringAsFixed(2)),
+                        summary: '\$' + state.deliveryPrice!.toStringAsFixed(2)),
                     Padding(
                         padding: EdgeInsets.only(top: AppSizes.sidePadding)),
                     OpenFlutterSummaryLine(
                         title: 'Summary',
-                        summary: '\$' + state.summaryPrice.toStringAsFixed(2)),
+                        summary: '\$' + state.summaryPrice!.toStringAsFixed(2)),
                     Padding(
                         padding: EdgeInsets.only(top: AppSizes.sidePadding)),
                     OpenFlutterButton(
                       title: 'SUBMIT ORDER',
                       onPressed: (() => {
-                            widget.changeView(
+                            widget.changeView!(
                                 changeType: ViewChangeType.Exact, index: 4)
                           }),
                     )

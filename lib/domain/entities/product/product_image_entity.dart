@@ -1,12 +1,12 @@
-import 'package:openflutterecommerce/domain/entities/entity.dart';
+import '../domain/entities/entity.dart';
 
-class ProductImageEntity extends Entity<int> {
-  final String title;
-  final String thumb;
-  final String image;
+class ProductImageEntity extends Entity<int?> {
+  final String? title;
+  final String? thumb;
+  final String? image;
 
   ProductImageEntity({
-    int id, 
+    int? id, 
     this.title, 
     this.thumb, 
     this.image}) : super(id);
@@ -21,7 +21,7 @@ class ProductImageEntity extends Entity<int> {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
     id, 
     title, 
     thumb, 

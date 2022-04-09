@@ -11,10 +11,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class OpenFlutterProductRating extends StatelessWidget {
   //current product rating
-  final double rating;
+  final double? rating;
 
   //current number of reviews by users
-  final int ratingCount;
+  final int? ratingCount;
 
   //number of start: 5 as standard
   final int starCount;
@@ -44,10 +44,10 @@ class OpenFlutterProductRating extends StatelessWidget {
   final bool showDefaultStar;
 
   //callback when rating was selected
-  final Function(double rating) onRatingSelected;
+  final Function(double rating)? onRatingSelected;
 
   const OpenFlutterProductRating({
-    Key key,
+    Key? key,
     this.rating,
     this.ratingCount,
     this.alignment = MainAxisAlignment.center,
@@ -74,7 +74,7 @@ class OpenFlutterProductRating extends StatelessWidget {
     );
   }
 
-  Widget _buildStars(BuildContext context, double rating) {
+  Widget _buildStars(BuildContext context, double? rating) {
     return Wrap(
       alignment: WrapAlignment.start,
       spacing: spacing,
@@ -86,7 +86,7 @@ class OpenFlutterProductRating extends StatelessWidget {
     return GestureDetector(
       onTap: editable
           ? () {
-              onRatingSelected(_calculateRatingSelected(index));
+              onRatingSelected!(_calculateRatingSelected(index));
             }
           : null,
       child: Container(
@@ -124,14 +124,14 @@ class OpenFlutterProductRating extends StatelessWidget {
 
   bool _isStarSelected(int index) {
     if (!rtl) {
-      return rating > index;
+      return rating! > index;
     }
 
-    return rating > (starCount - (index + 1));
+    return rating! > (starCount - (index + 1));
   }
 
   Widget _buildRatingLabel(BuildContext context) {
-    return showLabel && ratingCount > 0 ? _buildLabel(context) : Container();
+    return showLabel && ratingCount! > 0 ? _buildLabel(context) : Container();
   }
 
   Widget _buildLabel(BuildContext context) {
@@ -139,8 +139,8 @@ class OpenFlutterProductRating extends StatelessWidget {
       height: iconSize,
       child: Center(
         child: Text(
-          ' (' + ratingCount.toInt().toString() + ')',
-          style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: labelFontSize),
+          ' (' + ratingCount!.toInt().toString() + ')',
+          style: Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: labelFontSize),
           textAlign: TextAlign.center,
         ),
       ),

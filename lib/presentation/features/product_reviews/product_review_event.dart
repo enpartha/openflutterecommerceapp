@@ -9,7 +9,7 @@ class ProductReviewEvent extends Equatable {
 
 @immutable
 class ProductReviewStartEvent extends ProductReviewEvent {
-  final int productId;
+  final int? productId;
 
   final bool withPhotos;
 

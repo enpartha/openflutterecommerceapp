@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/config/theme.dart';
+import '../config/theme.dart';
 
 class OpenFlutterMenuLine extends StatelessWidget {
   final String title;
@@ -7,10 +7,10 @@ class OpenFlutterMenuLine extends StatelessWidget {
   final VoidCallback onTap;
 
   const OpenFlutterMenuLine(
-      {Key key,
-      @required this.title,
-      @required this.subtitle,
-      @required this.onTap})
+      {Key? key,
+      required this.title,
+      required this.subtitle,
+      required this.onTap})
       : super(key: key);
 
   @override

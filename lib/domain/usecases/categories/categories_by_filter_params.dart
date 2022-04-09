@@ -1,6 +1,6 @@
 
 class CategoriesByFilterParams {
-  final int categoryId;
+  final int? categoryId;
 
   CategoriesByFilterParams({
     this.categoryId

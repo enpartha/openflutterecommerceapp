@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/model/product_attribute.dart';
+import '../config/theme.dart';
+import '../data/model/product_attribute.dart';
 
 class AttributeBottomSheet extends StatelessWidget {
-  final ProductAttribute productAttribute;
-  final String selectedValue;
-  final Function(String, ProductAttribute) onValueSelect;
+  final ProductAttribute? productAttribute;
+  final String? selectedValue;
+  final Function(String, ProductAttribute?)? onValueSelect;
 
   const AttributeBottomSheet(
-    {Key key, this.productAttribute, this.selectedValue, this.onValueSelect})
+    {Key? key, this.productAttribute, this.selectedValue, this.onValueSelect})
     : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return FractionallySizedBox(
-      heightFactor: 0.12 + productAttribute.options.length/3*0.1,
+      heightFactor: 0.12 + productAttribute!.options!.length/3*0.1,
       child: Container(
         padding: AppSizes.bottomSheetPadding,
         decoration: BoxDecoration(
@@ -38,7 +38,7 @@ class AttributeBottomSheet extends StatelessWidget {
                 height: 16,
               ),
               Text(
-                'Select ${productAttribute.name}',
+                'Select ${productAttribute!.name}',
                 style: TextStyle(
                   color: AppColors.black,
                   fontSize: 20,
@@ -52,11 +52,11 @@ class AttributeBottomSheet extends StatelessWidget {
                   shrinkWrap: true,
                   crossAxisCount: 3,
                   childAspectRatio: 100 / 60,
-                  children: productAttribute.options
+                  children: productAttribute!.options!
                     .map((String value) => 
                       InkWell(
                         onTap: () => {
-                          onValueSelect(value, productAttribute)
+                          onValueSelect!(value, productAttribute)
                         },
                         child: Container(
                           margin: EdgeInsets.all(10.0),
@@ -81,16 +81,16 @@ class AttributeBottomSheet extends StatelessWidget {
               SizedBox(
                 height: 10.0,
               ),
-              productAttribute.info == null
+              productAttribute!.info == null
                   ? Container()
                   : Theme(
                       data: Theme.of(context)
                           .copyWith(dividerColor: AppColors.darkGray),
                       child: Divider()),
-              productAttribute.info == null
+              productAttribute!.info == null
                   ? Container()
                   : ExpansionTile(
-                      title: Text('${productAttribute.name} info'),
+                      title: Text('${productAttribute!.name} info'),
                       trailing: Icon(Icons.keyboard_arrow_right),
                       //TODO show info on click
                     ),

@@ -1,21 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openflutterecommerce/config/theme.dart';
-import 'package:openflutterecommerce/data/repositories/fake_repos/password_repository.dart';
-import 'package:openflutterecommerce/data/repositories/fake_repos/settings_repository.dart';
-import 'package:openflutterecommerce/presentation/features/profile/password_bloc.dart';
-import 'package:openflutterecommerce/presentation/features/profile/password_event.dart';
-import 'package:openflutterecommerce/presentation/features/profile/password_state.dart';
-import 'package:openflutterecommerce/presentation/features/profile/settings_bloc.dart';
-import 'package:openflutterecommerce/presentation/features/profile/settings_event.dart';
-import 'package:openflutterecommerce/presentation/features/profile/settings_state.dart';
-import 'package:openflutterecommerce/presentation/widgets/widgets.dart';
+import '../config/theme.dart';
+import '../data/repositories/fake_repos/password_repository.dart';
+import '../data/repositories/fake_repos/settings_repository.dart';
+import '../presentation/features/profile/password_bloc.dart';
+import '../presentation/features/profile/password_event.dart';
+import '../presentation/features/profile/password_state.dart';
+import '../presentation/features/profile/settings_bloc.dart';
+import '../presentation/features/profile/settings_event.dart';
+import '../presentation/features/profile/settings_state.dart';
+import '../presentation/widgets/widgets.dart';
 
 class SettingsView extends StatefulWidget {
-  final Function changeView;
+  final Function? changeView;
 
-  const SettingsView({Key key, this.changeView}) : super(key: key);
+  const SettingsView({Key? key, this.changeView}) : super(key: key);
 
   @override
   _SettingsViewState createState() => _SettingsViewState();
@@ -24,11 +24,11 @@ class SettingsView extends StatefulWidget {
 class _SettingsViewState extends State<SettingsView> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-  TextEditingController _currentPasswordController;
-  TextEditingController _newPasswordController;
-  TextEditingController _repeatPasswordController;
-  TextEditingController _fullNameController;
-  TextEditingController _dateOfBirthController;
+  TextEditingController? _currentPasswordController;
+  TextEditingController? _newPasswordController;
+  TextEditingController? _repeatPasswordController;
+  TextEditingController? _fullNameController;
+  TextEditingController? _dateOfBirthController;
 
   @override
   void initState() {
@@ -59,8 +59,8 @@ class _SettingsViewState extends State<SettingsView> {
       child: BlocBuilder<SettingsBloc, SettingsState>(
           bloc: settingsBloc,
           builder: (context, state) {
-            _fullNameController.text = state.settings.fullName;
-            _dateOfBirthController.text = state.settings.dateOfBirth;
+            _fullNameController!.text = state.settings!.fullName!;
+            _dateOfBirthController!.text = state.settings!.dateOfBirth!;
 
             return SingleChildScrollView(
                 child: Container(
@@ -140,7 +140,7 @@ class _SettingsViewState extends State<SettingsView> {
                       ),
                       CupertinoSwitch(
                         //trackColor: AppColors.lightGray,
-                        value: state.settings.notifySales,
+                        value: state.settings!.notifySales!,
                         activeColor: AppColors.success,
                         onChanged: (newValue) => settingsBloc.add(UpdateNotifySalesEvent(notifySales: newValue)),
                       ),
@@ -158,7 +158,7 @@ class _SettingsViewState extends State<SettingsView> {
                       ),
                       CupertinoSwitch(
                         //trackColor: AppColors.lightGray,
-                        value: state.settings.notifyArrivals,
+                        value: state.settings!.notifyArrivals!,
                         activeColor: AppColors.success,
                         onChanged: (newValue) => settingsBloc..add(UpdateNotifyArrivalsEvent(notifyArrivals: newValue)),
                       ),
@@ -176,7 +176,7 @@ class _SettingsViewState extends State<SettingsView> {
                       ),
                       CupertinoSwitch(
                         //trackColor: AppColors.lightGray,
-                        value: state.settings.notifyDelivery,
+                        value: state.settings!.notifyDelivery!,
                         activeColor: AppColors.success,
                         onChanged: (newValue) => settingsBloc..add(UpdateNotifyDeliveryEvent(notifyDelivery: newValue)),
                       ),
@@ -206,7 +206,7 @@ class _SettingsViewState extends State<SettingsView> {
                   bloc: passwordBloc,
                   builder: (context, state) {
                     if (state is PasswordChangedState) {
-                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                      WidgetsBinding.instance!.addPostFrameCallback((_) {
                         // close bottom sheet
                         Navigator.pop(context);
 
@@ -215,7 +215,7 @@ class _SettingsViewState extends State<SettingsView> {
                         clearPasswordFields();
                       });
                     } else if (state is ChangePasswordErrorState) {
-                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                      WidgetsBinding.instance!.addPostFrameCallback((_) {
                         _showAlertDialog(context, 'Error', state.errorMessage);
                       });
                     }
@@ -301,9 +301,9 @@ class _SettingsViewState extends State<SettingsView> {
                                 height: 48,
                                 onPressed: () => passwordBloc
                                   ..add(ChangePasswordEvent(
-                                      currentPassword: _currentPasswordController.text.trim(),
-                                      newPassword: _newPasswordController.text.trim(),
-                                      repeatNewPassword: _repeatPasswordController.text.trim())))
+                                      currentPassword: _currentPasswordController!.text.trim(),
+                                      newPassword: _newPasswordController!.text.trim(),
+                                      repeatNewPassword: _repeatPasswordController!.text.trim())))
                           ],
                         ),
                       ),
@@ -312,7 +312,7 @@ class _SettingsViewState extends State<SettingsView> {
             ));
   }
 
-  Future<void> _showAlertDialog(BuildContext context, String title, String content) {
+  Future<void> _showAlertDialog(BuildContext context, String title, String? content) {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
@@ -321,7 +321,7 @@ class _SettingsViewState extends State<SettingsView> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text(content),
+                Text(content!),
               ],
             ),
           ),
@@ -339,8 +339,8 @@ class _SettingsViewState extends State<SettingsView> {
   }
 
   void clearPasswordFields() {
-    _currentPasswordController.text = '';
-    _newPasswordController.text = '';
-    _repeatPasswordController.text = '';
+    _currentPasswordController!.text = '';
+    _newPasswordController!.text = '';
+    _repeatPasswordController!.text = '';
   }
 }

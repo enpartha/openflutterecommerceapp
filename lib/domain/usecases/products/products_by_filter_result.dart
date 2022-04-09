@@ -1,13 +1,13 @@
 
 
-import 'package:openflutterecommerce/data/model/filter_rules.dart';
-import 'package:openflutterecommerce/data/model/product.dart';
+import '../data/model/filter_rules.dart';
+import '../data/model/product.dart';
 
 class ProductsByFilterResult {
-  final FilterRules filterRules;
+  final FilterRules? filterRules;
   final List<Product> products;
   final int quantity;
-  final Exception exception;
+  final Exception? exception;
 
   ProductsByFilterResult(
     this.products,

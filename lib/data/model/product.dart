@@ -1,49 +1,49 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
-import 'package:openflutterecommerce/data/model/hashtag.dart';
-import 'package:openflutterecommerce/data/error/exceptions.dart';
-import 'package:openflutterecommerce/domain/entities/entity.dart';
-import 'package:openflutterecommerce/data/model/category.dart';
-import 'package:openflutterecommerce/domain/entities/product/product_entity.dart';
+import '../data/model/hashtag.dart';
+import '../data/error/exceptions.dart';
+import '../domain/entities/entity.dart';
+import '../data/model/category.dart';
+import '../domain/entities/product/product_entity.dart';
 
 import 'commerce_image.dart';
 import 'product_attribute.dart';
 
 class Product extends Equatable {
-  final int id;
-  final String title;
+  final int? id;
+  final String? title;
   //cateogry or hashtag to display next to title
-  final String subTitle;
-  final String shortDescription;
-  final String description;
+  final String? subTitle;
+  final String? shortDescription;
+  final String? description;
   final bool isFavorite;
   final double price;
   final double discountPercent;
-  final int amountAvailable;
+  final int? amountAvailable;
   final DateTime created;
-  final double averageRating;
+  final double? averageRating;
   final double rating1Count;
   final double rating2Count;
   final double rating3Count;
   final double rating4Count;
   final double rating5Count;
   final int ratingCount;
-  final List<CommerceImage> images;
+  final List<CommerceImage>? images;
   final List<ProductCategory> categories;
   final List<HashTag> hashTags;
-  final Map<String, dynamic> properties;
-  final List<ProductAttribute> selectableAttributes;
+  final Map<String, dynamic>? properties;
+  final List<ProductAttribute>? selectableAttributes;
 
   Product(
     this.id, {
-    @required this.title,
-    @required this.subTitle,
+    required this.title,
+    required this.subTitle,
     this.shortDescription,
     this.description,
-    @required this.price,
+    required this.price,
     this.discountPercent = 0,
     this.amountAvailable = 0,
-    DateTime created,
+    DateTime? created,
     this.averageRating,
     this.ratingCount = 0,
     this.rating1Count = 0,
@@ -54,8 +54,8 @@ class Product extends Equatable {
     this.images,
     this.properties,
     this.selectableAttributes,
-    @required this.categories,
-    @required this.hashTags,
+    required this.categories,
+    required this.hashTags,
     this.isFavorite = false,
   }) : created = created ?? DateTime.now();
 
@@ -88,8 +88,8 @@ class Product extends Equatable {
   factory Product.fromEntity(Entity entity) {
     if ( entity is ProductEntity ) {
       List<CommerceImage> images = [];
-      if ( entity.images.isNotEmpty ) {
-        entity.images.forEach((f) => images.add(CommerceImage(0, f, '')));
+      if ( entity.images!.isNotEmpty ) {
+        entity.images!.forEach((f) => images.add(CommerceImage(0, f, '')));
       }
       List<ProductCategory> categories = [];
       if ( entity.categories.isNotEmpty ){
@@ -127,7 +127,7 @@ class Product extends Equatable {
   bool get isNew => created.difference(DateTime.now()).inDays < 3;
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         id,
         title,
         shortDescription,
@@ -154,7 +154,7 @@ class Product extends Equatable {
   }
 
   //TODO place it in extension because it is about UI
-  String get specialMark {
+  String? get specialMark {
     if (discountPercent > 0) {
       return '-' + discountPercent.round().toString() + '%';
     } else if (isNew) {
@@ -164,7 +164,7 @@ class Product extends Equatable {
     }
   }
 
-  CommerceImage get mainImage => (images != null && images.isNotEmpty)
-      ? images.first
+  CommerceImage get mainImage => (images != null && images!.isNotEmpty)
+      ? images!.first
       : CommerceImage.placeHolder();
 }

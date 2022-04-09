@@ -1,12 +1,12 @@
-import 'package:openflutterecommerce/data/local/data_source.dart';
-import 'package:openflutterecommerce/domain/entities/order/order_product_parameter_entity.dart';
+import '../data/local/data_source.dart';
+import '../domain/entities/order/order_product_parameter_entity.dart';
 
 class OrderProductParameterDataSource extends DataSource {
   @override
   Future<List<OrderProductParameterEntity>> all() async {
     checkDatabaseConnection();
 
-    final List<Map<String, dynamic>> maps = await db.query(tableName);
+    final List<Map<String, dynamic>> maps = await db!.query(tableName);
 
     return List.generate(maps.length, (i) {
       return OrderProductParameterEntity(
@@ -19,11 +19,11 @@ class OrderProductParameterDataSource extends DataSource {
   }
 
   @override
-  Future<OrderProductParameterEntity> get(int id) async {
+  Future<OrderProductParameterEntity> get(int? id) async {
     checkDatabaseConnection();
 
     final List<Map<String, dynamic>> maps =
-        await db.query(tableName, where: '$primaryKey = ?', whereArgs: [id]);
+        await db!.query(tableName, where: '$primaryKey = ?', whereArgs: [id]);
 
     return OrderProductParameterEntity(
       id: maps[0]['id'],

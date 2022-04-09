@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:openflutterecommerce/config/theme.dart';
+import '../config/theme.dart';
 
 class OpenFlutterInputField extends StatefulWidget {
-  final TextEditingController controller;
-  final String hint;
-  final FormFieldValidator validator;
+  final TextEditingController? controller;
+  final String? hint;
+  final FormFieldValidator? validator;
   final TextInputType keyboard;
-  final FocusNode focusNode;
-  final VoidCallback onFinished;
+  final FocusNode? focusNode;
+  final VoidCallback? onFinished;
   final bool isPassword;
   final double horizontalPadding;
-  final Function onValueChanged;
-  final String error;
+  final Function? onValueChanged;
+  final String? error;
 
   const OpenFlutterInputField(
-      {Key key,
-      @required this.controller,
+      {Key? key,
+      required this.controller,
       this.hint,
       this.validator,
       this.keyboard = TextInputType.text,
@@ -34,7 +34,7 @@ class OpenFlutterInputField extends StatefulWidget {
 }
 
 class OpenFlutterInputFieldState extends State<OpenFlutterInputField> {
-  String error;
+  String? error;
   bool isChecked = false;
 
   @override
@@ -62,7 +62,7 @@ class OpenFlutterInputFieldState extends State<OpenFlutterInputField> {
             child: Padding(
               padding: EdgeInsets.only(left: 16.0),
               child: TextField(
-                onChanged: (value) => widget.onValueChanged(value),
+                onChanged: (value) => widget.onValueChanged!(value),
                 style: TextStyle(
                     color: AppColors.black,
                     fontWeight: FontWeight.normal,
@@ -91,7 +91,7 @@ class OpenFlutterInputFieldState extends State<OpenFlutterInputField> {
           error == null
               ? Container()
               : Text(
-                  error,
+                  error!,
                   style: TextStyle(color: AppColors.red, fontSize: 12),
                 )
         ],
@@ -99,9 +99,9 @@ class OpenFlutterInputFieldState extends State<OpenFlutterInputField> {
     );
   }
 
-  String validate() {
+  String? validate() {
     setState(() {
-      error = widget.validator(widget.controller.text);
+      error = widget.validator!(widget.controller!.text);
     });
     return error;
   }

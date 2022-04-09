@@ -5,7 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../config/app_settings.dart';
-import 'package:openflutterecommerce/config/routes.dart';
+import '../config/routes.dart';
 
 class OpenFlutterBottomMenu extends StatelessWidget {
   final int? menuIndex;
